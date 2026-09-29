@@ -1,4 +1,4 @@
-# QNN vs MLP: Fourier regression
+# 01 · QNN vs MLP: Fourier regression
 
 ## Câu hỏi
 
@@ -22,7 +22,7 @@ Hai notebook in ra checksum của split (`55766 12353 11681`) để kiểm tra c
 
 Mở và chạy từng notebook từ trên xuống dưới. MLP chạy mất khoảng 1 giây, QNN khoảng 45 giây.
 
-## Kết quả hiện tại
+## Kết quả
 
 | | MLP | QNN (như notebook hiện tại) |
 |---|---|---|

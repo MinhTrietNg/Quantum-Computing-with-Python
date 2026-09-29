@@ -2,25 +2,40 @@
 
 Nơi mình vừa **học** vừa **thử nghiệm** quantum computing bằng Python.
 
-- `learn/`: notebook học theo từng chủ đề, đi từ cơ bản đến nâng cao.
+- `learn/`: các bài học theo từng chủ đề, đi từ cơ bản đến nâng cao.
 - `experiments/`: các thí nghiệm có câu hỏi rõ ràng, so sánh mô hình và ghi lại kết quả.
 
 ## Cấu trúc
 
+Mọi bài học và thí nghiệm đều dùng chung một khuôn: **một folder `NN_ten_chu_de/`**,
+bên trong có `README.md`, code và `figures/` (nếu có hình).
+
 ```text
 .
-├── learn/                              # Học lý thuyết + code từng khái niệm
-│   └── 01_reversible_computing.ipynb   # X gate, CX gate, tính khả nghịch
+├── learn/
+│   ├── 01_reversible_computing/
+│   │   ├── README.md
+│   │   └── reversible_computing.ipynb
+│   └── 02_parameter_shift_rule/
+│       ├── README.md
+│       ├── parameter_shift_demo.py
+│       └── figures/
 │
-├── experiments/                        # Mỗi thí nghiệm là một folder riêng
-│   └── qnn-vs-mlp-fourier-regression/
-│       ├── README.md                   # Câu hỏi, cách chạy, kết quả
-│       ├── qnn_data_reuploading.ipynb  # QNN data re-uploading (NumPy state vector)
-│       └── mlp_baseline.ipynb          # Baseline classical MLP
+├── experiments/
+│   └── 01_qnn_vs_mlp_fourier_regression/
+│       ├── README.md
+│       ├── qnn_data_reuploading.ipynb
+│       └── mlp_baseline.ipynb
 │
 ├── requirements.txt
 └── README.md
 ```
+
+| | Nội dung |
+|---|---|
+| [learn/01_reversible_computing](learn/01_reversible_computing) | X gate, CX gate, tính khả nghịch |
+| [learn/02_parameter_shift_rule](learn/02_parameter_shift_rule) | Gradient của mạch có tham số bằng parameter-shift, shot noise |
+| [experiments/01_qnn_vs_mlp_fourier_regression](experiments/01_qnn_vs_mlp_fourier_regression) | QNN data re-uploading vs MLP trên hàm Fourier |
 
 ## Cài đặt
 
@@ -28,18 +43,29 @@ Nơi mình vừa **học** vừa **thử nghiệm** quantum computing bằng Pyt
 python -m venv .venv
 # Windows: .venv\Scripts\activate    |    macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
-jupyter lab
+jupyter lab                                                  # mở các notebook
+python learn/02_parameter_shift_rule/parameter_shift_demo.py # chạy script
 ```
 
 ## Quy ước
 
-**`learn/`**
-- Tên file: `NN_chu_de.ipynb` (ví dụ `02_qubits_and_bloch_sphere.ipynb`) để giữ thứ tự học.
-- Mỗi notebook tập trung vào một khái niệm và có thể chạy độc lập từ trên xuống dưới.
+**Khuôn folder (dùng cho cả `learn/` và `experiments/`)**
 
-**`experiments/`**
-- Mỗi thí nghiệm là một folder `ten-thi-nghiem/`, có `README.md` ghi:
-  câu hỏi, setup (dataset, seed, số tham số, ngân sách huấn luyện), cách chạy, kết quả và kết luận.
+```text
+NN_ten_chu_de/
+├── README.md          # bắt buộc
+├── <ten_chu_de>.ipynb # và/hoặc <ten>.py
+└── figures/           # chỉ khi có hình
+```
+
+- Tên folder: `NN_snake_case`, số thứ tự 2 chữ số, đánh riêng trong `learn/` và `experiments/`.
+- Tên file bên trong: `snake_case`, không cần số thứ tự.
+- Code chạy độc lập bên trong folder của nó; hình lưu vào `figures/` cạnh code.
+
+**README của bài học (`learn/`)**: `# NN · Tên`, rồi các mục *Mục tiêu*, *Nội dung*, *Cách chạy*, *Kết quả*.
+
+**README của thí nghiệm (`experiments/`)**: `# NN · Tên`, rồi các mục *Câu hỏi*, *Setup*, *Cách chạy*,
+*Kết quả*, *Vấn đề đã biết*.
 - Các mô hình được so sánh phải dùng cùng dataset, cùng split và cùng ngân sách huấn luyện.
 - Báo cáo mean ± std trên nhiều seed thay vì một lần chạy.
 
@@ -51,11 +77,12 @@ jupyter lab
 ## Lộ trình học (gợi ý)
 
 - [x] 01 · Reversible computing: X, CX
-- [ ] 02 · Qubit, Bloch sphere, đo lường
-- [ ] 03 · Single-qubit gates: H, S, T, rotations
-- [ ] 04 · Multi-qubit, tensor product, entanglement, Bell states
-- [ ] 05 · Quantum circuits với Qiskit / PennyLane
-- [ ] 06 · Thuật toán: Deutsch–Jozsa, Bernstein–Vazirani, Grover
-- [ ] 07 · QFT và phase estimation
-- [ ] 08 · Variational algorithms: VQE, QAOA
-- [ ] 09 · Quantum machine learning
+- [x] 02 · Parameter-shift rule: gradient của mạch có tham số, shot noise
+- [ ] 03 · Qubit, Bloch sphere, đo lường
+- [ ] 04 · Single-qubit gates: H, S, T, rotations
+- [ ] 05 · Multi-qubit, tensor product, entanglement, Bell states
+- [ ] 06 · Quantum circuits với Qiskit / PennyLane
+- [ ] 07 · Thuật toán: Deutsch–Jozsa, Bernstein–Vazirani, Grover
+- [ ] 08 · QFT và phase estimation
+- [ ] 09 · Variational algorithms: VQE, QAOA
+- [ ] 10 · Quantum machine learning
