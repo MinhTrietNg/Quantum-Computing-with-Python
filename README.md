@@ -4,6 +4,8 @@ Nơi mình vừa **học** vừa **thử nghiệm** quantum computing bằng Pyt
 
 - `learn/`: các bài học theo từng chủ đề, đi từ cơ bản đến nâng cao.
 - `experiments/`: các thí nghiệm có câu hỏi rõ ràng, so sánh mô hình và ghi lại kết quả.
+- `learnquantum/`: bản sao sách mở [learnquantum.io](https://learnquantum.io) (Qiskit, MIT License),
+  kèm README tiếng Việt cho từng phần.
 
 ## Cấu trúc
 
@@ -28,6 +30,10 @@ bên trong có `README.md`, code và `figures/` (nếu có hình).
 │       ├── qnn_data_reuploading.ipynb
 │       └── mlp_baseline.ipynb
 │
+├── learnquantum/                 # sách learnquantum.io, khuôn riêng (xem README bên trong)
+│   ├── README.md, LICENSE, requirements.txt
+│   └── 00_getting_started/ … 04_quantum_algorithms/
+│
 ├── requirements.txt
 └── README.md
 ```
@@ -37,6 +43,7 @@ bên trong có `README.md`, code và `figures/` (nếu có hình).
 | [learn/01_reversible_computing](learn/01_reversible_computing) | X gate, CX gate, tính khả nghịch |
 | [learn/02_parameter_shift_rule](learn/02_parameter_shift_rule) | Gradient của mạch có tham số bằng parameter-shift, shot noise |
 | [experiments/01_qnn_vs_mlp_fourier_regression](experiments/01_qnn_vs_mlp_fourier_regression) | QNN data re-uploading vs MLP trên hàm Fourier |
+| [learnquantum](learnquantum) | Sách learnquantum.io: bit cổ điển → qubit → giao thức → thuật toán (Deutsch–Jozsa, BV, Simon, Grover) |
 
 ## Cài đặt
 
@@ -44,6 +51,7 @@ bên trong có `README.md`, code và `figures/` (nếu có hình).
 python -m venv .venv
 # Windows: .venv\Scripts\activate    |    macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
+pip install -r learnquantum/requirements.txt                 # Qiskit, cho learnquantum/
 jupyter lab                                                  # mở các notebook
 python learn/02_parameter_shift_rule/parameter_shift_demo.py # chạy script
 ```
@@ -71,11 +79,14 @@ NN_ten_chu_de/
 - Báo cáo mean ± std trên nhiều seed thay vì một lần chạy.
 
 **Chung**
-- Clear output trước khi commit để diff gọn.
+- Clear output trước khi commit để diff gọn. Ngoại lệ: notebook trong `learnquantum/` giữ nguyên
+  output của tác giả để đọc được ngay trên GitHub.
 - Khi code bắt đầu bị copy giữa nhiều notebook (dataset, optimizer, metrics, simulator),
   tách ra một package dùng chung, ví dụ `src/qlab/`.
 
 ## Lộ trình học (gợi ý)
+
+Các mục 03–07 có tài liệu tham khảo sẵn trong [learnquantum/](learnquantum) (phần 02–04).
 
 - [x] 01 · Reversible computing: X, CX
 - [x] 02 · Parameter-shift rule: gradient của mạch có tham số, shot noise
