@@ -18,7 +18,8 @@ bên trong có `README.md`, code và `figures/` (nếu có hình).
 │   │   └── reversible_computing.ipynb
 │   └── 02_parameter_shift_rule/
 │       ├── README.md
-│       ├── parameter_shift_demo.py
+│       ├── parameter_shift_demo.py   # file chạy
+│       ├── circuit.py, gradients.py, plotting.py, ...
 │       └── figures/
 │
 ├── experiments/
