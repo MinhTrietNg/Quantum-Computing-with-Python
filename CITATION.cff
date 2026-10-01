@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: >-
+  If you use this material, please cite the original textbook
+  (preferred-citation below).
+title: "Quantum Computing with Python: Vietnamese study guides for learnquantum.io"
+type: software
+authors:
+  - given-names: Diego Emilio
+    family-names: Serrano
+  - alias: MinhTrietNg
+repository-code: "https://github.com/MinhTrietNg/Quantum-Computing-with-Python"
+url: "https://learnquantum.io"
+license: MIT
+keywords:
+  - quantum computing
+  - qiskit
+  - python
+  - education
+  - vietnamese
+preferred-citation:
+  type: book
+  title: Learn Quantum Computing using Python
+  authors:
+    - given-names: Diego Emilio
+      family-names: Serrano
+  year: 2024
+  url: "https://learnquantum.io"
+  repository-code: "https://github.com/learn-quantum/lqc-textbook"
