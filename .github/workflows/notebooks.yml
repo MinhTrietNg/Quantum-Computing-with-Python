@@ -1,0 +1,77 @@
+name: Notebooks
+
+# Re-run every notebook so we notice when a new Qiskit release breaks one.
+# Notebooks are executed in memory; the committed author outputs are untouched.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "chapters/**"
+      - "docs/**"
+      - "*.md"
+      - "scripts/**"
+      - "requirements*.txt"
+      - "qiskit_settings.conf"
+      - ".github/workflows/notebooks.yml"
+  pull_request:
+    paths:
+      - "chapters/**"
+      - "docs/**"
+      - "*.md"
+      - "scripts/**"
+      - "requirements*.txt"
+      - "qiskit_settings.conf"
+      - ".github/workflows/notebooks.yml"
+  schedule:
+    - cron: "0 2 * * 1" # every Monday, 02:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  run-notebooks:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    env:
+      MPLBACKEND: Agg
+      # Draw circuits and states the same way as the book.
+      QISKIT_SETTINGS: ${{ github.workspace }}/qiskit_settings.conf
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: requirements*.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Show versions
+        run: pip list | grep -iE "^(qiskit|numpy|sympy|matplotlib) "
+
+      - name: Lint scripts
+        run: |
+          black --check scripts/
+          ruff check scripts/
+
+      - name: Check Markdown links
+        run: python scripts/check_links.py
+
+      - name: Run code snippets in the docs
+        run: python scripts/check_doc_snippets.py
+
+      - name: Run notebooks
+        run: pytest --nbmake --nbmake-timeout=900 chapters/
