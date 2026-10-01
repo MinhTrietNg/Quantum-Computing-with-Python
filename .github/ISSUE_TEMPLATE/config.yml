@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Hỏi đáp về kiến thức trong sách
+    url: https://github.com/learn-quantum/lqc-textbook/discussions
+    about: Discussions của repo gốc, nơi tác giả và cộng đồng trả lời câu hỏi
+  - name: Đọc sách trên web
+    url: https://learnquantum.io
+    about: Bản web chính thức của Learn Quantum Computing using Python

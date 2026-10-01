@@ -1,0 +1,40 @@
+name: Câu hỏi khi học
+description: Bạn bị kẹt hoặc chưa hiểu một chỗ trong lúc học (hỏi bằng tiếng Việt)
+title: "[hỏi] PP_BB: "
+labels: [question]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Cảm ơn bạn đã hỏi. Câu hỏi hay thường giúp cải thiện tài liệu cho người sau.
+        Trước khi gửi, thử xem [FAQ](https://github.com/MinhTrietNg/Quantum-Computing-with-Python/blob/main/docs/faq.md)
+        và [bảng thuật ngữ](https://github.com/MinhTrietNg/Quantum-Computing-with-Python/blob/main/docs/glossary.md).
+  - type: input
+    id: where
+    attributes:
+      label: Bạn đang học đến đâu
+      description: Mã bài và mục, ví dụ `02_03, mục Bloch sphere`
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Câu hỏi của bạn
+      description: Chỗ nào chưa hiểu, và bạn đã hiểu đến đâu
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: Bạn đã thử gì
+      description: Đã đọc gì, đã chạy code nào, kết quả ra sao (dán code và output nếu có)
+  - type: dropdown
+    id: background
+    attributes:
+      label: Nền tảng của bạn
+      description: Giúp người trả lời chọn mức giải thích phù hợp
+      options:
+        - Chưa lập trình
+        - Biết Python cơ bản
+        - Biết Python và đại số tuyến tính
+        - Đã học cơ học lượng tử

@@ -1,0 +1,24 @@
+name: Góp ý hướng dẫn
+description: Giải thích chưa rõ, dịch chưa đúng hoặc muốn bổ sung nội dung cho README tiếng Việt
+title: "[guide] PP: "
+labels: [documentation]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Ở đâu
+      description: File và mục, ví dụ `chapters/02_quantum_computing/README.md, 02_03 · Kiến thức chính`
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: Vấn đề
+      description: Chỗ nào khó hiểu, sai hoặc còn thiếu
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Đề xuất
+      description: Cách viết lại hoặc nội dung muốn thêm (không bắt buộc)

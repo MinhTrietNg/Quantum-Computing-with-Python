@@ -1,0 +1,47 @@
+name: Báo lỗi trong sách
+description: Lỗi trong công thức, code hoặc giải thích của notebook gốc
+title: "[errata] PP_BB: "
+labels: [errata]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Notebook trong `chapters/` được giữ nguyên văn, nên lỗi sẽ được ghi vào
+        [ERRATA.md](https://github.com/MinhTrietNg/Quantum-Computing-with-Python/blob/main/ERRATA.md) thay vì sửa tại chỗ. Hãy kiểm tra danh sách đó trước.
+  - type: input
+    id: lesson
+    attributes:
+      label: Bài
+      description: Mã bài và mục, ví dụ `04_04, mục 2.2`
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Loại lỗi
+      options:
+        - Code (làm output hoặc kết luận sai)
+        - Nội dung (phát biểu sai về kiến thức)
+        - Đánh máy (công thức, comment, chữ)
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: Đang viết là
+      description: Trích nguyên văn đoạn sai
+    validations:
+      required: true
+  - type: textarea
+    id: right
+    attributes:
+      label: Đúng ra là
+      description: Kèm lý do hoặc nguồn tham khảo nếu có
+    validations:
+      required: true
+  - type: checkboxes
+    id: upstream
+    attributes:
+      label: Báo cho tác giả
+      options:
+        - label: Mình đã (hoặc sẽ) báo lỗi này ở https://github.com/learn-quantum/lqc-textbook/issues
