@@ -22,6 +22,8 @@ Từ thí nghiệm Stern–Gerlach với spin electron, phần này dựng lên 
 | 02_04 · Multi-qubit systems | [02_04_multi_qb_sys.ipynb](02_04_multi_qb_sys.ipynb) | [link](https://learnquantum.io/chapters/02_quantum_computing/02_04_multi_qb_sys.html) | Trạng thái n qubit; cổng điều khiển, SWAP; no-cloning; bộ cổng phổ quát; đo một phần |
 | 02_05 · Quantum building blocks | [02_05_quantum_blocks.ipynb](02_05_quantum_blocks.ipynb) | [link](https://learnquantum.io/chapters/02_quantum_computing/02_05_quantum_blocks.html) | Bell, GHZ, W; biến đổi Hadamard; phase kickback; oracle |
 
+> Các đoạn code trong README này là **trích** từ notebook (giữ comment gốc tiếng Anh) và dùng biến đã định nghĩa ở các cell trước. Muốn chạy được, hãy chạy cả notebook từ trên xuống.
+
 ---
 
 ## 02_01 · Qubits and quantum circuits (Qubit và mạch lượng tử)
@@ -30,14 +32,22 @@ Từ thí nghiệm Stern–Gerlach với spin electron, phần này dựng lên 
 
 ### Kiến thức chính
 
-**Thí nghiệm Stern–Gerlach.** Electron có spin (mô-men động lượng nội tại) và hành xử như một nam châm nhỏ. Cho đi
-qua từ trường không đều theo trục $z$:
+> Nếu vật lý bên dưới còn lạ, đừng lo. Bạn chỉ cần mang theo một ý: **xác suất = bình phương của biên độ**, và biên độ
+> có thể âm. Thí nghiệm chỉ là cách sách dẫn bạn tới ý đó.
+
+**Thí nghiệm Stern–Gerlach.** Electron có spin (một thuộc tính nội tại, làm nó hành xử như một nam châm nhỏ có thể
+hướng lên hoặc xuống). Cho đi qua từ trường không đều theo trục $z$:
 - spin $+z$ luôn lệch lên, spin $-z$ luôn lệch xuống;
 - spin $\pm x$ **không** đi thẳng như nam châm cổ điển, mà lệch lên hoặc xuống, mỗi bên 50%, và **không bao giờ** ở giữa.
 
-**Vector xác suất không đủ.** Nếu mô tả spin bằng vector xác suất thì $+x$ và $-x$ cùng là $[\tfrac12, \tfrac12]^\top$,
-dù xoay máy theo trục $x$ thì phân biệt được hai trạng thái này. Tệ hơn, viết $+z$ thành tổ hợp của $\pm x$ sẽ ra
-$[\tfrac12, \tfrac12]^\top$ thay vì $[1, 0]^\top$. Cần cho phép phần tử **âm**, và xác suất là **bình phương** biên độ
+**Vector xác suất không đủ.** Thử mô tả spin bằng vector xác suất (như ở 01_04). Khi đo theo trục $z$, cả $+x$ và $-x$
+đều cho 50% lên, 50% xuống, nên cả hai cùng là $[\tfrac12, \tfrac12]^\top$. Nhưng chúng là hai trạng thái *khác nhau*:
+xoay máy đo sang trục $x$ thì phân biệt được (một cái luôn cho $+x$, cái kia luôn cho $-x$). Vector xác suất đã làm
+mất thông tin.
+
+Tệ hơn, spin $+z$ có thể xem là sự kết hợp của $+x$ và $-x$. Nhưng cộng hai vector $[\tfrac12, \tfrac12]^\top$ chỉ cho
+lại $[\tfrac12, \tfrac12]^\top$, chứ không ra $[1, 0]^\top$: thành phần "xuống" phải **triệt tiêu**, mà xác suất không
+bao giờ âm nên không triệt tiêu được. Vì vậy cần cho phép phần tử **âm**, và xác suất là **bình phương** biên độ
 (quy tắc Born):
 
 $$|s\rangle = \begin{bmatrix}s_0\\ s_1\end{bmatrix}, \qquad \mathbb{P}_{+z} = s_0^2, \quad \mathbb{P}_{-z} = s_1^2$$
@@ -50,11 +60,14 @@ $$|+\rangle = \tfrac{1}{\sqrt2}\big(|0\rangle + |1\rangle\big), \qquad |-\rangle
 
 $$|q\rangle = \begin{bmatrix}\alpha_0\\ \alpha_1\end{bmatrix}, \quad \alpha_j \in \mathbb{C}, \quad |\alpha_0|^2 + |\alpha_1|^2 = 1$$
 
-So sánh: bit có phần tử thuộc $\{0,1\}$; p-bit có phần tử thuộc $[0,1]$ và **tổng** bằng 1; qubit có phần tử **phức**
-và **tổng bình phương mô-đun** bằng 1.
+(Ký hiệu $\mathbb{C}$ là tập số phức, chưa cần hiểu ngay; sẽ học ở 02_03. Lúc này cứ coi biên độ là số thực, có thể âm.)
 
-> Chồng chập **không** có nghĩa là "ở hai trạng thái cùng lúc". $|+\rangle$ là một trạng thái riêng; chỉ khi đo theo
-> trục $z$ thì nó mới viết được thành tổ hợp của $|0\rangle$ và $|1\rangle$ với biên độ bằng nhau.
+So sánh: bit có phần tử thuộc $\{0,1\}$; p-bit có phần tử thuộc $[0,1]$ và **tổng** bằng 1; qubit có phần tử **phức**
+và **tổng bình phương môđun** bằng 1.
+
+> Chồng chập **không** có nghĩa là "vừa 0 vừa 1" hay "ở hai trạng thái cùng lúc". $|+\rangle$ là **một trạng thái
+> hoàn toàn xác định**; chỉ là khi chọn trục $z$ để mô tả thì nó được viết thành tổ hợp của $|0\rangle$ và
+> $|1\rangle$ với biên độ bằng nhau.
 
 **Mạch lượng tử gồm 3 bước:**
 1. **Chuẩn bị trạng thái** (state preparation), gần như luôn là $|0\rangle$.
@@ -83,8 +96,8 @@ Tạo trạng thái bằng nhãn. Cũng có thể truyền danh sách biên đ�
 display(plus.draw('latex', prefix='|+ \\rangle = '))                       # display ket representation of |+⟩
 display(minus.draw('latex', prefix='|- \\rangle = ', convention='vector')) # display vector representation of |-⟩
 ```
-`draw('latex')` hiển thị dạng ket; `convention='vector'` hiển thị dạng vector. Qiskit in vector cột thành **hàng**,
-nhưng đó vẫn là ket, không phải bra.
+`draw('latex')` hiển thị dạng ket; `convention='vector'` hiển thị dạng vector. Qiskit in vector cột thành **hàng**
+cho gọn, nhưng đó vẫn là cùng một trạng thái.
 
 ```python
 qc = QuantumCircuit(1,1)  # Create circuit object with 1 qubit and 1 classical bit
@@ -120,15 +133,15 @@ Chạy mạch có phép đo trên simulator, giống quy trình trên phần c�
 | Kiểm tra | Output |
 |---|---|
 | `Operator` của mạch X | $\begin{bmatrix}0&1\\1&0\end{bmatrix}$ |
-| $\|0\rangle$, $\|1\rangle$ qua H | $\tfrac{\sqrt2}{2}(\|0\rangle \pm \|1\rangle)$ |
-| Mạch X rồi H từ $\|0\rangle$ | $\|-\rangle$; ma trận $H\cdot X = \tfrac{\sqrt2}{2}\begin{bmatrix}1&1\\-1&1\end{bmatrix}$ |
+| $\vert 0\rangle$, $\vert 1\rangle$ qua H | $\tfrac{\sqrt2}{2}(\vert 0\rangle \pm \vert 1\rangle)$ |
+| Mạch X rồi H từ $\vert 0\rangle$ | $\vert -\rangle$; ma trận $H\cdot X = \tfrac{\sqrt2}{2}\begin{bmatrix}1&1\\-1&1\end{bmatrix}$ |
 | `plus.sample_counts(100)` | `{'0': 51, '1': 49}` |
 | `zero.sample_counts(100)` | `{'0': 100}` |
 | Mạch H + đo, 100 shot, `BasicSimulator` | `{'0': 41, '1': 59}` |
 
 ### Ghi nhớ nhanh
 
-- Xác suất = bình phương (mô-đun) biên độ; biên độ có thể âm, và tổng quát là số phức.
+- Xác suất = bình phương (môđun) biên độ; biên độ có thể âm, và tổng quát là số phức.
 - $|+\rangle$, $|-\rangle$ cho cùng xác suất khi đo theo $z$ nhưng là hai trạng thái khác nhau.
 - $X$ đổi $|0\rangle \leftrightarrow |1\rangle$; $H$ đổi $|0\rangle \leftrightarrow |+\rangle$, $|1\rangle \leftrightarrow |-\rangle$.
 - `Statevector` = tính chính xác; `simulator.run(qc, shots=N)` = đo N lần.
@@ -190,9 +203,9 @@ Cách làm bằng mạch cho cùng kết quả. `qc.measure_all()` thêm phép �
 
 | Kiểm tra | Output |
 |---|---|
-| $\|+-\rangle$, $\|-+\rangle$, $\|--\rangle$ | các dấu $\pm\tfrac12$ đúng như tích Kronecker |
-| Mạch tách được $\|+\rangle\|-\rangle$, 1000 shot | `{'01': 270, '10': 229, '11': 225, '00': 276}`, mỗi kết quả khoảng 25% |
-| Mạch H + CX | $\tfrac{\sqrt2}{2}\|00\rangle + \tfrac{\sqrt2}{2}\|11\rangle$ |
+| $\vert +-\rangle$, $\vert -+\rangle$, $\vert --\rangle$ | các dấu $\pm\tfrac12$ đúng như tích Kronecker |
+| Mạch tách được $\vert +\rangle\vert -\rangle$, 1000 shot | `{'01': 270, '10': 229, '11': 225, '00': 276}`, mỗi kết quả khoảng 25% |
+| Mạch H + CX | $\tfrac{\sqrt2}{2}\vert 00\rangle + \tfrac{\sqrt2}{2}\vert 11\rangle$ |
 | Mạch H + CX, 1000 shot | `{'11': 508, '00': 492}`, không bao giờ ra `01`, `10` |
 
 ### Ghi nhớ nhanh
@@ -219,7 +232,7 @@ xác suất 1/2 vừa ghép lại được $|0\rangle$, $|1\rangle$; phải dùn
 
 $$|r\rangle = \tfrac{1}{\sqrt2}\big(|0\rangle + i|1\rangle\big), \qquad |l\rangle = \tfrac{1}{\sqrt2}\big(|0\rangle - i|1\rangle\big)$$
 
-Quy tắc Born chính xác là lấy **bình phương mô-đun**: $|c|^2 = c\,c^* = a^2 + b^2$. Tổng quát cho mặt phẳng $xy$ là
+Quy tắc Born chính xác là lấy **bình phương môđun**: $|c|^2 = c\,c^* = a^2 + b^2$. Tổng quát cho mặt phẳng $xy$ là
 $\tfrac{1}{\sqrt2}(|0\rangle + e^{i\varphi}|1\rangle)$.
 
 **Bloch sphere.** Ghép hai kết quả trên:
@@ -240,9 +253,9 @@ $\langle y|x\rangle = \langle x|y\rangle^*$; chuẩn $\|q\| = \sqrt{\langle q|q\
 
 | Cơ sở | Trạng thái | Trục Bloch |
 |---|---|---|
-| Computational (bit) | $\|0\rangle, \|1\rangle$ | $\pm z$ |
-| Hadamard (sign) | $\|+\rangle, \|-\rangle$ | $\pm x$ |
-| Y (hand) | $\|r\rangle, \|l\rangle$ | $\pm y$ |
+| Computational (bit) | $\vert 0\rangle, \vert 1\rangle$ | $\pm z$ |
+| Hadamard (sign) | $\vert +\rangle, \vert -\rangle$ | $\pm x$ |
+| Y (hand) | $\vert r\rangle, \vert l\rangle$ | $\pm y$ |
 
 Tích ngoài $|x\rangle\langle y|$ là một ma trận; hai phép chiếu $\Pi_0 = |0\rangle\langle 0|$ và $\Pi_1 = |1\rangle\langle 1|$ dùng cho phép đo.
 
@@ -253,7 +266,7 @@ khả nghịch), và unitary giữ nguyên chuẩn của vector.
 |---|---|---|
 | Pauli $X$ | $\begin{bmatrix}0&1\\1&0\end{bmatrix}$ | Xoay π quanh trục $x$ |
 | Pauli $Y$ | $\begin{bmatrix}0&-i\\i&0\end{bmatrix}$ | Xoay π quanh trục $y$ |
-| Pauli $Z$ | $\begin{bmatrix}1&0\\0&-1\end{bmatrix}$ | Xoay π quanh trục $z$: $Z\|+\rangle = \|-\rangle$, $Z\|1\rangle = -\|1\rangle$ |
+| Pauli $Z$ | $\begin{bmatrix}1&0\\0&-1\end{bmatrix}$ | Xoay π quanh trục $z$: $Z\vert +\rangle = \vert -\rangle$, $Z\vert 1\rangle = -\vert 1\rangle$ |
 | Phase $P(\varphi)$ | $\begin{bmatrix}1&0\\0&e^{i\varphi}\end{bmatrix}$ | Xoay $\varphi$ quanh $z$; $Z = P(\pi)$, $S = P(\pi/2)$, $T = P(\pi/4)$ |
 | $S^\dagger$, $T^\dagger$ | $e^{-i\varphi}$ ở góc dưới | Xoay ngược chiều |
 | $RX(\theta)$ | $\begin{bmatrix}\cos\frac\theta2 & -i\sin\frac\theta2\\ -i\sin\frac\theta2 & \cos\frac\theta2\end{bmatrix}$ | Xoay θ quanh $x$ |
@@ -351,7 +364,7 @@ Không cần tài khoản IBM.
 |---|---|
 | θ = π/3: `probabilities()` | `[0.75 0.25]` |
 | θ = π/3: `sample_counts(1000)` | `{'0': 763, '1': 237}` |
-| Reset: trước / sau | $\tfrac{\sqrt2}{2}(\|0\rangle + \|1\rangle)$ / $\|0\rangle$ |
+| Reset: trước / sau | $\tfrac{\sqrt2}{2}(\vert 0\rangle + \vert 1\rangle)$ / $\vert 0\rangle$ |
 | $\langle X\rangle$ chính xác (`expectation_value`) | `0.9428` |
 | $\langle X\rangle$ bằng `Estimator` | `0.936` (có sai số lấy mẫu) |
 
@@ -476,12 +489,12 @@ Mạch chuẩn bị $|w\rangle$ bằng `cry` (RY có điều khiển), rồi th�
 |---|---|
 | `Z.tensor(H.tensor(X))` và `Operator(qc)` của mạch X/H/Z | cùng một ma trận 8×8 |
 | `Π0⊗I + Π1⊗X` | trùng ma trận của `qc.cx(1,0)` |
-| H⊗H rồi CZ | $\tfrac12(\|00\rangle + \|01\rangle + \|10\rangle - \|11\rangle)$ |
+| H⊗H rồi CZ | $\tfrac12(\vert 00\rangle + \vert 01\rangle + \vert 10\rangle - \vert 11\rangle)$ |
 | 3 CX | ra đúng ma trận SWAP |
 | Mạch Clifford+T dựng CCX | đúng ma trận CCX, T-depth = `4` |
 | `w.probabilities()` | `[0, 1/3, 1/3, 0, 1/3, 0, 0, 0]` |
 | `w.probabilities([0])` | `[2/3, 1/3]` |
-| Đo riêng $q_0$ ra 0 | $\tfrac{\sqrt2 i}{2}\|010\rangle - \tfrac{\sqrt2}{2}\|100\rangle$ |
+| Đo riêng $q_0$ ra 0 | $\tfrac{\sqrt2 i}{2}\vert 010\rangle - \tfrac{\sqrt2}{2}\vert 100\rangle$ |
 
 ### Ghi nhớ nhanh
 
@@ -549,8 +562,8 @@ $$|x\rangle|-\rangle \xrightarrow{U_f} (-1)^{f(x)}|x\rangle|-\rangle$$
 
 | Oracle | Tác dụng |
 |---|---|
-| Bit oracle $U_f$ | $\|x\rangle\|y\rangle \to \|x\rangle\|y \oplus f(x)\rangle$ |
-| Phase oracle $Z_f$ | $\|x\rangle \to (-1)^{f(x)}\|x\rangle$; = bit oracle với $y = \|-\rangle$ rồi bỏ qubit $y$, hoặc dựng trực tiếp bằng MCZ không cần qubit phụ |
+| Bit oracle $U_f$ | $\vert x\rangle\vert y\rangle \to \vert x\rangle\vert y \oplus f(x)\rangle$ |
+| Phase oracle $Z_f$ | $\vert x\rangle \to (-1)^{f(x)}\vert x\rangle$; = bit oracle với $y = \vert -\rangle$ rồi bỏ qubit $y$, hoặc dựng trực tiếp bằng MCZ không cần qubit phụ |
 
 ### Code chính
 
@@ -661,16 +674,16 @@ Phase oracle dựng trực tiếp bằng CCZ, không cần qubit phụ: đánh d
 
 | Kiểm tra | Output |
 |---|---|
-| H+CX trên 4 trạng thái cơ sở | $\|\Phi^+\rangle, \|\Psi^+\rangle, \|\Phi^-\rangle, \|\Psi^-\rangle$ |
-| `ghz_cir_a(5)`, `ghz_cir_b(5)`, `ghz_cir_c(7)` | $\tfrac{\sqrt2}{2}(\|0\dots0\rangle + \|1\dots1\rangle)$ |
+| H+CX trên 4 trạng thái cơ sở | $\vert \Phi^+\rangle, \vert \Psi^+\rangle, \vert \Phi^-\rangle, \vert \Psi^-\rangle$ |
+| `ghz_cir_a(5)`, `ghz_cir_b(5)`, `ghz_cir_c(7)` | $\tfrac{\sqrt2}{2}(\vert 0\dots0\rangle + \vert 1\dots1\rangle)$ |
 | `w_cir(5)` | $\tfrac{\sqrt5}{5}$ trên 5 trạng thái one-hot |
-| QHT của $\|W_3\rangle$ (Qiskit và `qht_func`) | cùng kết quả, $\tfrac{\sqrt6}{4}\|000\rangle + \dots - \tfrac{\sqrt6}{4}\|111\rangle$ |
-| $\|1\rangle\|-\rangle$ qua CX | $-\|1\rangle\|-\rangle$ (chỉ pha toàn cục) |
-| H–CX–H trên $\|01\rangle$ | $\|11\rangle$ |
-| $C\bar C S$ với control chồng chập, target $\|1\rangle$ | chỉ $\|101\rangle$ nhận hệ số $i/2$ |
-| AND 3 bit, $y = 0$ / $y = 1$ | chỉ $\|111\rangle$ cho $y = 1$ / $y = 0$ (AND / NAND) |
-| Kickback AND 3 bit | chỉ $\|1110\rangle$ mang dấu $-$ |
-| Phase oracle (MCX + $\|-\rangle$, hoặc CCZ) | chỉ $x = 011$ mang dấu $-$ |
+| QHT của $\vert W_3\rangle$ (Qiskit và `qht_func`) | cùng kết quả, $\tfrac{\sqrt6}{4}\vert 000\rangle + \dots - \tfrac{\sqrt6}{4}\vert 111\rangle$ |
+| $\vert 1\rangle\vert -\rangle$ qua CX | $-\vert 1\rangle\vert -\rangle$ (chỉ pha toàn cục) |
+| H–CX–H trên $\vert 01\rangle$ | $\vert 11\rangle$ |
+| $C\bar C S$ với control chồng chập, target $\vert 1\rangle$ | chỉ $\vert 101\rangle$ nhận hệ số $i/2$ |
+| AND 3 bit, $y = 0$ / $y = 1$ | chỉ $\vert 111\rangle$ cho $y = 1$ / $y = 0$ (AND / NAND) |
+| Kickback AND 3 bit | chỉ $\vert 1110\rangle$ mang dấu $-$ |
+| Phase oracle (MCX + $\vert -\rangle$, hoặc CCZ) | chỉ $x = 011$ mang dấu $-$ |
 
 ### Ghi nhớ nhanh
 
@@ -687,7 +700,7 @@ Phase oracle dựng trực tiếp bằng CCZ, không cần qubit phụ: đánh d
 | API / hàm | Dùng để | Bài |
 |---|---|---|
 | `Statevector([...])`, `.from_label('0'/'+'/'-')`, `.from_int(k, dim)` | Tạo trạng thái | 02_01–02_05 |
-| `Statevector(qc)` | Trạng thái đầu ra của mạch, bắt đầu từ $\|0\dots0\rangle$ | 02_01–02_05 |
+| `Statevector(qc)` | Trạng thái đầu ra của mạch, bắt đầu từ $\vert 0\dots0\rangle$ | 02_01–02_05 |
 | `sv.draw('latex' / 'bloch', convention='vector', reverse_bits=True)` | Hiển thị ket, vector, Bloch sphere | 02_01–02_05 |
 | `sv.evolve(qc hoặc Operator)` | Cho trạng thái đi qua mạch/ma trận | 02_01, 02_02, 02_05 |
 | `sv.tensor(other)` | Tích Kronecker của trạng thái | 02_02 |
@@ -714,11 +727,16 @@ Phase oracle dựng trực tiếp bằng CCZ, không cần qubit phụ: đánh d
 ## Cách chạy
 
 Mở notebook trong VS Code hoặc Jupyter, chọn kernel `.venv` của repo, chạy từ trên xuống. Thư viện cần có
-trong [../requirements.txt](../requirements.txt).
+trong [requirements.txt](../../requirements.txt).
 
 - Mọi thứ chạy trên simulator cục bộ (`Statevector`, `BasicSimulator`, `AerSimulator`).
   `Estimator(mode=AerSimulator())` ở 02_03 cần cài `qiskit-ibm-runtime` nhưng **không cần tài khoản IBM**.
-- Hình mạch và Bloch sphere trong output được vẽ với cấu hình [../qiskit_settings.conf](../qiskit_settings.conf)
+- Hình mạch và Bloch sphere trong output được vẽ với cấu hình [qiskit_settings.conf](../../qiskit_settings.conf)
   (`circuit_reverse_bits = True`). Không có cấu hình này thì mạch vẽ ra bị lộn ngược thứ tự qubit, nhưng kết quả tính vẫn như nhau.
 - Kết quả lấy mẫu (counts) thay đổi mỗi lần chạy; kết quả `Statevector`/`Operator` thì không.
 - 02_05 dùng biến giữa các mục (ví dụ `w_cir` ở mục 1.3 được dùng lại ở mục 2), nên phải chạy theo thứ tự.
+
+---
+
+<!-- nav -->
+[← 01 · Classical computing](../01_classical_computing/README.md) · [Mục lục](../../README.md#mục-lục) · [03 · Quantum protocols →](../03_quantum_protocols/README.md)
