@@ -1,0 +1,26 @@
+name: Upstream
+
+# Fail (and notify the maintainer) when learn-quantum/lqc-textbook has new or
+# changed chapters that are not in this repo yet.
+
+on:
+  schedule:
+    - cron: "0 3 * * 1" # every Monday, 03:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-upstream:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compare with upstream
+        run: python scripts/check_upstream.py
