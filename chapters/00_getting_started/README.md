@@ -20,7 +20,7 @@ và (tuỳ chọn) liên kết tài khoản IBM Quantum để chạy trên máy 
 
 Có hai cách dùng sách: đọc trên web rồi chép code vào môi trường của mình, hoặc tải notebook
 từ repo [learn-quantum/lqc-textbook](https://github.com/learn-quantum/lqc-textbook).
-Folder `learnquantum/` này là cách thứ hai.
+Repo này đi theo cách thứ hai: notebook nằm trong `chapters/`.
 
 - Hỏi đáp: mục [Discussions](https://github.com/learn-quantum/lqc-textbook/discussions) của repo gốc.
 - Báo lỗi chính tả, bug: mục [Issues](https://github.com/learn-quantum/lqc-textbook/issues).
@@ -51,14 +51,18 @@ pip install "qiskit[visualization]" qiskit-aer qiskit-ibm-runtime notebook
 
 # hoặc venv (theo repo này), chạy ở thư mục gốc repo
 python -m venv .venv
-# Windows: .venv\Scripts\activate    |    macOS/Linux: source .venv/bin/activate
-pip install -r learnquantum/requirements.txt
+# Windows (PowerShell): .venv\Scripts\Activate.ps1   |   Windows (cmd): .venv\Scripts\activate.bat
+# macOS/Linux:          source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
 > Lưu ý: trên macOS (zsh) phải đặt `qiskit[visualization]` trong dấu nháy, vì zsh hiểu `[...]`
 > là mẫu tên file. Trên Windows và bash thì không cần.
 
 ### Code kiểm tra môi trường
+
+Đoạn code này dùng `display(...)`, nên phải chạy trong **một ô của notebook** (Jupyter hoặc VS Code), không chạy
+bằng `python tên_file.py`.
 
 ```python
 import numpy as np
@@ -87,7 +91,8 @@ print("Probability Distribution:")
 plot_distribution(counts)
 ```
 
-Đoạn này dùng đủ các thành phần sẽ gặp suốt sách:
+Đoạn này dùng đủ các thành phần sẽ gặp suốt sách. **Bạn chưa cần hiểu chúng ngay**: lúc này chỉ cần chạy được,
+mỗi khái niệm sẽ được giải thích kỹ ở Phần 01–02. Bảng dưới để tra khi tò mò.
 
 | Dòng | Ý nghĩa |
 |---|---|
@@ -100,8 +105,9 @@ plot_distribution(counts)
 | `simulator.run(qc, shots=2**10)` | Chạy 1024 lần, `get_counts()` trả về số lần mỗi kết quả |
 | `plot_distribution(counts)` | Vẽ phân bố xác suất |
 
-**Kết quả mong đợi:** trạng thái có dạng $\tfrac{1}{\sqrt{2}}(|00\rangle - i|11\rangle)$, nên chỉ đo được `00`
-và `11`, mỗi kết quả khoảng 50%. Đoạn code chạy không lỗi là môi trường đã sẵn sàng.
+**Kết quả mong đợi:** trạng thái có dạng $\tfrac{1}{\sqrt{2}}(|00\rangle - i|11\rangle)$ (chữ $i$ là đơn vị ảo,
+sẽ học ở 02_03; là một pha; nó không đổi xác suất của phép đo này), nên chỉ đo được `00` và `11`, mỗi kết quả
+khoảng 50%. Đoạn code chạy không lỗi là môi trường đã sẵn sàng.
 
 > Lưu ý: code tạo `qc_t = transpile(...)` nhưng lại chạy `simulator.run(qc, ...)` chứ không phải
 > `qc_t`. Với AerSimulator vẫn chạy được, vì Aer tự hỗ trợ các cổng này; trên phần cứng thật cần
@@ -122,14 +128,20 @@ Cả hai bước đều **tuỳ chọn**.
    ```
 
 Token được lưu ở `C:\Users\<tên>\.qiskit\qiskit-ibm.json` (Windows) hoặc `~/.qiskit/qiskit-ibm.json`
-(macOS/Linux). **Không bao giờ commit token lên GitHub.** Các notebook trong folder này đều chạy trên
+(macOS/Linux). **Không bao giờ commit token lên GitHub.**
+
+> Lưu ý (có thể đã lỗi thời): hướng dẫn này theo bản gốc, vốn trỏ tới `quantum.ibm.com` và gọi `save_account` chỉ với token.
+> Thư viện `qiskit-ibm-runtime` hiện hành (0.50.0) mô tả `token` là *IBM Cloud API key*, nhận kênh `ibm_cloud` hoặc
+> `ibm_quantum_platform`, và có thêm tham số `instance`. Nền tảng IBM Quantum cũng đã chuyển sang
+> `quantum.cloud.ibm.com`. Nếu bạn muốn chạy trên máy thật, hãy làm theo tài liệu hiện hành tại
+> [quantum.cloud.ibm.com/docs](https://quantum.cloud.ibm.com/docs) thay vì các bước ở trên. Các notebook trong repo này đều chạy trên
 simulator nên không cần token.
 
 ### 2. Tệp cấu hình `settings.conf` (để hình giống hệt sách)
 
 Tạo tệp `C:\Users\<tên>\.qiskit\settings.conf` (Windows) hoặc `~/.qiskit/settings.conf`
 (macOS/Linux). Repo gốc dùng nội dung dưới đây; bản sao có sẵn ở
-[../qiskit_settings.conf](../qiskit_settings.conf):
+[qiskit_settings.conf](../../qiskit_settings.conf):
 
 ```ini
 [default]
@@ -158,5 +170,12 @@ state_drawer = latex
 - Chỉ cần 4 gói: `qiskit[visualization]`, `qiskit-aer`, `qiskit-ibm-runtime`, `notebook`.
 - Chạy được đoạn code kiểm tra (ra `00`/`11` khoảng 50/50) là môi trường đã ổn.
 - Token IBM chỉ cần cho phần cứng thật; không bao giờ đưa token vào code commit.
-- Muốn hình giống sách: copy [../qiskit_settings.conf](../qiskit_settings.conf) vào `~/.qiskit/settings.conf`.
+- Muốn hình giống sách: copy [qiskit_settings.conf](../../qiskit_settings.conf) vào `~/.qiskit/settings.conf`.
 - Chuỗi kết quả của Qiskit đọc từ phải sang trái: ký tự cuối là qubit 0.
+
+> Các đoạn code trong README này là **trích** từ notebook (giữ comment gốc tiếng Anh) và dùng biến đã định nghĩa ở các cell trước. Muốn chạy được, hãy chạy cả notebook từ trên xuống.
+
+---
+
+<!-- nav -->
+[← Lộ trình học](../../docs/learning-path.md) · [Mục lục](../../README.md#mục-lục) · [01 · Classical computing →](../01_classical_computing/README.md)
