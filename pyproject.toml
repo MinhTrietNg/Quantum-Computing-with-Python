@@ -1,0 +1,16 @@
+# Tool settings only; this repo is not an installable package.
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+extend-exclude = ["chapters"] # upstream notebooks are kept verbatim
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+addopts = "-p no:cacheprovider"

@@ -1,0 +1,8 @@
+# Tools for checking the notebooks and scripts.
+#     pip install -r requirements-dev.txt
+#     pytest --nbmake chapters/
+-r requirements.txt
+pytest>=8.0
+nbmake>=1.5
+black>=24.0
+ruff>=0.5
