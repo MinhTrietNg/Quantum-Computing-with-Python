@@ -25,6 +25,8 @@ $H^{\otimes n}|x\rangle = \frac{1}{\sqrt N}\sum_z (-1)^{x\cdot z}|z\rangle$.
 | 04_03 · Simon | [04_03_simons.ipynb](04_03_simons.ipynb) | [link](https://learnquantum.io/chapters/04_quantum_algorithms/04_03_simons.html) | Tìm $s$ với $f(x) = f(x \oplus s)$ | $\sim 2^{n/2}$ → $\sim n$ (tăng tốc **hàm mũ**) |
 | 04_04 · Grover | [04_04_grover.ipynb](04_04_grover.ipynb) | [link](https://learnquantum.io/chapters/04_quantum_algorithms/04_04_grover.html) | Tìm $x$ với $f(x) = 1$ (tìm kiếm không cấu trúc) | $\sim N$ → $\sim\sqrt N$ (tăng tốc **bậc hai**) |
 
+> Các đoạn code trong README này là **trích** từ notebook (giữ comment gốc tiếng Anh) và dùng biến đã định nghĩa ở các cell trước. Muốn chạy được, hãy chạy cả notebook từ trên xuống.
+
 ---
 
 ## 04_01 · Deutsch–Jozsa algorithm (Thuật toán Deutsch–Jozsa)
@@ -129,8 +131,8 @@ Mạch Deutsch–Jozsa hoàn chỉnh. Mô phỏng cổ điển dùng `qc.prepare
 
 | Kiểm tra | Output |
 |---|---|
-| Statevector cuối cho $f = 0,\ 1,\ x,\ \bar x$ | $\|01\rangle,\ -\|01\rangle,\ \|11\rangle,\ -\|11\rangle$: qubit trên là 0 với hàm hằng, 1 với hàm cân bằng |
-| Oracle hằng $f = 1$ (X lên $y$) | mọi $\|x\rangle\|0\rangle \to \|x\rangle\|1\rangle$ |
+| Statevector cuối cho $f = 0,\ 1,\ x,\ \bar x$ | $\vert 01\rangle,\ -\vert 01\rangle,\ \vert 11\rangle,\ -\vert 11\rangle$: qubit trên là 0 với hàm hằng, 1 với hàm cân bằng |
+| Oracle hằng $f = 1$ (X lên $y$) | mọi $\vert x\rangle\vert 0\rangle \to \vert x\rangle\vert 1\rangle$ |
 | Oracle parity, 3 bit | $f(x)$ = parity của $x$ (ví dụ $011 \to 0$, $111 \to 1$) |
 | DJ với parity | luôn ra $111$ |
 | DJ với các hàm cân bằng khác | không bao giờ ra $000$ |
@@ -529,7 +531,7 @@ Số vòng lặp tối ưu. Notebook còn có `find_κ(N)` tính lặp theo côn
 | | Deutsch–Jozsa | Bernstein–Vazirani | Simon | Grover |
 |---|---|---|---|---|
 | Đầu ra của $f$ | 1 bit | 1 bit | $n$ bit | 1 bit |
-| Qubit phụ | 1, ở $\|-\rangle$ | 1, ở $\|-\rangle$ | $n$, ở $\|0\rangle^{\otimes n}$ | 1, ở $\|-\rangle$ |
+| Qubit phụ | 1, ở $\vert -\rangle$ | 1, ở $\vert -\rangle$ | $n$, ở $\vert 0\rangle^{\otimes n}$ | 1, ở $\vert -\rangle$ |
 | Cơ chế chính | Kickback + $H^{\otimes n}$ | Kickback + $H^{\otimes n}$ | Đo thanh ghi dưới + $H^{\otimes n}$ | Kickback + diffuser, lặp $\kappa$ lần |
 | Kết quả mỗi lần chạy | Tất định | Tất định | Ngẫu nhiên: một $z$ với $s\cdot z = 0$ | Xác suất cao |
 | Hậu xử lý cổ điển | Không | Không | Khử Gauss modulo 2 | Kiểm tra $f(x_\text{out})$ |
@@ -544,7 +546,7 @@ Số vòng lặp tối ưu. Notebook còn có `find_κ(N)` tính lặp theo côn
 | `qc.append(sub_circuit_or_gate, qubits)` | Gắn hộp đen, diffuser vào mạch | 04_01–04_04 |
 | `qc.mcx(controls, target, ctrl_state=)` | Oracle: lật $y$ tại một giá trị $x$ | 04_01, 04_03, 04_04 |
 | `qc.cx(list_controls, list_targets)` | Nhiều CX cùng lúc (oracle BV, parity) | 04_01, 04_02 |
-| `qc.prepare_state(k, qubits)` | Nạp đầu vào cổ điển $\|k\rangle$ | 04_01, 04_04 |
+| `qc.prepare_state(k, qubits)` | Nạp đầu vào cổ điển $\vert k\rangle$ | 04_01, 04_04 |
 | `ZGate().control(k)` | Tạo MCZ cho diffuser | 04_04 |
 | `BitFlipOracleGate(expr, vars)` | Dựng oracle từ biểu thức Boolean | 04_03 |
 | `sympy.symbols`, `sympy.logic.boolalg.SOPform` | Rút gọn biểu thức Boolean | 04_03 |
@@ -558,7 +560,7 @@ Số vòng lặp tối ưu. Notebook còn có `find_κ(N)` tính lặp theo côn
 ## Cách chạy
 
 Mở notebook trong VS Code hoặc Jupyter, chọn kernel `.venv` của repo, chạy từ trên xuống. Thư viện cần có
-trong [../requirements.txt](../requirements.txt); 04_03 cần thêm `sympy`, đã có sẵn trong file đó.
+trong [requirements.txt](../../requirements.txt); 04_03 cần thêm `sympy`, đã có sẵn trong file đó.
 
 - Mọi thứ chạy trên `AerSimulator` cục bộ, không cần tài khoản IBM.
 - Hộp đen, chuỗi bí mật và phần tử đánh dấu đều sinh **ngẫu nhiên**, nên output mỗi lần chạy khác bản đã lưu;
@@ -566,3 +568,8 @@ trong [../requirements.txt](../requirements.txt); 04_03 cần thêm `sympy`, đ�
 - Một số biểu đồ so sánh cổ điển/lượng tử (xác suất theo số lần thử) chỉ có dạng **ảnh tĩnh** trong notebook,
   không có code sinh ra chúng.
 - Các notebook dùng lại hàm giữa các mục (ví dụ `black_box_n`, `diffuser`, `fx_simon`), nên phải chạy theo thứ tự.
+
+---
+
+<!-- nav -->
+[← 03 · Quantum protocols](../03_quantum_protocols/README.md) · [Mục lục](../../README.md#mục-lục) · [Học tiếp sau Phần 04 →](../../docs/learning-path.md#sau-phần-04-thì-sao)
