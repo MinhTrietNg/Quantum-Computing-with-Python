@@ -16,10 +16,12 @@ cổng **khả nghịch** (reversible), bit là **vector** và cổng là **ma t
 |---|---|---|---|
 | 01_01 · Bits and digital circuits | [01_01_bits_and_circuits.ipynb](01_01_bits_and_circuits.ipynb) | [link](https://learnquantum.io/chapters/01_classical_computing/01_01_bits_and_circuits.html) | Số nhị phân trong Python, AND/OR/NOT/XOR, mạch cộng, transistor CMOS |
 | 01_02 · Reversible computing | [01_02_reversible_computing.ipynb](01_02_reversible_computing.ipynb) | [link](https://learnquantum.io/chapters/01_classical_computing/01_02_reversible_computing.html) | X, CX, CCX (Toffoli); AND/OR/COPY/full adder khả nghịch |
-| 01_03 · Linear algebra for reversible circuits | [01_03_bits_to_vectors.ipynb](01_03_bits_to_vectors.ipynb) | [link](https://learnquantum.io/chapters/01_classical_computing/01_03_bits_to_vectors.html) | Bit là vector $\|0\rangle,\|1\rangle$; cổng là ma trận; tích Kronecker |
+| 01_03 · Linear algebra for reversible circuits | [01_03_bits_to_vectors.ipynb](01_03_bits_to_vectors.ipynb) | [link](https://learnquantum.io/chapters/01_classical_computing/01_03_bits_to_vectors.html) | Bit là vector $\vert 0\rangle,\vert 1\rangle$; cổng là ma trận; tích Kronecker |
 | 01_04 · Probabilistic computing | [01_04_probabilistic_circuits.ipynb](01_04_probabilistic_circuits.ipynb) | [link](https://learnquantum.io/chapters/01_classical_computing/01_04_probabilistic_circuits.html) | p-bit, vector xác suất, ma trận ngẫu nhiên (stochastic) |
 
 Phần này chỉ dùng **Python thuần, NumPy, SymPy và Matplotlib**, chưa dùng Qiskit.
+
+> Các đoạn code trong README này là **trích** từ notebook (giữ comment gốc tiếng Anh) và dùng biến đã định nghĩa ở các cell trước. Muốn chạy được, hãy chạy cả notebook từ trên xuống.
 
 ---
 
@@ -341,13 +343,13 @@ CX giữa bit trên cùng và bit dưới cùng, bỏ qua bit giữa.
 
 | Kiểm tra | Output |
 |---|---|
-| Độ dài $\|0\rangle$, $\|1\rangle$ | `1.0`, `1.0` |
+| Độ dài $\vert 0\rangle$, $\vert 1\rangle$ | `1.0`, `1.0` |
 | Độ dài $[0,0]^\top$, $[1,1]^\top$ | `0.0`, `1.414…` (không hợp lệ) |
-| `np.vdot` giữa $\|0\rangle,\|1\rangle$ | `1, 0, 0, 1` |
+| `np.vdot` giữa $\vert 0\rangle,\vert 1\rangle$ | `1, 0, 0, 1` |
 | `np.linalg.inv(X)` | bằng X |
 | `bin_to_vec('10110')` | vector 32 chiều, số 1 ở vị trí 22 |
 | $Q_2 Q_1$ và $Q_3 Q_2 Q_1$ (hai cách chia lớp) | cùng một ma trận |
-| $Q\,\|100\rangle$ với CX nhảy qua bit giữa | $\|101\rangle$ (số 1 ở vị trí 5) |
+| $Q\,\vert 100\rangle$ với CX nhảy qua bit giữa | $\vert 101\rangle$ (số 1 ở vị trí 5) |
 
 ### Ghi nhớ nhanh
 
@@ -439,9 +441,9 @@ Sau đó `Q.inv() @ p_int` đưa chúng về chỗ cũ.
 | Kiểm tra | Output |
 |---|---|
 | 200 mẫu từ $[1/4, 3/4]$ | tần suất 0 là `0.27`, tần suất 1 là `0.73` |
-| $P = R \otimes \text{X}$ áp lên $\|00\rangle$ | $[0, 0.5, 0, 0.5]$: $\vec p_0$ luôn là 1, $\vec p_1$ là 0/1 mỗi bên 1/2 |
+| $P = R \otimes \text{X}$ áp lên $\vert 00\rangle$ | $[0, 0.5, 0, 0.5]$: $\vec p_0$ luôn là 1, $\vec p_1$ là 0/1 mỗi bên 1/2 |
 | $P$ áp lên $\vec p_1 \otimes \vec p_0$ với $\vec p_0 = [2/3, 1/3]$, $\vec p_1 = [1/10, 9/10]$ | $[0.1667, 0.3333, 0.1667, 0.3333]$ |
-| Ma trận stochastic áp lên $\|10\rangle$ | $[0, 0, 0.5, 0.5]$ |
+| Ma trận stochastic áp lên $\vert 10\rangle$ | $[0, 0, 0.5, 0.5]$ |
 | $Q\,[\varrho_0, \varrho_1, \varrho_2, \varrho_3]^\top$ | $[\varrho_3, \varrho_2, \varrho_0, \varrho_1]^\top$; nhân tiếp $Q^{-1}$ ra lại thứ tự ban đầu |
 
 ### Ghi nhớ nhanh
@@ -459,7 +461,7 @@ Sau đó `Q.inv() @ p_int` đưa chúng về chỗ cũ.
 |---|---|---|
 | `0b1101`, `bin(x)`, `int(s, 2)` | Viết số nhị phân, đổi số ↔ chuỗi nhị phân | 01_01 |
 | `str.zfill(n)`, `np.binary_repr(x, n)` | Chuỗi nhị phân đủ $n$ bit | 01_01 |
-| `&`, `\|`, `^` | AND, OR, XOR từng bit | 01_01, 01_02 |
+| `&`, `\vert `, `^` | AND, OR, XOR từng bit | 01_01, 01_02 |
 | `np.array([[1],[0]])` | Vector cột (ket) | 01_03, 01_04 |
 | `@`, `np.matmul` | Nhân ma trận | 01_03, 01_04 |
 | `np.kron` | Tích Kronecker (ghép bit, ghép cổng song song) | 01_03, 01_04 |
@@ -475,8 +477,13 @@ Sau đó `Q.inv() @ p_int` đưa chúng về chỗ cũ.
 ## Cách chạy
 
 Mở notebook trong VS Code hoặc Jupyter, chọn kernel `.venv` của repo, chạy từ trên xuống. Thư viện cần có
-trong [../requirements.txt](../requirements.txt); phần này chỉ dùng NumPy, SymPy, Matplotlib.
+trong [requirements.txt](../../requirements.txt); phần này chỉ dùng NumPy, SymPy, Matplotlib.
 
 - Các notebook độc lập với nhau, nhưng trong mỗi notebook, cell sau dùng biến của cell trước
   (ví dụ `X`, `I`, `bin_to_vec` ở 01_03), nên phải chạy theo thứ tự.
 - 01_04 lấy mẫu ngẫu nhiên không có seed, nên số liệu lấy mẫu sẽ khác output lưu sẵn. Các phép nhân ma trận thì luôn cho cùng kết quả.
+
+---
+
+<!-- nav -->
+[← 00 · Getting started](../00_getting_started/README.md) · [Mục lục](../../README.md#mục-lục) · [02 · Quantum computing →](../02_quantum_computing/README.md)
