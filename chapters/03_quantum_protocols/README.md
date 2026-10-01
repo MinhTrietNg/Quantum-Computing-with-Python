@@ -14,6 +14,8 @@ Phần này dùng các khái niệm đã học (superposition, measurement, enta
 
 Trang web còn liệt kê "Bell Inequalities" (03_04) và "Quantum Key Distribution" (03_05), nhưng ở repo gốc hai chương này chỉ có tiêu đề (chưa có nội dung) nên không được sao chép vào đây.
 
+> Các đoạn code trong README này là **trích** từ notebook (giữ comment gốc tiếng Anh) và dùng biến đã định nghĩa ở các cell trước. Muốn chạy được, hãy chạy cả notebook từ trên xuống.
+
 ---
 
 ## 03_01 · Uncertainty & Quantum Money (Nguyên lý bất định và tiền lượng tử)
@@ -46,12 +48,16 @@ Notebook vẽ hai vế theo $\theta$ với vài giá trị $\varphi$, sau đó k
 4. **Kẻ làm giả** không biết $U$:
    - Đo thẳng ở cơ sở bit: các qubit $|\pm\rangle$ cho kết quả ngẫu nhiên.
    - Đo ở cơ sở sign (áp $H$ lên mọi qubit trước): các qubit $|0\rangle, |1\rangle$ cho kết quả ngẫu nhiên.
-   - Chỉ đo được một lần, vì phép đo làm sụp trạng thái. Đoán mò đúng cả $n$ qubit có xác suất $(1/4)^n$; với $n=6$: $\approx 0.000244$.
-5. **Vì sao an toàn**: $\{|+\rangle, |-\rangle\}$ là cơ sở liên hợp với $\{|0\rangle, |1\rangle\}$ (bất định), và theo **no-cloning theorem** không thể sao chép một trạng thái lượng tử chưa biết. Cùng lắm kẻ gian tạo được bản sao *vướng víu*, nhưng khi ngân hàng kiểm tra một đồng thì đồng kia sụp và trở nên vô dụng.
+   - Chỉ đo được một lần, vì phép đo làm sụp trạng thái. Đoán mò **chính xác** cả $n$ qubit có xác suất $(1/4)^n$; với $n=6$: $\approx 0.000244$.
+     (Đây là xác suất đoán mù. Kẻ làm giả khôn hơn, đo ngẫu nhiên từng qubit rồi chuẩn bị lại, thì **một** đồng qua được
+     bước kiểm tra với xác suất $(3/4)^n$ (≈ 0.18 khi $n=6$). Để làm ra **hai** đồng cùng qua, cách đo-rồi-chuẩn-bị-lại
+     chỉ đạt $(5/8)^n$ và kẻ gian giỏi nhất, dùng phép sao chép tối ưu, đạt $(3/4)^n$. Tất cả đều giảm theo hàm mũ
+     khi thêm qubit.)
+5. **Vì sao an toàn**: $\{|+\rangle, |-\rangle\}$ là cơ sở liên hợp với $\{|0\rangle, |1\rangle\}$ (bất định), và theo **no-cloning theorem** không thể sao chép một trạng thái lượng tử chưa biết. Cùng lắm kẻ gian tạo được bản sao *vướng víu*, nhưng khi ngân hàng kiểm tra một đồng thì đồng kia sụp và trở nên vô dụng. (Đó là cách nói của sách; thực ra bản sao vướng víu không đảm bảo bị loại: kẻ gian giỏi nhất vẫn làm cả hai đồng cùng qua với xác suất $(3/4)^n$, giảm theo hàm mũ. Giao thức cũng giả định kẻ gian không thể dò kết quả kiểm tra của ngân hàng nhiều lần.)
 
 Cuối bài nhắc tới hướng "tiền lượng tử ảo" và quantum lightning (Zhandry18) như cách kết hợp với blockchain.
 
-> Lưu ý: notebook có hai chỗ viết nhầm: (1) câu "In the above, we only consider qubits in the $xy$-plane" phải là mặt phẳng $xz$; (2) câu "the probability of the criminal successfully guessing the state grows with the number of qubits" thực ra là *giảm* theo $n$, đúng như công thức $(1/4)^n$.
+> Lưu ý: notebook có hai chỗ viết nhầm, và một chỗ dễ gây hiểu lầm (phần cuối): (1) câu "In the above, we only consider qubits in the $xy$-plane" phải là mặt phẳng $xz$; (2) câu "the probability of the criminal successfully guessing the state grows with the number of qubits" thực ra là *giảm* theo $n$, đúng như công thức $(1/4)^n$. Ngoài ra, $(1/4)^n$ trong notebook là xác suất đoán mù **chính xác** cả trạng thái; nó không phải xác suất kẻ làm giả thành công. Chiến lược đo ngẫu nhiên từng qubit rồi chuẩn bị lại thì một đồng qua được bước kiểm tra với xác suất $(3/4)^n$ (khoảng 0.18 khi $n=6$, nên cần nhiều qubit hơn ví dụ để thực sự an toàn).
 
 ### Code chính
 
@@ -117,7 +123,7 @@ Kiểm tra đồng xu: `QuantumCircuit.inverse()` tạo $U^\dagger$, `Statevecto
 - $X$ và $Z$ là cặp observable liên hợp: $\Delta Z = |\sin\theta|$, $\Delta X = |\cos\theta|$, không thể cùng nhỏ.
 - Đồng xu = serial công khai + $n$ qubit ngẫu nhiên trong $\{|0\rangle,|1\rangle,|+\rangle,|-\rangle\}$; chỉ ngân hàng biết cơ sở.
 - Kiểm tra = áp $U^\dagger$ rồi đo, đồng xu thật cho toàn 0.
-- Hai lớp bảo vệ: phép đo phá hủy trạng thái (bất định) và no-cloning; xác suất đoán mò $(1/4)^n$.
+- Hai lớp bảo vệ: phép đo phá hủy trạng thái (bất định) và no-cloning; xác suất đoán mù chính xác $(1/4)^n$ (kẻ gian giỏi hơn vẫn làm được với xác suất $(3/4)^n$, cũng giảm theo hàm mũ).
 - Estimator V2: `estimator.run([(qc, observables, params, precision)])` rồi đọc `result()[0].data.evs`.
 
 ---
@@ -325,6 +331,11 @@ Bit được chọn ngẫu nhiên nên mỗi lần chạy lại sẽ khác, như
 ## Cách chạy
 
 - Mở notebook bằng Jupyter hoặc VS Code, chọn kernel `.venv` của repo, chạy lần lượt từ trên xuống dưới.
-- Thư viện cần thiết nằm trong [`../requirements.txt`](../requirements.txt) (cài từ gốc repo: `pip install -r learnquantum/requirements.txt`).
+- Thư viện cần thiết nằm trong [`requirements.txt`](../../requirements.txt) (cài từ gốc repo: `pip install -r requirements.txt`).
 - Mọi thứ chạy trên simulator cục bộ (`AerSimulator`, `Statevector`). `qiskit_ibm_runtime.Estimator(mode=AerSimulator())` ở bài 03_01 cần cài gói `qiskit-ibm-runtime` nhưng không cần tài khoản IBM.
 - Các bài dùng số ngẫu nhiên (đồng xu, bit của Alice, kết quả đo) nên output mỗi lần chạy sẽ khác bản đã lưu, nhưng kết luận vẫn giữ nguyên.
+
+---
+
+<!-- nav -->
+[← 02 · Quantum computing](../02_quantum_computing/README.md) · [Mục lục](../../README.md#mục-lục) · [04 · Quantum algorithms →](../04_quantum_algorithms/README.md)
