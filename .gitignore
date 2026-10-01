@@ -7,13 +7,15 @@ venv/
 # Jupyter
 .ipynb_checkpoints/
 
+# Tools
+.pytest_cache/
+.ruff_cache/
+
+# Qiskit account files must never be committed
+qiskit-ibm.json
+
 # Editors / OS
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
-
-# Experiment outputs
-experiments/**/outputs/
-*.npz
-*.pkl
