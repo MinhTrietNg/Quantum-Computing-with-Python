@@ -1,9 +1,10 @@
 # 04 · Foundational quantum algorithms (Các thuật toán lượng tử nền tảng)
 
-Bốn thuật toán kinh điển cho thấy máy lượng tử vượt máy cổ điển ở đâu: **Deutsch–Jozsa**, **Bernstein–Vazirani**,
-**Simon** và **Grover**. Cả bốn dùng chung một khuôn: đưa đầu vào về chồng chập bằng Hadamard, gọi **oracle** $U_f$
-(hộp đen chứa bài toán), rồi dùng **giao thoa** (interference) để kết quả cần tìm nổi lên khi đo. Thước đo so sánh
-là **số lần truy vấn oracle** (query complexity).
+Bốn thuật toán kinh điển cho thấy, trong mô hình hộp đen, máy lượng tử cần ít lần gọi hơn máy cổ điển ra sao:
+**Deutsch–Jozsa**, **Bernstein–Vazirani**, **Simon** và **Grover**. Cả bốn dùng chung một khuôn: đưa đầu vào về chồng chập
+bằng Hadamard, gọi **oracle** $U_f$ (hộp đen chứa bài toán), rồi dùng **giao thoa** (interference) để kết quả cần tìm nổi
+lên khi đo. Thước đo so sánh là **số lần truy vấn oracle**, tức độ phức tạp truy vấn (query complexity). Đây là các bài toán
+dựng sẵn để minh hoạ: ít lần gọi oracle hơn không có nghĩa máy lượng tử giải nhanh hơn các bài toán thực tế.
 
 > Nguồn: [04_01](https://learnquantum.io/chapters/04_quantum_algorithms/04_01_deutsch-jozsa.html) ·
 > [04_02](https://learnquantum.io/chapters/04_quantum_algorithms/04_02_bernstein-vazirani.html) ·
@@ -37,9 +38,26 @@ $H^{\otimes n}|x\rangle = \frac{1}{\sqrt N}\sum_z (-1)^{x\cdot z}|z\rangle$.
 ### Kiến thức chính
 
 **Trường hợp $n = 1$ (thuật toán Deutsch).** Có 4 hàm: $f = 0$, $f = 1$ (hằng), $f = x$, $f = \bar x$ (cân bằng).
+
+<p align="center"><img src="images/04_01_02_oracles.png" width="750" alt="Bốn mạch hai dây x, y: hai dây thẳng; cổng X trên y; CX điều khiển bởi x lên y; CX điều khiển khi x bằng 0"></p>
+
+*Hình: bốn mạch có thể nằm trong hộp đen; mạch 1 và 2 là hàm hằng ($f = 0$, $f = 1$), mạch 3 và 4 là hàm cân bằng ($f = x$, $f = \bar x$).*
+
 Cổ điển, một lần hỏi chỉ đoán đúng 50%, vì mỗi đầu vào luôn ra trùng với một hàm hằng và một hàm cân bằng; cần 2 lần
 mới chắc chắn. Lượng tử: bọc hộp đen bằng H. Với hàm hằng, hai lớp H triệt tiêu nhau; với CX, H–CX–H **đảo chiều**
 điều khiển (phase kickback), nên qubit trên bị lật.
+
+<p align="center"><img src="images/04_01_05_cir1_equiv.png" width="630" alt="Mạch 1 (hộp rỗng) kẹp giữa hai lớp H tương đương hai dây thẳng"></p>
+
+*Hình: mạch 1 (hộp rỗng) kẹp giữa hai lớp H vẫn chỉ là hai dây thẳng, vì $HH = I$.*
+
+<p align="center"><img src="images/04_01_06_cir3_equiv.png" width="630" alt="Mạch 3 (CX từ x xuống y) kẹp giữa hai lớp H tương đương một CX đảo chiều, y điều khiển và x là đích"></p>
+
+*Hình: mạch 3 (CX từ $x$ xuống $y$) kẹp giữa hai lớp H tương đương một CX đảo chiều: $y$ điều khiển, $x$ là đích.*
+
+<p align="center"><img src="images/04_01_07_deutsch.png" width="500" alt="Mạch Deutsch: X lên qubit dưới, H lên cả hai qubit, hộp đen, H lên cả hai qubit, đo qubit trên; các mốc psi 0 đến psi 4"></p>
+
+*Hình: mạch Deutsch với các mốc $|\psi\rangle_0$ đến $|\psi\rangle_4$; chỉ đo qubit trên.*
 
 Các bước ($q_1$ là $x$, $q_0$ là $y$):
 
@@ -50,9 +68,25 @@ $$|0\rangle|0\rangle \xrightarrow{X \text{ lên } y} |0\rangle|1\rangle \xrighta
 Đo qubit trên ra 0 thì $f$ hằng, ra 1 thì $f$ cân bằng. Chỉ cần **1 lần gọi**, kết quả tất định.
 
 **Tổng quát $n$ bit.**
-- **Cổ điển:** muốn chắc chắn thì trong trường hợp xấu nhất phải thử $2^n/2 + 1$ đầu vào. Nếu chấp nhận đoán theo xác suất,
-  sau $r$ lần thử ngẫu nhiên thì $\mathbb{P}_\text{success} = 1 - 1/2^r$, nhưng vẫn chỉ là đoán.
+- **Cổ điển:** muốn chắc chắn thì trong trường hợp xấu nhất phải thử $2^n/2 + 1 = 2^{n-1} + 1$ đầu vào, vì $2^{n-1}$ đầu ra
+  giống nhau vẫn chưa loại được hàm cân bằng. Nếu chấp nhận đoán theo xác suất (thử $r$ đầu vào ngẫu nhiên; đầu ra toàn
+  giống nhau thì đoán hằng), notebook cho $\mathbb{P}_\text{success} = 1 - 1/2^r$, nhưng vẫn chỉ là đoán.
+
+<p align="center"><img src="images/04_01_11_classical_probs.png" width="520" alt="Biểu đồ cột: xác suất đoán đúng loại hàm theo số đầu vào đã thử r, với N = 32; khoảng 51% ở r = 1, khoảng 99% ở r = 6, gần 100% từ r = 7"></p>
+
+*Hình: đoán theo xác suất với $N = 32$ (mô phỏng): khoảng 99% ở $r = 6$, chưa cần tới 17 lần thử như khi muốn chắc chắn.*
+
+> Lưu ý: công thức $1 - 1/2^r$ ngầm giả sử hộp đen là hằng hay cân bằng với xác suất 50/50 và các lần thử chọn độc lập
+> (có thể trùng nhau). Nếu chọn $r$ đầu vào **khác nhau** như trong mô phỏng thì xác suất còn cao hơn một chút (99.1% thay vì
+> 98.4% ở $N = 32$, $r = 6$). Nếu hộp đen là hàm cân bằng thì xác suất đoán sai là $1/2^{r-1}$ (thử độc lập). Dù sao sai số
+> giảm theo hàm mũ của $r$ và không phụ thuộc $n$: 11 lần thử là sai dưới 0.1%. Vì vậy lợi thế "1 lần so với $2^{n-1} + 1$
+> lần" của DJ chỉ đúng khi so với thuật toán cổ điển **tất định** (không được phép sai).
+
 - **Lượng tử:** cùng mạch, thay H bằng $H^{\otimes n}$:
+
+<p align="center"><img src="images/04_01_10_deutsch-jozsa.png" width="520" alt="Mạch Deutsch–Jozsa: n qubit x qua QHT, qubit y qua X rồi H, oracle U_f, rồi QHT lên x, H lên y, đo n qubit x; các mốc psi 0 đến psi 4"></p>
+
+*Hình: mạch Deutsch–Jozsa; QHT là $H^{\otimes n}$ trên thanh ghi $x$, và chỉ thanh ghi $x$ được đo.*
 
 $$|\psi\rangle_3 = \Big(\frac{1}{\sqrt N}\sum_x (-1)^{f(x)}|x\rangle\Big)|-\rangle$$
 
@@ -143,7 +177,8 @@ Mạch Deutsch–Jozsa hoàn chỉnh. Mô phỏng cổ điển dùng `qc.prepare
 - Mạch: X lên $y$ → H mọi qubit → $U_f$ → H mọi qubit → đo $x$.
 - Toàn 0 thì hằng, khác 0 thì cân bằng; 1 lần gọi, tất định.
 - Cơ chế: kickback đưa $(-1)^{f(x)}$ vào biên độ; $H^{\otimes n}$ cộng các dấu lại, nên biên độ của $|0\dots0\rangle$ bằng 0 khi cân bằng.
-- Cổ điển chắc chắn cần $2^{n-1} + 1$ lần gọi (trường hợp xấu nhất).
+- Cổ điển chắc chắn cần $2^{n-1} + 1$ lần gọi (trường hợp xấu nhất). Nếu chấp nhận sai rất nhỏ thì vài lần gọi ngẫu nhiên là
+  đủ, nên lợi thế của DJ chỉ là so với cổ điển tất định.
 
 ---
 
@@ -155,9 +190,14 @@ nhị phân). Tìm chuỗi bí mật $s$ có $n$ bit.
 ### Kiến thức chính
 
 **Cổ điển: cần đúng $n$ lần gọi.** Dùng các đầu vào chỉ có một bit 1, $x = 0\dots01,\ 0\dots10,\ \dots$. Mỗi lần như vậy
-$f(x) = s_i$, tức "mặt nạ" lấy ra từng bit của $s$.
+$f(x) = s_i$, tức "mặt nạ" lấy ra từng bit của $s$. Thuật toán cổ điển tất định không thể ít hơn: mỗi lần gọi chỉ trả về
+1 bit, còn $s$ có $n$ bit.
 
 **Lượng tử: 1 lần gọi**, mạch **giống hệt Deutsch–Jozsa**, chỉ khác oracle:
+
+<p align="center"><img src="images/04_01_10_deutsch-jozsa.png" width="520" alt="Mạch Deutsch–Jozsa dùng lại cho Bernstein–Vazirani: n qubit x qua QHT, qubit y qua X rồi H, oracle U_f, rồi QHT lên x, H lên y, đo n qubit x"></p>
+
+*Hình: Bernstein–Vazirani dùng đúng mạch của Deutsch–Jozsa; chỉ khác là $U_f$ tính $f(x) = s\cdot x$, nên phép đo cho thẳng $s$.*
 
 $$|\psi\rangle_3 = \Big(\frac{1}{\sqrt N}\sum_x (-1)^{s\cdot x}|x\rangle\Big)|-\rangle = \big(H^{\otimes n}|s\rangle\big)|-\rangle$$
 
@@ -218,7 +258,7 @@ Cách lượng tử: **1 shot** là đọc được $s$. `bernstein_vazirani(n)`
 
 - Mạch giống hệt DJ; oracle là các CX từ những $x_i$ có $s_i = 1$.
 - $\sum_x (-1)^{s\cdot x}|x\rangle = H^{\otimes n}|s\rangle$, nên thêm $H^{\otimes n}$ là ra $|s\rangle$.
-- $n$ lần gọi cổ điển → 1 lần gọi lượng tử.
+- $n$ lần gọi cổ điển → 1 lần gọi lượng tử: chỉ là tăng tốc tuyến tính, không phải hàm mũ.
 
 ---
 
@@ -227,18 +267,41 @@ Cách lượng tử: **1 shot** là đọc được $s$. `bernstein_vazirani(n)`
 **Bài toán.** Cho oracle của $f:\{0,1\}^n \to \{0,1\}^n$, được hứa rằng $f(x) = f(x \oplus s)$ với một chuỗi $s \neq 0$
 (tức $f$ là hàm **hai-một**: mỗi giá trị đầu ra đến từ đúng một cặp $\{x, x\oplus s\}$). Tìm $s$.
 
-Đây là thuật toán đầu tiên có tăng tốc **hàm mũ** so với cổ điển, và là tiền thân trực tiếp của thuật toán Shor.
+<p align="center"><img src="images/04_03_01_simons_bb.png" width="650" alt="Oracle U_f của Simon: n dây x đi qua giữ nguyên, n dây y ra y_i XOR f(x)_i; khi y bằng 0 thì thanh ghi dưới ra f(x)"></p>
+
+*Hình: oracle của Simon có $2n$ qubit; với $y = 0\dots0$, thanh ghi dưới ra đúng $|f(x)\rangle$.*
+
+Đây là thuật toán đầu tiên có tăng tốc **hàm mũ** so với mọi thuật toán cổ điển, kể cả thuật toán ngẫu nhiên, nhưng là
+trong mô hình oracle (đếm số lần gọi $U_f$). Bài toán không có ứng dụng trực tiếp; ý tưởng của nó là tiền thân của thuật
+toán Shor.
+
+> Lưu ý: phần mở đầu notebook gọi Shor là thuật toán có lợi thế **đã được chứng minh** cho một ứng dụng thực tế. Thực ra
+> chưa ai chứng minh phân tích thừa số là khó với máy cổ điển: Shor nhanh hơn hẳn thuật toán cổ điển **tốt nhất đã biết**,
+> nhưng lợi thế so với mọi thuật toán cổ điển vẫn chưa được chứng minh.
 
 ### Kiến thức chính
 
 **Cổ điển.** Thử các $x$ đến khi gặp hai đầu vào $a, b$ có $f(a) = f(b)$, khi đó $s = a \oplus b$. Giống bài toán ngày
-sinh (birthday paradox):
+sinh (birthday paradox). Với $r$ đầu vào khác nhau chọn ngẫu nhiên:
 
 $$\mathbb{P}_\text{success} = 1 - \prod_{k=0}^{r-1}\frac{2^n - 2k}{2^n - k}$$
 
-Cần khoảng $2^{n/2}$ lần để thành công quá 50%, tức tăng theo **hàm mũ** của $n$ (trường hợp xấu nhất $2^{n-1} + 1$).
+Cần khoảng $2^{n/2}$ lần (chính xác hơn, khoảng $1.18 \cdot 2^{n/2}$) để thành công quá 50%, tức tăng theo **hàm mũ** của
+$n$. Cách thử này trong trường hợp xấu nhất cần $2^{n-1} + 1$ lần. Simon cũng chứng minh mọi thuật toán cổ điển, kể cả
+ngẫu nhiên, đều cần cỡ $2^{n/2}$ lần gọi.
+
+<p align="center"><img src="images/04_03_02_classical_probs.png" width="520" alt="Biểu đồ cột: xác suất cổ điển tìm được s theo số lần thử r, với n = 5; khoảng 44% ở r = 6, khoảng 58% ở r = 7, gần 100% từ r = 14"></p>
+
+*Hình: cách cổ điển với $n = 5$ (mô phỏng): xác suất tìm được $s$ chỉ vượt 50% từ $r = 7$.*
+
+> Lưu ý: notebook viết rằng với $n = 5$, xác suất vượt 50% "after $r = 6$ tries". Cả công thức trên (43.4% ở $r = 6$,
+> 56.5% ở $r = 7$) lẫn chính biểu đồ đều cho thấy phải tới $r = 7$.
 
 **Mạch lượng tử** (khác DJ/BV: thanh ghi dưới có $n$ qubit, khởi tạo $|0\rangle^{\otimes n}$, **không** dùng kickback):
+
+<p align="center"><img src="images/04_03_03_simon.png" width="520" alt="Mạch Simon: QHT lên n qubit x, U_f trên cả 2n qubit, đo n qubit y ngay sau U_f, rồi QHT lên x và đo x; các mốc psi 0 đến psi 4"></p>
+
+*Hình: mạch Simon; thanh ghi dưới bắt đầu ở $|0\rangle^{\otimes n}$ và được đo ngay sau $U_f$.*
 
 1. $H^{\otimes n}$ lên thanh ghi $x$: $\frac{1}{\sqrt N}\sum_x |x\rangle|0\rangle$.
 2. $U_f$: $\frac{1}{\sqrt N}\sum_x |x\rangle|f(x)\rangle = \frac{1}{\sqrt N}\sum_{x\in S}\big(|x\rangle + |x\oplus s\rangle\big)|f(x)\rangle$.
@@ -255,25 +318,36 @@ $$\frac{1}{\sqrt{2N}}\sum_z (-1)^{a\cdot z}\big[1 + (-1)^{s\cdot z}\big]|z\rangl
 $$Z\vec s = \vec 0 \pmod 2 \quad\Rightarrow\quad \vec s = \text{kernel}(Z)$$
 
 Quy trình lai lượng tử–cổ điển:
+
+<p align="center"><img src="images/04_03_04_full_simon.png" width="760" alt="Lưu đồ Simon: nếu k chưa bằng n−1 thì chạy mạch lấy z; giữ z nếu khác 0, chưa có trong danh sách và độc lập tuyến tính, rồi tăng k; khi đủ thì giải hệ s·z = 0 ra s"></p>
+
+*Hình: lưu đồ của Simon: chạy mạch, lọc $z$, lưu đến khi đủ $n-1$ giá trị độc lập tuyến tính, rồi giải hệ $s\cdot z = 0$.*
+
 1. Chạy mạch lấy $z$.
 2. Bỏ nếu $z = 0$ hoặc $z$ phụ thuộc tuyến tính vào các $z$ đã có (khử Gauss modulo 2).
 3. Lặp đến khi có $n-1$ vector cơ sở.
 4. Giải kernel (dạng bậc thang rút gọn RREF, rồi thế ngược) ra $s$.
 
-Số lần chạy trung bình chỉ tăng **tuyến tính** theo $n$.
+Số lần chạy trung bình chỉ tăng **tuyến tính** theo $n$: mỗi lần chạy cho một $z$ ngẫu nhiên, phân bố đều trên $2^{n-1}$
+nghiệm của $s\cdot z = 0$, nên trung bình chưa tới $n + 1$ lần chạy là đủ $n-1$ vector độc lập. Phần khử Gauss chỉ tốn thời gian đa
+thức theo $n$. Tức phía lượng tử cần $O(n)$ lần gọi oracle **cộng** hậu xử lý cổ điển, so với cỡ $2^{n/2}$ lần gọi của cổ điển.
+
+<p align="center"><img src="images/04_03_06_compare_probs.png" width="750" alt="Biểu đồ cột so sánh xác suất tìm được s theo số lần gọi r, với n = 7: lượng tử bằng 0 khi r nhỏ hơn 6 và vượt 50% ở r = 7; cổ điển chỉ vượt 50% ở r = 14"></p>
+
+*Hình: $n = 7$, cổ điển (hồng) và lượng tử (tím): lượng tử vượt 50% ở $r = 7$, cổ điển phải tới $r = 14$.*
 
 **Ví dụ trong notebook ($s = 1010$).** Các $z$ có thể là $\{0000, 0001, 0100, 0101, 1010, 1011, 1110, 1111\}$.
 - $z = 0001$ cho $s_0 = 0$.
 - $z = 1010$ cho $s_3 \oplus s_1 = 0$.
 - $z = 1011$ phụ thuộc tuyến tính vào hai $z$ trước, nên bỏ.
-- $z = 1110$ cho $s_2 = 0$.
+- $z = 1110$ cho $s_3 \oplus s_2 \oplus s_1 = 0$; kết hợp với $s_3 \oplus s_1 = 0$ ra $s_2 = 0$.
 
 Vì $s \neq 0$ nên $s = 1010$.
 
 **Dựng oracle từ bảng chân trị.**
 - Cách ngây thơ: mỗi bit $f(x)_i$ viết dạng tổng các tích (DNF), mỗi tích là một MCX. Mạch rất dài.
 - Cách gọn: rút gọn biểu thức bằng `sympy.logic.boolalg.SOPform`, ví dụ $(\bar x_2 x_1 x_0) \lor (x_2 x_1 x_0) = x_1 \land x_0$,
-  rồi dựng mạch bằng `BitFlipOracleGate`. Transpiler của Qiskit không tự rút gọn được việc này.
+  rồi dựng mạch bằng `BitFlipOracleGate`. Theo sách, transpiler của Qiskit không tự rút gọn được việc này.
 
 ### Code chính
 
@@ -374,6 +448,10 @@ qc_bool.append(BitFlipOracleGate(fx_expr, x_vars), x_qubits)
 Rút gọn biểu thức Boolean bằng SymPy, rồi `BitFlipOracleGate` (trong `qiskit.circuit.library`) dựng oracle từ chuỗi
 biểu thức. `qc.decompose()` để xem mạch bên trong.
 
+> Lưu ý nhỏ: chú thích cuối notebook viết hàm tổng quát là $f:\{0,1\}^n \to \{0,1\}^n$ với $m \ge n$; đúng ra là
+> $\{0,1\}^n \to \{0,1\}^m$. Mục 2.1 hẹn "ví dụ dùng 3 qubit" ở mục 2.3, nhưng ví dụ đó là $s = 1010$ (4 bit, 8 qubit).
+> Vài chỗ dẫn "section 1.2.1", "1.2.2", "1.1" thực ra là mục 2.1, 2.2 và 1.
+
 ### Kết quả
 
 | Kiểm tra | Output |
@@ -390,7 +468,8 @@ biểu thức. `qc.decompose()` để xem mạch bên trong.
 - Hứa: $f(x) = f(x\oplus s)$, hàm hai-một; tìm $s$.
 - Mạch: H lên $x$ → $U_f$ → đo $f(x)$ → H lên $x$ → đo $x$ được một $z$ với $s\cdot z = 0$.
 - Cần $n-1$ giá trị $z$ độc lập tuyến tính, rồi giải kernel modulo 2 (khử Gauss bằng XOR).
-- Cổ điển $\sim 2^{n/2}$ lần, lượng tử $\sim n$ lần: tăng tốc **hàm mũ**.
+- Cổ điển $\sim 2^{n/2}$ lần gọi (kể cả thuật toán ngẫu nhiên), lượng tử $\sim n$ lần gọi cộng khử Gauss: tăng tốc
+  **hàm mũ** trong mô hình oracle.
 - Là thuật toán lai: phần lượng tử lấy mẫu, phần cổ điển giải hệ phương trình.
 
 ---
@@ -402,45 +481,85 @@ $x$ có $f(x) = 1$ (**phần tử được đánh dấu**, marked element). $N =
 
 > Ví dụ "tra danh bạ theo số điện thoại" chỉ để minh hoạ. Muốn dựng oracle cho danh bạ thì phải duyệt hết danh bạ trước,
 > nên Grover chỉ có ích khi $f$ **dựng được hiệu quả** thành mạch, ví dụ bài toán thoả mãn mạch (circuit satisfiability).
+> Ngay cả khi đó, lợi thế chỉ là bậc hai so với duyệt vét cạn, không phải so với mọi thuật toán cổ điển chuyên biệt cho
+> bài toán đó.
 
 ### Kiến thức chính
 
-**Cổ điển.** Thử lần lượt từng phần tử: $\mathbb{P}_\text{success} = r/2^n$, nên cần $2^{n-1}$ lần để đạt 50% và $N$ lần để
-chắc chắn. Tức tăng tuyến tính theo $N$.
+**Cổ điển.** Thử lần lượt từng phần tử: $\mathbb{P}_\text{success} = r/2^n$, nên cần $2^{n-1}$ lần để đạt 50% và cỡ $N$ lần
+để chắc chắn. Tức tăng tuyến tính theo $N$.
 
-**Ý tưởng lượng tử: khuếch đại biên độ** (amplitude amplification). Lặp $\kappa$ lần cặp (oracle, diffuser):
+**Ý tưởng lượng tử: khuếch đại biên độ** (amplitude amplification).
+
+<p align="center"><img src="images/04_04_03_grover.png" width="450" alt="Mạch Grover: QHT lên n qubit đầu vào, qubit phụ ở trạng thái trừ, cặp U_f và V lặp kappa lần, rồi đo; chạy một lần, đầu ra là m với xác suất cao"></p>
+
+*Hình: mạch Grover; cặp $U_f$ và $V$ (diffuser) được lặp $\kappa$ lần trước khi đo.*
+
+Lặp $\kappa$ lần cặp (oracle, diffuser):
 1. $H^{\otimes n}$: mọi biên độ bằng $1/\sqrt N$ (trạng thái $|s\rangle$).
 2. **Oracle** $U_f$ với $y = |-\rangle$: **đảo dấu** biên độ của phần tử đánh dấu.
 3. **Diffuser** $V$: **lật mọi biên độ quanh giá trị trung bình** $\mu$: $\alpha_x \to 2\mu - \alpha_x$.
-   Biên độ đánh dấu (đang âm, nằm xa dưới $\mu$) bị bật lên cao; các biên độ khác giảm nhẹ.
+   Biên độ đánh dấu (đang âm, nằm xa dưới $\mu$) bị bật lên cao; các biên độ khác giảm.
 
 Ví dụ $n = 3$, $m = 101$:
+
+<p align="center"><img src="images/04_04_07_grover_step03.png" width="600" alt="Biểu đồ biên độ 8 trạng thái sau oracle: bảy trạng thái ở khoảng 0.354, riêng 101 ở khoảng −0.354"></p>
+
+*Hình: sau oracle, chỉ biên độ của $|101\rangle$ đổi dấu.*
+
+<p align="center"><img src="images/04_04_09_grover_step04.png" width="600" alt="Biểu đồ biên độ sau diffuser, đường đứt nét là trung bình khoảng 0.265: bảy trạng thái còn khoảng 0.177, riêng 101 bật lên khoảng 0.884"></p>
+
+*Hình: diffuser lật mọi biên độ quanh trung bình (đường đứt nét): $|101\rangle$ bật lên 0.884, các trạng thái khác còn 0.177.*
 
 | Bước | Biên độ của $m$ | Xác suất đo được $m$ |
 |---|---|---|
 | Sau H | 0.354 | 12.5% |
 | Sau 1 vòng (oracle + diffuser) | $\frac{1}{\sqrt8}\cdot\frac{3\cdot8-4}{8} \approx 0.884$ | ≈ 78% |
 | Sau 2 vòng | $\approx 0.972$ | ≈ 94.5% |
-| Thêm vòng thứ 3 | giảm | giảm, vì xác suất **dao động tuần hoàn** chứ không tăng mãi |
+| Thêm vòng thứ 3 | giảm còn $\approx 0.574$ | ≈ 33%, vì xác suất **dao động tuần hoàn** chứ không tăng mãi |
+
+<p align="center"><img src="images/04_04_12_grover_step06.png" width="600" alt="Biểu đồ biên độ sau 2 vòng: 101 ở khoảng 0.972, bảy trạng thái khác ở khoảng −0.088"></p>
+
+*Hình: sau 2 vòng, biên độ của $|101\rangle$ là 0.972 (xác suất khoảng 94.5%); các trạng thái khác còn $-0.088$.*
 
 **Mạch của diffuser.**
 
-$$V = 2|s\rangle\langle s| - I = H^{\otimes n}\big(2|0\rangle\langle 0| - I\big)H^{\otimes n} = H^{\otimes n}X^{\otimes n}\,\text{MCZ}\,X^{\otimes n}H^{\otimes n}$$
+$$V = 2|s\rangle\langle s| - I = H^{\otimes n}\big(2|0\rangle\langle 0| - I\big)H^{\otimes n} = -\,H^{\otimes n}X^{\otimes n}\,\text{MCZ}\,X^{\otimes n}H^{\otimes n}$$
 
-$2|0\rangle\langle0| - I$ bằng (sai khác pha toàn cục $-1$) một cổng đảo dấu **chỉ** trạng thái $|0\dots0\rangle$,
-tức MCZ kẹp giữa hai lớp X.
+$2|0\rangle\langle0| - I$ bằng $-1$ nhân với một cổng đảo dấu **chỉ** trạng thái $|0\dots0\rangle$, tức MCZ kẹp giữa hai lớp X.
+Dấu $-1$ là pha toàn cục nên bỏ qua được: mạch `diffuser(n)` thực chất dựng $-V$, cho cùng kết quả đo.
 
 **Góc nhìn hình học → số vòng lặp.** Tách $|s\rangle = \cos\frac\theta2|m^\perp\rangle + \sin\frac\theta2|m\rangle$, với
 $\sin\frac\theta2 = 1/\sqrt N$. Oracle là phép phản xạ qua $|m^\perp\rangle$; diffuser là phép phản xạ qua $|s\rangle$.
-Hai phản xạ ghép lại thành **phép quay một góc $\theta$** về phía $|m\rangle$. Muốn tới $\pi/2$ thì
-$\kappa\theta + \theta/2 = \pi/2$:
+Hai phản xạ ghép lại thành **phép quay một góc $\theta$** về phía $|m\rangle$.
+
+<p align="center"><img src="images/04_04_15_grover_rotation03.png" width="270" alt="Mặt phẳng hai trục m vuông góc và m: s nghiêng góc theta/2; oracle phản xạ s thành Z_f s ở góc âm theta/2; diffuser phản xạ quanh s thành V U_f s, cách s góc theta"></p>
+
+*Hình: một vòng Grover: oracle ($Z_f$, dạng pha của $U_f$) phản xạ $|s\rangle$ qua trục $|m^\perp\rangle$, diffuser phản xạ lại qua $|s\rangle$; kết quả là quay thêm góc $\theta$.*
+
+Sau $\kappa$ vòng, trạng thái hợp với $|m^\perp\rangle$ một góc $(2\kappa + 1)\frac\theta2$, nên xác suất đo được $m$ là
+$\sin^2\big((2\kappa + 1)\tfrac\theta2\big)$. Muốn tới $\pi/2$ thì $\kappa\theta + \theta/2 = \pi/2$:
 
 $$\kappa = \left\lfloor \frac{\pi}{4\arcsin(1/\sqrt N)} - \frac12 \right\rceil \;\approx\; \frac{\pi}{4}\sqrt N$$
 
-Với $M$ phần tử đánh dấu, thay $1/\sqrt N$ bằng $\sqrt{M/N}$.
+Lặp quá số vòng này thì vector vượt qua $|m\rangle$ (overshoot) và xác suất giảm, như ở vòng thứ 3 của ví dụ trên.
+
+<p align="center"><img src="images/04_04_16_grover_rotation04.png" width="270" alt="Sau hai vòng, vector (V U_f)^2 s đã quay 2 theta so với s và vượt qua trục m"></p>
+
+*Hình: hai vòng quay $|s\rangle$ thêm $2\theta$; với $\theta$ lớn như trong hình, vector đã vượt qua trục $|m\rangle$.*
+
+Với $M$ phần tử đánh dấu (cần biết trước $M$), thay $1/\sqrt N$ bằng $\sqrt{M/N}$, nên $\kappa \approx \frac\pi4\sqrt{N/M}$ khi $M \ll N$.
+
+Không thuật toán lượng tử nào làm tốt hơn: tìm kiếm không cấu trúc cần ít nhất cỡ $\sqrt N$ lần gọi oracle (Bennett,
+Bernstein, Brassard, Vazirani, 1997). Vậy tăng tốc **bậc hai** của Grover là tối ưu, và không phải tăng tốc hàm mũ.
 
 **Kiểm tra kết quả.** Chạy Grover một lần được $x_\text{out}$, rồi gọi $f(x_\text{out})$ để kiểm tra; sai thì chạy lại.
-Tổng cộng tối thiểu $\kappa + 1$ lần gọi oracle. Với $N = 32$: gần 100% sau $\kappa + 1 = 5$ lần gọi, so với 32 lần cho cổ điển.
+Tổng cộng tối thiểu $\kappa + 1$ lần gọi oracle. Với $N = 32$: gần 100% sau $\kappa + 1 = 5$ lần gọi, trong khi cách cổ
+điển phải thử gần hết 32 phần tử mới chắc chắn.
+
+<p align="center"><img src="images/04_04_18_compare_probs.png" width="750" alt="Biểu đồ cột so sánh xác suất tìm được m theo số lần gọi r với N = 32: Grover bằng 0 khi r nhỏ hơn 5 và gần 100% từ r = 5; cổ điển tăng gần tuyến tính, tới 100% ở r = 31"></p>
+
+*Hình: $N = 32$, cổ điển (hồng) và Grover kèm một lần kiểm tra (tím): Grover gần 100% từ $r = \kappa + 1 = 5$, cổ điển tăng gần tuyến tính.*
 
 ### Code chính
 
@@ -471,7 +590,7 @@ def diffuser(n):
     
     return qc_v
 ```
-Diffuser $V = H\,X\,\text{MCZ}\,X\,H$. `ZGate().control(n-1)` tạo MCZ trên $n$ qubit.
+Diffuser $H\,X\,\text{MCZ}\,X\,H$, tức $V$ sai khác pha toàn cục $-1$. `ZGate().control(n-1)` tạo MCZ trên $n$ qubit.
 
 ```python
 def grover_one_marked(n, κ):
@@ -505,6 +624,10 @@ Số vòng lặp tối ưu. Notebook còn có `find_κ(N)` tính lặp theo côn
 > `np.random.choice(N, size=M, replace=False)`.
 
 > Lưu ý nhỏ: ở mục 2.2, $|m^\perp\rangle$ viết là $\sum_{x \neq 0}$, đúng ra là $\sum_{x \neq m}$ (và cần chuẩn hoá).
+> Mục 3 cũng thiếu chuẩn hoá như vậy: đúng ra $|\xi\rangle = \frac{1}{\sqrt M}\sum_{m \in \Xi}|m\rangle$ và
+> $|\xi^\perp\rangle = \frac{1}{\sqrt{N-M}}\sum_{x \notin \Xi}|x\rangle$.
+> Ở mục 2.1 bước 5, công thức tổng quát của $\alpha_x^{(5)}$ ghi mẫu số $N$, đúng ra là $N^2$; các giá trị số 0.972 và
+> $-0.088$ vẫn đúng. Mục 2.2 viết "$(U_f V)^2$", đúng ra là $(V U_f)^2$ như trong hình.
 > Ở mục 1, dòng in `found after: {x_in} tries` in ra **chỉ số** $x$, nên số lần thử thật là `x_in + 1`.
 
 ### Kết quả
@@ -519,14 +642,19 @@ Số vòng lặp tối ưu. Notebook còn có `find_κ(N)` tính lặp theo côn
 ### Ghi nhớ nhanh
 
 - Một vòng Grover = oracle (đảo dấu phần tử đánh dấu) + diffuser (lật quanh trung bình).
-- $V = H^{\otimes n}X^{\otimes n}\,\text{MCZ}\,X^{\otimes n}H^{\otimes n} = 2|s\rangle\langle s| - I$.
-- Hình học: mỗi vòng quay $\theta = 2\arcsin\sqrt{M/N}$; $\kappa \approx \frac\pi4\sqrt{N/M}$. Lặp **quá** $\kappa$ thì xác suất giảm.
-- Cổ điển $\sim N$, Grover $\sim\sqrt N$: tăng tốc **bậc hai**, không phải hàm mũ.
+- $H^{\otimes n}X^{\otimes n}\,\text{MCZ}\,X^{\otimes n}H^{\otimes n} = -(2|s\rangle\langle s| - I)$, tức là $V$ sai khác pha toàn cục.
+- Hình học: mỗi vòng quay $\theta = 2\arcsin\sqrt{M/N}$; xác suất thành công sau $\kappa$ vòng là
+  $\sin^2\big((2\kappa+1)\tfrac\theta2\big)$; $\kappa \approx \frac\pi4\sqrt{N/M}$. Lặp **quá** $\kappa$ thì xác suất giảm.
+- Cổ điển $\sim N$, Grover $\sim\sqrt N$: tăng tốc **bậc hai**, không phải hàm mũ, và không thuật toán lượng tử nào làm tốt hơn.
 - Chỉ có ích khi oracle dựng được hiệu quả.
 
 ---
 
 ## So sánh 4 thuật toán
+
+<p align="center"><img src="images/04_04_02_algo_compare.png" width="760" alt="Ba mạch cạnh nhau: Deutsch–Jozsa, Bernstein–Vazirani và Simon, cùng khuôn QHT, U_f, QHT rồi đo, kèm ghi chú cách đọc kết quả của từng thuật toán"></p>
+
+*Hình: khuôn chung của DJ, BV và Simon: DJ và BV chạy một lần; Simon chạy đến khi có $n-1$ kết quả độc lập tuyến tính rồi hậu xử lý (mạch Grover ở mục 04_04).*
 
 | | Deutsch–Jozsa | Bernstein–Vazirani | Simon | Grover |
 |---|---|---|---|---|
@@ -537,6 +665,7 @@ Số vòng lặp tối ưu. Notebook còn có `find_κ(N)` tính lặp theo côn
 | Hậu xử lý cổ điển | Không | Không | Khử Gauss modulo 2 | Kiểm tra $f(x_\text{out})$ |
 | Gọi oracle, cổ điển | $2^{n-1}+1$ (chắc chắn) | $n$ | $\sim 2^{n/2}$ | $\sim N$ |
 | Gọi oracle, lượng tử | 1 | 1 | $\sim n$ | $\sim\sqrt N$ |
+| Lợi thế (số lần gọi oracle) | Hàm mũ, nhưng chỉ so với cổ điển tất định | Tuyến tính | Hàm mũ, kể cả so với cổ điển ngẫu nhiên | Bậc hai, và là tối ưu |
 
 ## Tổng hợp API dùng trong phần này
 
@@ -545,7 +674,7 @@ Số vòng lặp tối ưu. Notebook còn có `find_κ(N)` tính lặp theo côn
 | `QuantumCircuit(n, m, name=)`, `QuantumRegister` | Tạo mạch/hộp đen có tên | 04_01–04_04 |
 | `qc.append(sub_circuit_or_gate, qubits)` | Gắn hộp đen, diffuser vào mạch | 04_01–04_04 |
 | `qc.mcx(controls, target, ctrl_state=)` | Oracle: lật $y$ tại một giá trị $x$ | 04_01, 04_03, 04_04 |
-| `qc.cx(list_controls, list_targets)` | Nhiều CX cùng lúc (oracle BV, parity) | 04_01, 04_02 |
+| `qc.cx(list_controls, list_targets)` | Nhiều CX cùng lúc (oracle BV) | 04_02 |
 | `qc.prepare_state(k, qubits)` | Nạp đầu vào cổ điển $\vert k\rangle$ | 04_01, 04_04 |
 | `ZGate().control(k)` | Tạo MCZ cho diffuser | 04_04 |
 | `BitFlipOracleGate(expr, vars)` | Dựng oracle từ biểu thức Boolean | 04_03 |
