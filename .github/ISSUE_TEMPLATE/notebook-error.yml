@@ -22,7 +22,7 @@ body:
     id: versions
     attributes:
       label: Phiên bản
-      description: Kết quả của `pip list | grep -iE "qiskit|numpy|matplotlib"` và `python --version`
+      description: Kết quả của `pip list | grep -iE "qiskit|numpy|matplotlib"` và `python --version` (Windows PowerShell không có `grep`, dùng `pip list | Select-String qiskit,numpy,matplotlib`)
       render: text
     validations:
       required: true

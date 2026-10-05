@@ -22,6 +22,7 @@ body:
       options:
         - Code (làm output hoặc kết luận sai)
         - Nội dung (phát biểu sai về kiến thức)
+        - Có thể đã lỗi thời (phần mềm hoặc dịch vụ đã thay đổi)
         - Đánh máy (công thức, comment, chữ)
     validations:
       required: true
