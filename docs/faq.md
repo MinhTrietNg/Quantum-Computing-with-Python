@@ -4,7 +4,7 @@
 
 ### Máy tính lượng tử có thay thế máy tính thường không?
 
-Không. Nó giỏi một số bài toán đặc thù (xem [bảng trong trang giới thiệu](what-is-quantum-computing.md#những-gì-đã-biết))
+Không. Về lý thuyết, nó giỏi một số bài toán đặc thù (xem [bảng trong trang giới thiệu](what-is-quantum-computing.md#những-gì-đã-biết))
 và không giúp gì cho phần lớn việc hằng ngày. Nhiều khả năng chúng sẽ tồn tại song song: máy lượng tử như một
 bộ tăng tốc cho vài loại phép tính, giống GPU bây giờ.
 
@@ -14,7 +14,7 @@ bộ tăng tốc cho vài loại phép tính, giống GPU bây giờ.
 nó không phải "vừa 0 vừa 1". Và **phép đo chỉ cho ra một kết quả**. Nếu chỉ "thử hết" rồi đo, bạn nhận được một
 đáp án ngẫu nhiên.
 
-Sức mạnh thật nằm ở **giao thoa**: thuật toán được thiết kế sao cho các đường dẫn tới đáp án sai triệt tiêu nhau
+Chìa khoá nằm ở **giao thoa** (cùng với vướng víu): thuật toán được thiết kế sao cho các đường dẫn tới đáp án sai triệt tiêu nhau
 còn đáp án đúng được khuếch đại. Việc thiết kế được như vậy rất khó, và chỉ làm được cho một số bài toán.
 Ví dụ cụ thể ở [trang giới thiệu](what-is-quantum-computing.md) (hai cổng H liên tiếp).
 
@@ -22,7 +22,7 @@ Ví dụ cụ thể ở [trang giới thiệu](what-is-quantum-computing.md) (ha
 
 Nếu chỉ nhìn kết quả `00` hoặc `11` thì không khác: hai đồng xu bỏ trong hai phong bì, ghép trùng từ trước, cũng cho
 kết quả như vậy. Khác biệt chỉ lộ ra khi **đo theo nhiều hướng khác nhau**. Khi đó các tương quan của qubit vướng víu mạnh
-hơn bất kỳ cách "quy định sẵn kết quả từ trước" nào có thể tạo ra. Đây là nội dung của *bất đẳng thức Bell* (trò chơi CHSH).
+hơn bất kỳ cách "quy định sẵn kết quả từ trước" nào có thể tạo ra. Đây là nội dung của *bất đẳng thức Bell* (ví dụ trò chơi CHSH).
 Khoá *Basics of quantum information* của IBM trong [Tài nguyên](resources.md) có phần này.
 
 ### Vướng víu có cho phép gửi tin nhanh hơn ánh sáng không?
@@ -48,12 +48,13 @@ thuật toán nhỏ và mô phỏng hệ lượng tử. Tiến độ nhanh và n
 
 **Một số loại, và chỉ khi có máy đủ lớn.**
 
-- **Mã hoá khoá công khai** như RSA và đường cong elliptic (ECC) dựa trên độ khó của phân tích thừa số hoặc
+- **Mật mã khoá công khai** (dùng để trao đổi khoá và ký số) như RSA và đường cong elliptic (ECC) dựa trên độ khó của phân tích thừa số hoặc
   *logarithm rời rạc* (một bài toán số học khác mà máy tính thường cũng chưa giải nhanh được). Thuật toán **Shor** giải các bài này trong thời gian đa thức, nên một máy lượng tử lớn có sửa lỗi
   sẽ phá được chúng. Máy như vậy **chưa tồn tại** (đến tháng 10/2026).
-- **Mã hoá đối xứng** (như AES) bị ảnh hưởng ít hơn nhiều: thuật toán **Grover** chỉ cho tăng tốc bậc hai, nên khoá $k$ bit
-  có độ an toàn lý thuyết khoảng $k/2$ bit. Vì vậy người ta khuyến nghị dùng khoá 256 bit để có dư địa; trong thực tế
-  Grover khó song song hoá nên ảnh hưởng thật còn nhỏ hơn con số lý thuyết.
+- **Mã hoá đối xứng** (như AES) bị ảnh hưởng ít hơn nhiều: thuật toán **Grover** chỉ cho tăng tốc bậc hai, nên trước phép dò khoá
+  vét cạn, khoá $k$ bit có độ an toàn lý thuyết khoảng $k/2$ bit (AES-128 còn khoảng 64 bit). NIST vẫn chấp nhận AES-128
+  (bản dự thảo NIST IR 8547 dùng nó làm mốc cho mức an toàn thấp nhất); một số nơi, như NSA, yêu cầu AES-256 để có dư địa.
+  Trong thực tế Grover khó song song hoá nên ảnh hưởng thật còn nhỏ hơn con số lý thuyết.
 
 ### Vậy có cần lo ngay không?
 
@@ -63,8 +64,9 @@ với bí mật lâu dài, nhất là trao đổi khoá; chữ ký số chỉ b�
 
 Giải pháp là **mật mã hậu lượng tử** (post-quantum cryptography): thuật toán chạy trên máy tính thường nhưng
 được cho là chịu được cả máy lượng tử. Tháng 8/2024, NIST công bố ba chuẩn đầu tiên:
-FIPS 203 (ML-KEM), FIPS 204 (ML-DSA) và FIPS 205 (SLH-DSA). Đến tháng 10/2026, NIST còn đang hoàn thiện FN-DSA (FIPS 206) và chuẩn HQC; bản dự thảo NIST IR 8547 đề xuất ngừng dùng
-RSA/ECC sau 2030 và cấm hẳn sau 2035 (hãy kiểm tra xem đã thành bản chính thức chưa). Xem
+FIPS 203 (ML-KEM), FIPS 204 (ML-DSA) và FIPS 205 (SLH-DSA). Đến tháng 10/2026, NIST còn đang hoàn thiện FN-DSA (FIPS 206) và chuẩn HQC.
+Bản dự thảo NIST IR 8547 (11/2024, đến tháng 10/2026 vẫn là dự thảo) đề xuất coi RSA/ECC ở mức an toàn 112 bit (như RSA-2048)
+là lỗi thời (deprecated) sau 2030, và cấm mọi RSA/ECC sau 2035. Xem
 [trang của NIST](https://csrc.nist.gov/projects/post-quantum-cryptography) để biết hiện trạng.
 
 ### Còn "mật mã lượng tử" (QKD) thì sao?
@@ -101,7 +103,7 @@ tiếng Anh. Không cần giỏi: các notebook dùng câu đơn giản, và [b�
 
 ### Tôi có cần học vật lý lượng tử trước không?
 
-Không. Sách bắt đầu từ thí nghiệm Stern–Gerlach và xây khái niệm qubit từ đó.
+Không. Phần lượng tử của sách (Phần 02) bắt đầu từ thí nghiệm Stern–Gerlach và xây khái niệm qubit từ đó.
 Bạn không cần giải phương trình Schrödinger hay biết vật lý nguyên tử.
 
 ### Tôi có cần máy lượng tử thật hoặc tài khoản IBM không?
@@ -112,7 +114,8 @@ chính sách của IBM nên hãy xem trang chính thức.
 
 ### Máy tôi cần cấu hình thế nào?
 
-Một laptop bình thường là đủ: các ví dụ chỉ dùng vài qubit. Trên máy phát triển của repo, 19 notebook chạy hết trong khoảng 4,5–5,5 phút (đo ngày 2026-10-01, sau khi đã cài thư viện); máy bạn có thể chậm hơn.
+Một laptop bình thường là đủ: các ví dụ dùng nhiều nhất 14 qubit, nên vector trạng thái chỉ chiếm khoảng 256 KiB
+(xem [bảng bộ nhớ](what-is-quantum-computing.md#vì-sao-không-thể-chỉ-mô-phỏng-bằng-máy-tính-thường)). Trên máy phát triển của repo, 19 notebook chạy hết trong khoảng 3–5,5 phút (đo các ngày 2026-10-01 và 2026-10-05, sau khi đã cài thư viện); máy bạn có thể chậm hơn.
 
 ### Nên dùng Qiskit, Cirq hay PennyLane?
 
