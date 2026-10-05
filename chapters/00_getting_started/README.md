@@ -56,6 +56,13 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+Kích hoạt xong thì tên môi trường hiện ở đầu dòng lệnh: `(learn-quantum)` với conda, `(.venv)` với venv.
+Hãy kiểm tra điều này trước khi chạy `pip install`.
+
+<p align="center"><img src="images/00_01_02_terminal_window_learn.png" width="350" alt="Cửa sổ terminal: dòng đầu có tiền tố (base), sau lệnh conda activate learn-quantum thì tiền tố đổi thành (learn-quantum)"></p>
+
+*Hình: trước khi kích hoạt, dòng lệnh bắt đầu bằng `(base)`; sau `conda activate learn-quantum` thì đổi thành `(learn-quantum)`.*
+
 > Lưu ý: trên macOS (zsh) phải đặt `qiskit[visualization]` trong dấu nháy, vì zsh hiểu `[...]`
 > là mẫu tên file. Trên Windows và bash thì không cần.
 
@@ -91,14 +98,14 @@ print("Probability Distribution:")
 plot_distribution(counts)
 ```
 
-Đoạn này dùng đủ các thành phần sẽ gặp suốt sách. **Bạn chưa cần hiểu chúng ngay**: lúc này chỉ cần chạy được,
+Đoạn này dùng nhiều thành phần sẽ gặp suốt sách. **Bạn chưa cần hiểu chúng ngay**: lúc này chỉ cần chạy được,
 mỗi khái niệm sẽ được giải thích kỹ ở Phần 01–02. Bảng dưới để tra khi tò mò.
 
 | Dòng | Ý nghĩa |
 |---|---|
 | `QuantumCircuit(2,2)` | Mạch 2 qubit, 2 bit cổ điển để lưu kết quả đo |
 | `qc.rx(np.pi/2,1)` | Xoay qubit 1 quanh trục X một góc π/2, tạo chồng chập (superposition) |
-| `qc.cx(1,0)` | CNOT: qubit 1 điều khiển, qubit 0 là target, tạo vướng víu (entanglement) |
+| `qc.cx(1,0)` | CNOT: qubit 1 điều khiển (control), qubit 0 là đích (target), tạo vướng víu (entanglement) |
 | `Statevector(qc).draw('latex')` | Tính statevector chính xác, hiển thị dạng ket |
 | `qc.measure([1,0],[1,0])` | Đo qubit 1 → bit 1, qubit 0 → bit 0 |
 | `transpile(qc, simulator)` | Dịch mạch sang tập cổng mà backend hỗ trợ |
@@ -106,8 +113,10 @@ mỗi khái niệm sẽ được giải thích kỹ ở Phần 01–02. Bảng d
 | `plot_distribution(counts)` | Vẽ phân bố xác suất |
 
 **Kết quả mong đợi:** trạng thái có dạng $\tfrac{1}{\sqrt{2}}(|00\rangle - i|11\rangle)$ (chữ $i$ là đơn vị ảo,
-sẽ học ở 02_03; là một pha; nó không đổi xác suất của phép đo này), nên chỉ đo được `00` và `11`, mỗi kết quả
-khoảng 50%. Đoạn code chạy không lỗi là môi trường đã sẵn sàng.
+sẽ học ở 02_03; hệ số $-i$ chỉ là một pha, không làm đổi xác suất của phép đo này), nên chỉ đo được `00` và `11`,
+mỗi kết quả khoảng 50%. Output lưu trong notebook cho `00` ≈ 0.493 và `11` ≈ 0.507; lần chạy của bạn sẽ hơi khác.
+Đoạn code chạy không lỗi là môi trường đã sẵn sàng. Riêng `qiskit-ibm-runtime` thì đoạn này chưa kiểm tra
+(notebook cũng nói vậy); gói đó dùng ở 00_02 và khi gọi `Estimator`.
 
 > Lưu ý: code tạo `qc_t = transpile(...)` nhưng lại chạy `simulator.run(qc, ...)` chứ không phải
 > `qc_t`. Với AerSimulator vẫn chạy được, vì Aer tự hỗ trợ các cổng này; trên phần cứng thật cần
@@ -119,7 +128,12 @@ Cả hai bước đều **tuỳ chọn**.
 
 ### 1. Liên kết tài khoản IBM Quantum (chỉ cần khi chạy trên máy thật)
 
-1. Tạo tài khoản ở https://quantum.ibm.com/ và copy API token.
+1. Tạo tài khoản ở https://quantum.ibm.com/, đăng nhập và copy API token ở góc trên bên phải trang chủ.
+
+   <p align="center"><img src="images/00_02_01_api_token.png" width="700" alt="Trang chủ IBM Quantum Platform với ô API Token và nút copy ở góc trên bên phải"></p>
+
+   *Hình: ô API Token trên trang chủ IBM Quantum Platform (giao diện cũ, lúc viết sách); nút copy nằm cạnh ô token.*
+
 2. Chạy một lần:
 
    ```python
@@ -135,13 +149,14 @@ Token được lưu ở `C:\Users\<tên>\.qiskit\qiskit-ibm.json` (Windows) ho�
 > `ibm_quantum_platform`, và có thêm tham số `instance`. Nền tảng IBM Quantum cũng đã chuyển sang
 > `quantum.cloud.ibm.com`. Nếu bạn muốn chạy trên máy thật, hãy làm theo tài liệu hiện hành tại
 > [quantum.cloud.ibm.com/docs](https://quantum.cloud.ibm.com/docs) thay vì các bước ở trên. Các notebook trong repo này đều chạy trên
-simulator nên không cần token.
+> simulator nên không cần token.
 
 ### 2. Tệp cấu hình `settings.conf` (để hình giống hệt sách)
 
 Tạo tệp `C:\Users\<tên>\.qiskit\settings.conf` (Windows) hoặc `~/.qiskit/settings.conf`
-(macOS/Linux). Repo gốc dùng nội dung dưới đây; bản sao có sẵn ở
-[qiskit_settings.conf](../../qiskit_settings.conf):
+(macOS/Linux). Repo gốc dùng nội dung dưới đây (tệp `settings.conf` ở thư mục gốc của repo gốc); bản sao có sẵn ở
+[qiskit_settings.conf](../../qiskit_settings.conf). Danh sách in trong notebook 00_02 hơi khác: dùng `iqp-dark`
+và không có dòng `circuit_idle_wires`.
 
 ```ini
 [default]
@@ -168,12 +183,13 @@ state_drawer = latex
 ## Ghi nhớ nhanh
 
 - Chỉ cần 4 gói: `qiskit[visualization]`, `qiskit-aer`, `qiskit-ibm-runtime`, `notebook`.
-- Chạy được đoạn code kiểm tra (ra `00`/`11` khoảng 50/50) là môi trường đã ổn.
+- Chạy được đoạn code kiểm tra (ra `00`/`11` khoảng 50/50) là môi trường đã ổn (đoạn này chưa thử `qiskit-ibm-runtime`).
 - Token IBM chỉ cần cho phần cứng thật; không bao giờ đưa token vào code commit.
 - Muốn hình giống sách: copy [qiskit_settings.conf](../../qiskit_settings.conf) vào `~/.qiskit/settings.conf`.
 - Chuỗi kết quả của Qiskit đọc từ phải sang trái: ký tự cuối là qubit 0.
 
-> Các đoạn code trong README này là **trích** từ notebook (giữ comment gốc tiếng Anh) và dùng biến đã định nghĩa ở các cell trước. Muốn chạy được, hãy chạy cả notebook từ trên xuống.
+> Các đoạn code trong README này được **trích nguyên văn** từ notebook. Chúng không cần biến của cell khác, nhưng
+> đoạn kiểm tra môi trường phải chạy trong notebook vì dùng `display(...)`.
 
 ---
 
