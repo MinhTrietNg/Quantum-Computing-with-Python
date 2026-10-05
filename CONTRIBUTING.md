@@ -1,7 +1,9 @@
 # Đóng góp
 
+**Tiếng Việt** · [English](CONTRIBUTING.en.md) · [简体中文](CONTRIBUTING.zh-CN.md)
+
 Cảm ơn bạn muốn góp sức. Repo này chia sẻ kiến thức từ sách
-[learnquantum.io](https://learnquantum.io) cho người đọc tiếng Việt. Mọi đóng góp đều được hoan nghênh,
+[learnquantum.io](https://learnquantum.io) cho người đọc tiếng Việt, kèm bản dịch English và 简体中文. Mọi đóng góp đều được hoan nghênh,
 từ sửa một lỗi chính tả đến viết hướng dẫn cho chương mới.
 
 ## Những cách đóng góp
@@ -10,12 +12,12 @@ từ sửa một lỗi chính tả đến viết hướng dẫn cho chương m�
 |---|---|
 | Báo lỗi trong nội dung sách (công thức, code, giải thích) | Mở issue **Báo lỗi trong sách** |
 | Báo notebook không chạy được | Mở issue **Notebook không chạy**, kèm phiên bản Qiskit và traceback |
-| Góp ý hoặc sửa hướng dẫn tiếng Việt | Mở issue **Góp ý hướng dẫn**, hoặc gửi pull request luôn |
-| Hỏi về kiến thức trong sách | Mở issue **Câu hỏi khi học** (hỏi bằng tiếng Việt), hoặc hỏi tác giả tại [Discussions của repo gốc](https://github.com/learn-quantum/lqc-textbook/discussions) (tiếng Anh) |
+| Góp ý hoặc sửa hướng dẫn (bản tiếng Việt, English hoặc 简体中文) | Mở issue **Góp ý hướng dẫn**, hoặc gửi pull request luôn |
+| Hỏi về kiến thức trong sách | Mở issue **Câu hỏi khi học** (viết bằng tiếng Việt, English hoặc 中文 đều được), hoặc hỏi tác giả tại [Discussions của repo gốc](https://github.com/learn-quantum/lqc-textbook/discussions) (tiếng Anh) |
 
 ## Nguyên tắc quan trọng nhất: notebook giữ nguyên văn
 
-Mọi file trong `chapters/` **trừ `README.md`** là bản sao từng byte của
+Mọi file trong `chapters/` **trừ các README** (`README.md` và hai bản dịch `README.en.md`, `README.zh-CN.md`) là bản sao từng byte của
 [repo gốc](https://github.com/learn-quantum/lqc-textbook), kể cả output tác giả đã chạy và kể cả lỗi.
 Nhờ vậy người đọc có thể đối chiếu với web, và cập nhật từ bản gốc chỉ cần copy đè.
 
@@ -28,7 +30,7 @@ Nhờ vậy người đọc có thể đối chiếu với web, và cập nhật
 
 ## Khuôn README của một phần
 
-Mỗi folder `chapters/PP_ten_phan/` có đúng một `README.md` viết bằng tiếng Việt, theo khuôn sau:
+Mỗi folder `chapters/PP_ten_phan/` có một `README.md` viết bằng tiếng Việt (bản gốc) theo khuôn sau, cùng hai bản dịch `README.en.md` và `README.zh-CN.md` (xem [Bản dịch](#bản-dịch-english-và-简体中文)):
 
 ```markdown
 # PP · Tên tiếng Anh (Tên tiếng Việt)
@@ -74,7 +76,7 @@ Khi `scripts/check_upstream.py` (hoặc workflow **Upstream**) báo có thay đ�
 2. Copy các file được báo **mới** hoặc **đã sửa** từ `<tmp>/chapters/` vào `chapters/`, cùng đường dẫn;
    xoá các file được báo **đã xoá**.
 3. Chạy lại `python scripts/check_upstream.py --upstream <tmp>` cho đến khi báo *in sync*.
-4. Cập nhật README của phần tương ứng (với chương mới thì viết README theo khuôn ở trên), mục lục trong
+4. Cập nhật README của phần tương ứng và hai bản dịch của nó (với chương mới thì viết README theo khuôn ở trên), mục lục trong
    [README.md](README.md), và commit cùng ngày lấy về trong mục *Nguồn gốc và cập nhật* của README.
 5. Đọc lại [ERRATA.md](ERRATA.md): xoá những lỗi tác giả đã sửa.
 
@@ -98,6 +100,28 @@ Chương được báo *empty stub* là chương mới có tiêu đề, chưa c�
   [README](README.md), [docs/setup.md](docs/setup.md), [docs/learning-path.md](docs/learning-path.md),
   [docs/faq.md](docs/faq.md).
 
+## Bản dịch (English và 简体中文)
+
+Mỗi file Markdown của repo (`README.md`, `CONTRIBUTING.md`, `ERRATA.md`, `docs/*.md`, `chapters/*/README.md`) có hai bản dịch
+nằm cạnh nó: `<tên>.en.md` (English) và `<tên>.zh-CN.md` (简体中文, tiếng Trung giản thể). **Bản tiếng Việt là bản gốc**:
+sửa nội dung ở đó trước, rồi cập nhật hai bản dịch trong cùng pull request.
+
+- Dòng đầu tiên sau tiêu đề (`#`) của mọi file là thanh chuyển ngôn ngữ, đúng khuôn sau (ngôn ngữ hiện tại in đậm, hai ngôn ngữ còn lại là link tới file anh em):
+
+  ```markdown
+  [Tiếng Việt](README.md) · **English** · [简体中文](README.zh-CN.md)
+  ```
+
+- Bản dịch được diễn đạt tự nhiên, nhưng **giữ nguyên cấu trúc**: cùng các tiêu đề (cùng cấp, cùng thứ tự), cùng công thức, cùng
+  code (chỉ dịch được comment), cùng hình, cùng link (trỏ tới bản dịch cùng ngôn ngữ của file đích nếu có), cùng số dòng bảng và số mục danh sách.
+  `python scripts/check_translations.py` kiểm tra các điều này và CI chạy nó.
+- Khối `text` chứa sơ đồ có nhãn chữ (ví dụ sơ đồ lộ trình trong `docs/learning-path.md`) được phép dịch khi dòng ngay phía trên nó là `<!-- translate-block -->` (đặt dòng này ở cả ba bản). Mọi khối code khác phải giống bản gốc, chỉ khác phần comment.
+- Link tới tiêu đề (anchor) trong bản dịch phải trỏ đúng tiêu đề **đã dịch**; `python scripts/check_links.py` kiểm tra điều đó.
+- Giữ nguyên tên riêng, tên hàm, lệnh, đường dẫn, số liệu và mốc thời gian. Thuật ngữ lần đầu xuất hiện thì ghi kèm bản gốc tiếng Anh
+  trong ngoặc (bản tiếng Trung), và dùng nhất quán một cách dịch trong cả repo.
+- Chỉ dịch, không thêm hay bớt ý. Thấy bản gốc có chỗ sai thì sửa ở bản tiếng Việt trước rồi cập nhật các bản dịch.
+- Issue và pull request có thể viết bằng tiếng Việt, English hoặc 中文. Ai đọc được ngôn ngữ nào cũng có thể giúp rà soát bản dịch ngôn ngữ đó.
+
 ## Kiểm tra trước khi gửi pull request
 
 ```bash
@@ -106,6 +130,7 @@ pytest --nbmake chapters/                # chạy mọi notebook (không ghi đ�
 python scripts/check_upstream.py         # notebook vẫn khớp với bản gốc
 python scripts/check_links.py            # link, hình và anchor trong mọi file .md còn đúng (kể cả chữ hoa/thường)
 python scripts/check_doc_snippets.py     # mọi đoạn code Python trong README và docs/ chạy được
+python scripts/check_translations.py     # bản .en.md và .zh-CN.md vẫn khớp với bản tiếng Việt
 black --check scripts/ && ruff check scripts/
 ```
 
