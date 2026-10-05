@@ -23,7 +23,7 @@ Các liên kết được rà soát tháng 10/2026.
 | Tài liệu | Dành cho | Ghi chú |
 |---|---|---|
 | [IBM Quantum Learning: Basics of quantum information](https://quantum.cloud.ibm.com/learning/courses/basics-of-quantum-information) | Người quen đại số tuyến tính, số phức | Miễn phí. Bài giảng video của John Watrous kèm bản chữ chi tiết; đi tới teleportation, superdense coding và trò chơi CHSH (bất đẳng thức Bell). Hợp lý sau Phần 03 |
-| [IBM Quantum Learning: Fundamentals of quantum algorithms](https://quantum.cloud.ibm.com/learning/courses/fundamentals-of-quantum-algorithms) | Người đã học xong Phần 04 | Miễn phí, cùng tác giả. Các thuật toán truy vấn (Deutsch–Jozsa, Simon), ước lượng pha, thuật toán Shor và Grover: đúng phần mà sách gốc còn thiếu |
+| [IBM Quantum Learning: Fundamentals of quantum algorithms](https://quantum.cloud.ibm.com/learning/courses/fundamentals-of-quantum-algorithms) | Người đã học xong Phần 04 | Miễn phí, cùng tác giả. Các thuật toán truy vấn (Deutsch–Jozsa, Simon), ước lượng pha, thuật toán Shor và Grover; ước lượng pha và Shor là phần sách gốc còn thiếu |
 | [Qiskit documentation](https://quantum.cloud.ibm.com/docs) | Người viết code | Tài liệu chính thức của Qiskit: hướng dẫn và API |
 | *Programming Quantum Computers* (Johnston, Harrigan, Gimeno-Segovia, O'Reilly 2019) | Lập trình viên | Sách có phí, tiếp cận từ góc độ của người lập trình hơn là vật lý |
 
