@@ -72,6 +72,9 @@ jobs:
       - name: Check Markdown links
         run: python scripts/check_links.py
 
+      - name: Check English and Chinese translations
+        run: python scripts/check_translations.py
+
       - name: Run code snippets in the docs
         run: python scripts/check_doc_snippets.py
 
