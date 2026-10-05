@@ -1,10 +1,12 @@
 """Run the Python code blocks that appear in the introductory docs.
 
 The docs promise that every snippet runs and prints what the text says.
-This script keeps that promise honest: it extracts each ```python block from
-README.md and docs/*.md, runs it in a fresh interpreter, and fails if any
-block raises. Blocks that use notebook magics (``%pip``, ``!cmd``) are skipped
-because they only make sense inside Colab or Jupyter.
+This script keeps that promise honest: it extracts each ```python (or ```py)
+block from README*.md and docs/*.md, translations such as README.en.md
+included, runs it in a fresh interpreter, and fails if any block raises.
+Blocks indented inside list items are found too. Blocks that use notebook
+magics (``%pip``, ``!cmd``) are skipped because they only make sense inside
+Colab or Jupyter.
 
 Output of sampling code differs on every run, so only the exit status is
 checked, not the printed counts.
@@ -22,22 +24,28 @@ import os
 import re
 import subprocess
 import sys
+import textwrap
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-FENCE = re.compile(r"^```python[ \t]*\n(.*?)^```", re.DOTALL | re.MULTILINE)
+# A fence may be indented (inside a list item); its body is dedented before use.
+FENCE = re.compile(
+    r"^[ \t]*(?P<fence>`{3,}|~{3,})[ \t]*(?:python3?|py)\b[^\n]*\n"
+    r"(?P<body>.*?)^[ \t]*(?P=fence)[ \t]*$",
+    re.DOTALL | re.MULTILINE | re.IGNORECASE,
+)
 MAGIC = re.compile(r"^\s*(%|!)", re.MULTILINE)
 TIMEOUT_SECONDS = 120
 
 
 def doc_files(root: Path) -> list[Path]:
-    """Return README.md and every Markdown file under docs/."""
-    return [root / "README.md", *sorted((root / "docs").glob("*.md"))]
+    """Return README*.md at the root and every Markdown file under docs/."""
+    return [*sorted(root.glob("README*.md")), *sorted((root / "docs").glob("*.md"))]
 
 
 def extract_snippets(markdown: str) -> list[str]:
-    """Return the body of every ```python fenced block in ``markdown``."""
-    return FENCE.findall(markdown)
+    """Return the dedented body of every Python fenced block in ``markdown``."""
+    return [textwrap.dedent(m.group("body")) for m in FENCE.finditer(markdown)]
 
 
 def run_snippet(code: str) -> subprocess.CompletedProcess[str]:
