@@ -9,7 +9,7 @@ Chưa biết máy tính lượng tử là gì? Đọc [Máy tính lượng tử 
 |---|---|
 | **Tò mò, chưa lập trình** | Đọc [Máy tính lượng tử là gì?](what-is-quantum-computing.md) và [FAQ](faq.md). Rồi đọc sách mở *Quantum Computing for the Quantum Curious* (ít toán, xem [Tài nguyên](resources.md)). Muốn xem repo này mà không code: đọc mục *Ghi nhớ nhanh* của từng bài trong [Phần 02](../chapters/02_quantum_computing/README.md) và [Phần 03](../chapters/03_quantum_protocols/README.md); notebook đã có sẵn output nên không cần chạy gì. Khi muốn code, học Python cơ bản rồi quay lại |
 | **Biết Python cơ bản** | Đi theo lộ trình đầy đủ bên dưới, từ Phần 00. Đây là đường dành cho đa số người đọc |
-| **Biết Python và đại số tuyến tính** (vector, ma trận, số phức) | Làm Phần 00. Ở Phần 01: lướt 01_01, đọc 01_02 (cổng khả nghịch X, CX, CCX, nền của oracle), lướt 01_03 để nắm ký hiệu ket và tích Kronecker, bỏ qua 01_04 được. (Nếu tích tensor/Kronecker còn lạ, hãy đọc kỹ 01_03.) Đọc kỹ từ Phần 02 |
+| **Biết Python và đại số tuyến tính** (vector, ma trận, số phức) | Làm Phần 00. Ở Phần 01: lướt 01_01, đọc 01_02 (cổng khả nghịch X, CX, CCX, nền của oracle), lướt 01_03 để nắm ký hiệu ket và tích Kronecker, lướt nhanh 01_04 (bit xác suất, mà 02_01 dùng để so sánh với qubit). (Nếu tích tensor/Kronecker còn lạ, hãy đọc kỹ 01_03.) Đọc kỹ từ Phần 02 |
 | **Đã học cơ học lượng tử ở trường** | Đọc phần *Code chính* của [02_01](../chapters/02_quantum_computing/README.md) để làm quen cách Qiskit viết mạch, rồi 02_04, 02_05 và Phần 04 (nếu cú pháp cổng một qubit còn lạ, lướt thêm 02_03). Dùng repo như sổ tay Qiskit |
 
 ## Cần chuẩn bị gì
@@ -21,7 +21,7 @@ Bloch sphere ở 02_03. Học nhẹ nhàng hơn nếu bạn đã gặp chúng tr
 |---|---|---|
 | **Python** | Biến, hàm, vòng lặp, list; biết `import` và đọc được code ngắn | Học một khoá Python cơ bản trước. Không cần biết NumPy; sách giải thích khi dùng |
 | **Số nhị phân và logic** | Đổi nhị phân sang thập phân; biết AND, OR, XOR | Phần 01_01 dạy lại từ đầu |
-| **Xác suất** | Xác suất của biến cố, tổng bằng 1 | Mức lớp 10 là đủ |
+| **Xác suất** | Xác suất của biến cố, tổng bằng 1; nhân xác suất của hai biến cố độc lập | Ôn lại kiến thức lớp 10 là đủ |
 | **Đại số tuyến tính** | Nhân ma trận với vector | Phần 01_03 dạy; xem trước sẽ nhẹ hơn (mục *Ôn toán*) |
 | **Số phức** | Biết $i^2 = -1$, môđun $\vert a+bi \vert$ | 02_03 dạy lại; xem trước sẽ nhẹ hơn |
 | **Vật lý lượng tử** | Không cần | Sách dựng từ thí nghiệm Stern–Gerlach |
@@ -31,7 +31,7 @@ Bloch sphere ở 02_03. Học nhẹ nhàng hơn nếu bạn đã gặp chúng tr
 Nếu chưa từng gặp ma trận hoặc số phức, hãy xem trước:
 
 - [3Blue1Brown, *Essence of linear algebra*](https://www.3blue1brown.com/topics/linear-algebra): loạt video trực quan về vector
-  và ma trận (xem hai ba video đầu là đủ cho Phần 01).
+  và ma trận (xem bốn video đầu, tới phép nhân hai ma trận, là đủ cho Phần 01).
 - [Khan Academy, Linear algebra](https://www.khanacademy.org/math/linear-algebra) (vector, ma trận) và
   [Precalculus](https://www.khanacademy.org/math/precalculus) (phần số phức): có bài tập tương tác, miễn phí.
 
@@ -45,8 +45,9 @@ Trả lời nhanh mà không tra cứu.
 4. Tính $\begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}1\\0\end{pmatrix}$.
 5. Môđun của số phức $3+4i$ là bao nhiêu?
 
-**Cách đọc kết quả:** sai câu 1 thì nên ôn Python trước. Sai câu 2–3 (nhị phân, xác suất) thì không sao: 01_01 dạy lại
-nhị phân, và xác suất mức lớp 10 là đủ; bạn chỉ cần đọc kỹ.
+**Cách đọc kết quả:** sai câu 1 thì nên ôn Python trước. Sai câu 2 (nhị phân, XOR) thì không sao: 01_01 dạy lại từ đầu.
+Sai câu 3 thì nên ôn lại xác suất mức lớp 10 (xác suất để hai biến cố độc lập cùng xảy ra), vì 01_04 và 02_02 dùng đúng
+phép tính này.
 Sai câu 4–5 thì **không sao**, vì sách dạy lại; nhưng nếu cả hai đều lạ, hãy xem mục *Ôn toán* ở trên.
 
 <details>
@@ -72,7 +73,8 @@ Phần 01 trông "cổ điển" nhưng là bộ công cụ vector, ma trận và
 Bài 02_05 (oracle, phase kickback) là nền của cả Phần 04.
 
 Thời gian dưới đây là **ước tính** cho người học cẩn thận: đọc kỹ, tự gõ lại code, làm phần tự kiểm tra.
-Người đọc lướt có thể nhanh hơn nhiều. Tổng cộng khoảng 25–40 giờ, tức 4–6 tuần nếu học một giờ mỗi ngày.
+Người đọc lướt có thể nhanh hơn nhiều. Cộng năm phần dưới đây được khoảng 25–40 giờ (chưa tính mục *Ôn toán* tuỳ chọn),
+tức 4–6 tuần nếu học một giờ mỗi ngày.
 
 Mỗi phần có phần **tự kiểm tra** và **đáp án gợi ý**. Hãy tự trả lời trước khi mở đáp án.
 
@@ -88,7 +90,7 @@ Bit, cổng logic, cổng khả nghịch, bit là vector và cổng là ma trậ
 
 **Tự kiểm tra:**
 - Vì sao cổng AND không khả nghịch, còn cổng CX thì có?
-- Viết ma trận $4 \times 4$ của cổng CX (qubit điều khiển là qubit bên trái trong ký hiệu ket) và kiểm tra nó biến $|10\rangle$ thành $|11\rangle$.
+- Viết ma trận $4 \times 4$ của cổng CX (bit điều khiển là bit bên trái trong ký hiệu ket) và kiểm tra nó biến $|10\rangle$ thành $|11\rangle$.
 - Tích Kronecker của hai vector 2 chiều có mấy chiều? Với $n$ bit là bao nhiêu?
 
 <details>
@@ -122,7 +124,7 @@ Nên chia thành nhiều buổi, và **đọc kỹ 02_05** vì Phần 04 dựa h
 - H trên qubit 0 rồi CX(0, 1) cho $\tfrac{1}{\sqrt2}(|00\rangle + |11\rangle)$. Biên độ của $|01\rangle$ và $|10\rangle$ bằng 0,
   nên xác suất đo ra chúng bằng 0.
 - $|+\rangle$ nằm trên trục $+x$ và $|-\rangle$ trên trục $-x$ của Bloch sphere, cả hai ở đường xích đạo. Đo theo trục $z$
-  cả hai cho 50/50 nên không phân biệt được. Chúng khác nhau ở dấu tương đối của biên độ (pha), chỉ lộ ra khi đo theo trục $x$.
+  cả hai cho 50/50 nên không phân biệt được. Chúng khác nhau ở dấu tương đối của biên độ (pha), lộ ra khi đo theo trục $x$ (tức áp H rồi đo: $|+\rangle \to$ `0`, $|-\rangle \to$ `1`).
 
 </details>
 
@@ -143,7 +145,8 @@ Ba ứng dụng đầu tiên của vướng víu và nguyên lý bất định: 
 - Cả hai đều dùng **một cặp vướng víu** chia sẻ trước. Teleportation gửi **1 qubit** bằng cách truyền **2 bit cổ điển**;
   superdense coding ngược lại, gửi **2 bit cổ điển** bằng cách truyền **1 qubit**.
 - Kẻ làm giả không biết mỗi qubit được chuẩn bị theo cơ sở nào (bit hay sign). Đo sai cơ sở thì làm hỏng trạng thái,
-  còn định lý no-cloning cấm sao chép một trạng thái chưa biết, nên không có cách nào làm bản sao đáng tin. Chi tiết ở 03_01.
+  còn định lý no-cloning cấm sao chép một trạng thái chưa biết, nên không có cách nào làm bản sao đáng tin: xác suất làm giả
+  qua được kiểm tra giảm theo hàm mũ khi tăng số qubit (ví dụ $(3/4)^n$ với cách đo rồi chuẩn bị lại). Chi tiết ở 03_01.
 
 </details>
 
