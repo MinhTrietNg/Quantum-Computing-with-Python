@@ -1,5 +1,5 @@
 name: Câu hỏi khi học
-description: Bạn bị kẹt hoặc chưa hiểu một chỗ trong lúc học (hỏi bằng tiếng Việt)
+description: Bạn bị kẹt hoặc chưa hiểu một chỗ trong lúc học (viết bằng tiếng Việt, English hoặc 中文 đều được)
 title: "[hỏi] PP_BB: "
 labels: [question]
 body:
@@ -7,6 +7,7 @@ body:
     attributes:
       value: |
         Cảm ơn bạn đã hỏi. Câu hỏi hay thường giúp cải thiện tài liệu cho người sau.
+        Bạn có thể viết bằng tiếng Việt, English hoặc 中文 (Vietnamese, English or Chinese are all fine).
         Trước khi gửi, thử xem [FAQ](https://github.com/MinhTrietNg/Quantum-Computing-with-Python/blob/main/docs/faq.md)
         và [bảng thuật ngữ](https://github.com/MinhTrietNg/Quantum-Computing-with-Python/blob/main/docs/glossary.md).
   - type: input

@@ -5,6 +5,7 @@
 ## Loại thay đổi
 
 - [ ] Hướng dẫn tiếng Việt (`chapters/*/README.md`)
+- [ ] Bản dịch English / 简体中文 (`*.en.md`, `*.zh-CN.md`)
 - [ ] Tài liệu nhập môn (`docs/`)
 - [ ] Errata (`ERRATA.md` và ghi chú `> Lưu ý:`)
 - [ ] Đồng bộ notebook với bản gốc
@@ -16,5 +17,6 @@
 - [ ] `python scripts/check_upstream.py` báo *in sync*
 - [ ] README mới hoặc đã sửa theo đúng khuôn trong [CONTRIBUTING.md](https://github.com/MinhTrietNg/Quantum-Computing-with-Python/blob/main/CONTRIBUTING.md)
 - [ ] `python scripts/check_links.py` không báo link hỏng
+- [ ] `python scripts/check_translations.py` báo `ok` (đã cập nhật cả bản `.en.md` và `.zh-CN.md` khi sửa bản tiếng Việt)
 - [ ] Link và công thức hiển thị đúng khi xem trên GitHub
 - [ ] Với `docs/`: phát biểu kỹ thuật đã kiểm chứng, code đã chạy thử (xem CONTRIBUTING)
