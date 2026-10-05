@@ -35,18 +35,40 @@ Từ thí nghiệm Stern–Gerlach với spin electron, phần này dựng lên 
 > Nếu vật lý bên dưới còn lạ, đừng lo. Bạn chỉ cần mang theo một ý: **xác suất = bình phương của biên độ**, và biên độ
 > có thể âm. Thí nghiệm chỉ là cách sách dẫn bạn tới ý đó.
 
-**Thí nghiệm Stern–Gerlach.** Electron có spin (một thuộc tính nội tại, làm nó hành xử như một nam châm nhỏ có thể
-hướng lên hoặc xuống). Cho đi qua từ trường không đều theo trục $z$:
+**Thí nghiệm Stern–Gerlach.** Electron có spin (một thuộc tính nội tại, làm nó hành xử như một nam châm rất nhỏ).
+Cho đi qua từ trường không đều theo trục $z$:
 - spin $+z$ luôn lệch lên, spin $-z$ luôn lệch xuống;
 - spin $\pm x$ **không** đi thẳng như nam châm cổ điển, mà lệch lên hoặc xuống, mỗi bên 50%, và **không bao giờ** ở giữa.
+
+(Sách dùng electron cho dễ hình dung. Thí nghiệm thật dùng nguyên tử bạc trung hoà điện, vì với electron mang điện,
+lực Lorentz sẽ lấn át hiệu ứng của spin.)
+
+<p align="center"><img src="images/02_01_05_stern-gerlach_up-down_elec.png" width="700" alt="Máy Stern–Gerlach: electron spin lên lệch lên, electron spin xuống lệch xuống"></p>
+
+*Hình: Electron có spin $+z$ luôn lệch lên (trái), spin $-z$ luôn lệch xuống (phải).*
+
+<p align="center"><img src="images/02_01_06_stern-gerlach_right_elec.png" width="360" alt="Electron spin +x đi qua máy Stern–Gerlach, lệch lên hoặc xuống, mỗi bên 50%"></p>
+
+*Hình: Electron có spin $+x$ không đi thẳng mà lệch lên hoặc xuống, mỗi bên 50%.*
 
 **Vector xác suất không đủ.** Thử mô tả spin bằng vector xác suất (như ở 01_04). Khi đo theo trục $z$, cả $+x$ và $-x$
 đều cho 50% lên, 50% xuống, nên cả hai cùng là $[\tfrac12, \tfrac12]^\top$. Nhưng chúng là hai trạng thái *khác nhau*:
 xoay máy đo sang trục $x$ thì phân biệt được (một cái luôn cho $+x$, cái kia luôn cho $-x$). Vector xác suất đã làm
 mất thông tin.
 
-Tệ hơn, spin $+z$ có thể xem là sự kết hợp của $+x$ và $-x$. Nhưng cộng hai vector $[\tfrac12, \tfrac12]^\top$ chỉ cho
-lại $[\tfrac12, \tfrac12]^\top$, chứ không ra $[1, 0]^\top$: thành phần "xuống" phải **triệt tiêu**, mà xác suất không
+<p align="center"><img src="images/02_01_08_stern-gerlach_left-right_elec.png" width="700" alt="Máy Stern–Gerlach xoay để từ trường theo trục x: electron spin +x và spin −x lệch về hai phía ngược nhau"></p>
+
+*Hình: Xoay máy đo cho từ trường theo trục $x$: spin $+x$ (trái) và spin $-x$ (phải) lệch về hai phía ngược nhau.*
+
+Tệ hơn, spin $+z$ đi qua máy đo đặt theo trục $x$ cũng lệch sang hai bên, mỗi bên 50%. Vậy spin $+z$ có thể xem là
+sự kết hợp, mỗi phần một nửa, của $+x$ và $-x$.
+
+<p align="center"><img src="images/02_01_09_stern-gerlach_up_elec.png" width="360" alt="Electron spin +z đi qua máy Stern–Gerlach đặt theo trục x, lệch sang hai bên, mỗi bên 50%"></p>
+
+*Hình: Electron spin $+z$ đi qua máy đo đặt theo trục $x$: lệch sang hai bên, mỗi bên 50%.*
+
+Nhưng lấy một nửa của mỗi vector rồi cộng lại, $\tfrac12[\tfrac12, \tfrac12]^\top + \tfrac12[\tfrac12, \tfrac12]^\top$,
+chỉ cho lại $[\tfrac12, \tfrac12]^\top$, chứ không ra $[1, 0]^\top$: thành phần "xuống" phải **triệt tiêu**, mà xác suất không
 bao giờ âm nên không triệt tiêu được. Vì vậy cần cho phép phần tử **âm**, và xác suất là **bình phương** biên độ
 (quy tắc Born):
 
@@ -55,6 +77,10 @@ $$|s\rangle = \begin{bmatrix}s_0\\ s_1\end{bmatrix}, \qquad \mathbb{P}_{+z} = s_
 **Qubit.** Đổi tên: spin lên là $|0\rangle$, spin xuống là $|1\rangle$, và
 
 $$|+\rangle = \tfrac{1}{\sqrt2}\big(|0\rangle + |1\rangle\big), \qquad |-\rangle = \tfrac{1}{\sqrt2}\big(|0\rangle - |1\rangle\big)$$
+
+> Lưu ý: ở phần tóm tắt cuối mục 1.2, notebook ghi nhãn $|s_{-x}\rangle$ cho cả hai vector; vector
+> $[\tfrac{1}{\sqrt2}, \tfrac{1}{\sqrt2}]^\top$ phải là $|s_{+x}\rangle$. Ngay trước đó, câu "find what $s_0$ and $s_1$
+> for the vector $|s_{-z}\rangle$ should be" cũng phải là $|s_{-x}\rangle$.
 
 Định nghĩa tổng quát:
 
@@ -74,10 +100,22 @@ và **tổng bình phương môđun** bằng 1.
 2. **Biến đổi trạng thái** bằng các cổng.
 3. **Đo** (measurement): chiếu trạng thái lượng tử về bit cổ điển, mang tính xác suất.
 
+<p align="center"><img src="images/02_01_10_spin_vs_qubit_x.png" width="750" alt="Thí nghiệm spin và mạch tương ứng: chuẩn bị |0⟩, cổng X, đo luôn ra 1"></p>
+
+*Hình: Thí nghiệm (trên) và mạch tương ứng (dưới). SG1 cùng màn chắn chỉ để electron spin lên đi tiếp (chuẩn bị $|0\rangle$), từ trường B lật spin (cổng $X$), SG2 đo và luôn ra 1.*
+
 **Hai cổng đầu tiên:**
 
 $$X = \begin{bmatrix}0&1\\1&0\end{bmatrix}\ (|0\rangle \leftrightarrow |1\rangle), \qquad
 H = \tfrac{1}{\sqrt2}\begin{bmatrix}1&1\\1&-1\end{bmatrix}\ (|0\rangle \leftrightarrow |+\rangle,\ |1\rangle \leftrightarrow |-\rangle)$$
+
+<p align="center"><img src="images/02_01_11_spin_vs_qubit_h.png" width="750" alt="Thí nghiệm và mạch với cổng H: |0⟩ thành |+⟩, đo ra 0 hoặc 1, mỗi kết quả 50%"></p>
+
+*Hình: Cùng thí nghiệm, nhưng từ trường B xoay spin từ $+z$ sang $+x$ (cổng $H$ đưa $|0\rangle$ thành $|+\rangle$); SG2 cho 0 hoặc 1, mỗi kết quả 50%.*
+
+> Lưu ý: dạng thập phân của $H$ trong notebook ghi phần tử góc dưới bên phải là $-\frac{\sqrt2}{\sqrt2}$; đúng là
+> $-\frac{\sqrt2}{2}$. Cell cho $|0\rangle$, $|1\rangle$ đi qua `qc_h` in nhầm nhãn "over an X gate"; output là của cổng
+> $H$ và đúng.
 
 ### Code chính
 
@@ -161,19 +199,53 @@ $$|+\rangle \otimes |+\rangle = \tfrac12\big(|00\rangle + |01\rangle + |10\rangl
 
 Mỗi kết quả có xác suất $(1/2)^2 = 1/4$, khớp thí nghiệm hai electron độc lập.
 
+<p align="center"><img src="images/02_02_03_two_spin_right_options.png" width="740" alt="Hai electron độc lập cùng spin +x đo ở hai máy riêng: bốn tổ hợp lên/xuống, mỗi tổ hợp 25%"></p>
+
+*Hình: Hai electron độc lập, cùng spin $+x$, đo ở hai máy riêng: 4 tổ hợp lên/xuống, mỗi tổ hợp 25%.*
+
 **Tách được** = viết được thành **một** tích của các trạng thái từng qubit. Ví dụ
 $\tfrac12(|00\rangle - |01\rangle + |10\rangle - |11\rangle) = |+\rangle \otimes |-\rangle$.
 
-**Vướng víu.** Một hạt spin 0 phân rã thành hai electron có spin ngược nhau. Đo theo trục $z$: luôn một lên một xuống.
-Điều bất ngờ là **xoay máy đo theo trục nào cũng vậy**, chứ không ra 4 kết quả mỗi cái 25% như hai hạt độc lập. Trạng thái mô tả được là
+**Vướng víu.** Một hạt spin 0 phân rã thành hai hạt (như electron) có spin ngược nhau. Đo theo trục $z$: luôn một lên
+một xuống, mỗi trường hợp 50%.
+
+<p align="center"><img src="images/02_02_04_two_spin_entangled.png" width="700" alt="Một hạt phân rã thành hai electron bay về hai máy đo; luôn một electron lệch lên, một lệch xuống"></p>
+
+*Hình: Một hạt (màu tím) phân rã thành hai electron bay về hai máy đo theo $z$: luôn một lên một xuống, mỗi trường hợp 50%.*
+
+Có thể đoán cặp hạt luôn sinh ra với spin nằm sẵn theo $z$. Nếu vậy, xoay cả hai máy đo sang trục $x$ thì kết quả hai
+bên phải độc lập: 4 tổ hợp, mỗi cái 25%.
+
+<p align="center"><img src="images/02_02_06_two_spin_x_entangled.png" width="700" alt="Giả thuyết: spin nằm sẵn theo z, nên khi xoay máy đo thì mỗi bên 50/50 và độc lập với bên kia"></p>
+
+*Hình: Giả thuyết cần kiểm tra: nếu spin của cặp hạt nằm sẵn theo $z$, xoay máy đo thì mỗi bên ra 50/50, độc lập với bên kia. Thí nghiệm bác bỏ giả thuyết này.*
+
+Thí nghiệm cho thấy **không phải vậy**: đặt cả hai máy đo theo cùng một trục bất kỳ thì vẫn luôn một lên một xuống. Nếu chỉ
+dựa vào phép đo theo $z$ (`01` và `10`, mỗi cái 1/2) thì cả hai trạng thái sau đều khớp:
 
 $$\tfrac{1}{\sqrt2}\big(|01\rangle + |10\rangle\big) \quad\text{hoặc}\quad \tfrac{1}{\sqrt2}\big(|01\rangle - |10\rangle\big)$$
 
-và **không thể** tách thành tích của hai trạng thái riêng. Đây là hiện tượng không có trong hệ cổ điển nào.
+Cả hai đều **không thể** tách thành tích của hai trạng thái riêng. Với hệ cổ điển, biết đầy đủ trạng thái của cả hệ thì
+cũng biết đầy đủ trạng thái từng phần; ở đây thì không. Trong hai trạng thái trên, chỉ
+$\tfrac{1}{\sqrt2}(|01\rangle - |10\rangle)$ cho kết quả ngược nhau theo **mọi** trục, nên đó mới là trạng thái của cặp
+hạt sinh ra từ hạt spin 0. Với $\tfrac{1}{\sqrt2}(|01\rangle + |10\rangle)$, đo cả hai theo trục $x$ lại luôn ra **cùng** hướng.
+
+> Lưu ý: notebook gọi $\tfrac{1}{\sqrt2}(|01\rangle + |10\rangle)$ là "lựa chọn hợp lý" chỉ dựa trên thống kê theo trục $z$,
+> rồi nói trạng thái dấu trừ "cũng cho cùng quan sát". Điều đó chỉ đúng khi đo theo $z$; với quan sát "trục nào cũng
+> ngược nhau" ở trên thì chỉ trạng thái dấu trừ khớp.
+
+> Đừng suy diễn quá: (1) mỗi bên vẫn thấy kết quả ngẫu nhiên 50/50, nên tương quan này **không** dùng để truyền tin được;
+> (2) riêng việc "cùng trục thì luôn ngược nhau" vẫn bắt chước được bằng một mô hình cổ điển (mỗi cặp mang sẵn một hướng
+> ngẫu nhiên). Điều mà không mô hình "quy định sẵn" nào làm được chỉ lộ ra khi hai máy đo đặt **lệch trục** nhau, qua bất
+> đẳng thức Bell (chưa có trong sách; xem [bảng thuật ngữ](../../docs/glossary.md)).
 
 **Tạo vướng víu bằng mạch** (H rồi CX):
 
 $$|00\rangle \xrightarrow{H \otimes I} \tfrac{1}{\sqrt2}\big(|00\rangle + |10\rangle\big) \xrightarrow{CX} \tfrac{1}{\sqrt2}\big(|00\rangle + |11\rangle\big)$$
+
+<p align="center"><img src="images/02_02_07_spin_vs_qubit_entangled.png" width="750" alt="Thí nghiệm và mạch tạo vướng víu: H rồi CX tạo trạng thái Bell, đo ra 00 hoặc 11"></p>
+
+*Hình: Từ trường B đưa electron trên về $+x$ (cổng $H$), trường điện từ cho hai electron tương tác (cổng $CX$), tạo $\tfrac{1}{\sqrt2}(|00\rangle + |11\rangle)$; đo ra `00` hoặc `11`, mỗi kết quả 50%.*
 
 ### Code chính
 
@@ -212,8 +284,9 @@ Cách làm bằng mạch cho cùng kết quả. `qc.measure_all()` thêm phép �
 
 - $|q_1 q_0\rangle = |q_1\rangle \otimes |q_0\rangle$: qubit 0 ở **bên phải**.
 - Tách được = một tích Kronecker; vướng víu = không tách được.
-- H trên control + CX = cách chuẩn để tạo vướng víu.
-- Đo trạng thái vướng víu: kết quả các qubit tương quan hoàn toàn.
+- Từ $|00\rangle$: H trên control + CX = cách chuẩn để tạo vướng víu.
+- Đo $\tfrac{1}{\sqrt2}(|00\rangle + |11\rangle)$ theo $z$: hai kết quả luôn giống nhau, nhưng từng kết quả riêng vẫn ngẫu
+  nhiên 50/50, nên không truyền được tin.
 
 ---
 
@@ -227,26 +300,56 @@ Cách làm bằng mạch cho cùng kết quả. `qc.measure_all()` thêm phép �
 
 $$|q\rangle = \cos\tfrac\theta2\,|0\rangle + \sin\tfrac\theta2\,|1\rangle$$
 
-**Cần số phức.** Spin trong mặt phẳng $xy$ luôn cho 50/50 khi đo theo $z$. Với $\pm y$ không có số **thực** nào vừa cho
-xác suất 1/2 vừa ghép lại được $|0\rangle$, $|1\rangle$; phải dùng $\pm i$:
+<p align="center"><img src="images/02_03_01_stern-gerlach_angle_prob.png" width="360" alt="Electron spin lệch góc θ so với trục z: lệch lên với xác suất cos²(θ/2), lệch xuống với xác suất sin²(θ/2)"></p>
+
+*Hình: Spin lệch góc $\theta$ so với $+z$: lệch lên với xác suất $\cos^2(\theta/2)$, lệch xuống với xác suất $\sin^2(\theta/2)$.*
+
+> Lưu ý: bảng ở mục 1.1 của notebook ghi $|-\rangle$ ứng với $\theta = \frac{3\pi}{2}$ và $\cos\frac\theta2 = \frac{1}{\sqrt2}$,
+> $\sin\frac\theta2 = -\frac{1}{\sqrt2}$. Với $\theta = \frac{3\pi}{2}$ thì thực ra $\cos\frac{3\pi}{4} = -\frac{1}{\sqrt2}$ và
+> $\sin\frac{3\pi}{4} = \frac{1}{\sqrt2}$, cho $-|-\rangle$ (cùng trạng thái, chỉ khác pha toàn cục, xem dưới). Các giá trị
+> trong bảng ứng với $\theta = -\frac{\pi}{2}$.
+
+**Cần số phức.** Spin trong mặt phẳng $xy$ luôn cho 50/50 khi đo theo $z$.
+
+<p align="center"><img src="images/02_03_02_elec_phi_angle.png" width="520" alt="Spin nằm trong mặt phẳng xy ở góc φ bất kỳ: đo theo z luôn ra 50% lên, 50% xuống"></p>
+
+*Hình: Spin nằm trong mặt phẳng $xy$, ở góc $\varphi$ bất kỳ so với trục $x$: đo theo $z$ luôn ra 50/50, không phụ thuộc $\varphi$.*
+
+Với $\pm y$, cần biên độ vừa cho xác suất 1/2 vừa ghép lại được $|0\rangle$, $|1\rangle$. Các số **thực** duy nhất làm
+được vậy là $\pm\tfrac{1}{\sqrt2}$, nhưng chúng đã dùng cho $|\pm\rangle$ (trục $x$); nên phải dùng $\pm i$:
 
 $$|r\rangle = \tfrac{1}{\sqrt2}\big(|0\rangle + i|1\rangle\big), \qquad |l\rangle = \tfrac{1}{\sqrt2}\big(|0\rangle - i|1\rangle\big)$$
 
+<p align="center"><img src="images/02_03_05_spin_in_complex_plane.png" width="250" alt="Mặt phẳng phức đặt trùng mặt phẳng xy: 1, i, −1, −i nằm trên các trục +x, +y, −x, −y"></p>
+
+*Hình: Đặt mặt phẳng phức trùng mặt phẳng $xy$: các số $1, i, -1, -i$ nằm trên các trục $+x, +y, -x, -y$; spin ở góc $\varphi$ ứng với số $e^{i\varphi}$.*
+
 Quy tắc Born chính xác là lấy **bình phương môđun**: $|c|^2 = c\,c^* = a^2 + b^2$. Tổng quát cho mặt phẳng $xy$ là
 $\tfrac{1}{\sqrt2}(|0\rangle + e^{i\varphi}|1\rangle)$.
+
+> Lưu ý: notebook viết góc của số phức $c = a + bi$ là $\varphi = \text{atan2}(a, b)$; theo quy ước thông dụng
+> (`numpy.arctan2(y, x)`) phải là $\text{atan2}(b, a)$, phần ảo đứng trước. Cũng ở mục 1.2, vế trái của "tổ hợp trừ" ghi
+> $\frac{1}{\sqrt2}|r\rangle - \frac{i}{\sqrt2}|l\rangle$, nhưng phép tính bên dưới (ra $i|1\rangle$) dùng
+> $\frac{1}{\sqrt2}|r\rangle - \frac{1}{\sqrt2}|l\rangle$.
 
 **Bloch sphere.** Ghép hai kết quả trên:
 
 $$|q\rangle = \cos\tfrac\theta2\,|0\rangle + e^{i\varphi}\sin\tfrac\theta2\,|1\rangle$$
 
-$\theta$ là góc so với trục $+z$, $\varphi$ là góc so với trục $+x$. Mọi qubit là một điểm trên mặt cầu đơn vị.
+$\theta \in [0, \pi]$ là góc so với trục $+z$; $\varphi \in [0, 2\pi)$ là góc của hình chiếu xuống mặt phẳng $xy$, đo từ
+trục $+x$. Mọi trạng thái của một qubit (bỏ qua pha toàn cục, xem ngay dưới) là một điểm trên mặt cầu đơn vị.
+
+<p align="center"><img src="images/02_03_06_bloch.png" width="300" alt="Bloch sphere với góc θ tính từ trục z, góc φ tính từ trục x, và vị trí của |0⟩, |1⟩, |+⟩, |−⟩, |r⟩, |l⟩"></p>
+
+*Hình: Bloch sphere. $|0\rangle$, $|1\rangle$ ở hai cực; $|\pm\rangle$ trên trục $x$; $|r\rangle$, $|l\rangle$ trên trục $y$.*
 
 **Pha toàn cục và pha tương đối.** Với $\alpha_0, \alpha_1$ phức bất kỳ:
 
 $$|q\rangle = e^{i\gamma}\Big[\cos\tfrac\theta2\,|0\rangle + e^{i\varphi}\sin\tfrac\theta2\,|1\rangle\Big]$$
 
 - $\gamma$ là **pha toàn cục** (global phase): không đo được, vì $|e^{i\gamma}|^2 = 1$. Ví dụ $i|1\rangle$ tương đương $|1\rangle$.
-- $\varphi$ là **pha tương đối** (relative phase): đo được, vì nó quyết định vị trí trên Bloch sphere.
+- $\varphi$ là **pha tương đối** (relative phase): đo được, vì nó quyết định vị trí trên Bloch sphere. Đo theo $z$ thì
+  không thấy nó (như $|+\rangle$ và $|-\rangle$), nhưng đo theo $x$ hay $y$ thì kết quả thay đổi.
 
 **Bra, tích trong, cơ sở.** Bra là **chuyển vị liên hợp**: $\langle q| = [\alpha_0^*, \alpha_1^*]$. Tích trong
 $\langle y|x\rangle = \langle x|y\rangle^*$; chuẩn $\|q\| = \sqrt{\langle q|q\rangle}$. Ba cơ sở trực chuẩn quan trọng:
@@ -256,6 +359,10 @@ $\langle y|x\rangle = \langle x|y\rangle^*$; chuẩn $\|q\| = \sqrt{\langle q|q\
 | Computational (bit) | $\vert 0\rangle, \vert 1\rangle$ | $\pm z$ |
 | Hadamard (sign) | $\vert +\rangle, \vert -\rangle$ | $\pm x$ |
 | Y (hand) | $\vert r\rangle, \vert l\rangle$ | $\pm y$ |
+
+> Lưu ý: ở ví dụ đổi $\sqrt{2/3}\,|0\rangle - \sqrt{1/3}\,|1\rangle$ sang cơ sở sign, notebook ghi cả hai hệ số là
+> $\frac{2\sqrt3 - \sqrt6}{6}$. Hệ số của $|-\rangle$ đúng ra là $\frac{2\sqrt3 + \sqrt6}{6} \approx 0.986$; giá trị số trong
+> notebook thì đúng.
 
 Tích ngoài $|x\rangle\langle y|$ là một ma trận; hai phép chiếu $\Pi_0 = |0\rangle\langle 0|$ và $\Pi_1 = |1\rangle\langle 1|$ dùng cho phép đo.
 
@@ -275,7 +382,31 @@ khả nghịch), và unitary giữ nguyên chuẩn của vector.
 
 > Lưu ý: notebook viết rằng $S$ cùng $H$ và $CX$ đủ để xấp xỉ mọi cổng. Thực ra $\{H, S, CX\}$ chỉ sinh ra nhóm Clifford,
 > và nhóm này mô phỏng được hiệu quả trên máy cổ điển (định lý Gottesman–Knill). Cần thêm cổng **$T$** (bộ Clifford+T)
-> mới phổ quát. Chính bài 02_04 của sách cũng nói đúng như vậy.
+> mới phổ quát. Chính bài 02_04 của sách cũng nói đúng như vậy. Định lý Solovay–Kitaev mà notebook dẫn cũng không nói bộ
+> nào là phổ quát; nó nói rằng khi đã có một bộ cổng phổ quát thì xấp xỉ một cổng tới sai số $\varepsilon$ chỉ cần số cổng
+> cỡ lũy thừa của $\log(1/\varepsilon)$, tức xấp xỉ được **hiệu quả**.
+
+**Đo phá huỷ và không phá huỷ.** Nếu electron đập vào màn thì nó bị hấp thụ: đó là phép đo **phá huỷ** (destructive
+measurement), sau đo không còn spin nào để bàn tới.
+
+<p align="center"><img src="images/02_03_07_dest_meas.png" width="375" alt="Đo phá huỷ: electron sau máy Stern–Gerlach đập vào màn, để lại vết ở trên hoặc dưới, mỗi bên 50%"></p>
+
+*Hình: Đo phá huỷ: electron bị màn hấp thụ, chỉ để lại vết ở trên hoặc ở dưới (mỗi bên 50%).*
+
+Nếu khoét hai lỗ trên màn cho electron bay qua thì ta biết nó đi lối nào mà electron vẫn còn: đó là phép đo **không phá
+huỷ** (non-destructive). Sau đo, spin nằm đúng ở trạng thái ứng với kết quả. Sách gọi việc này là trạng thái bị **chiếu**
+(projection) hay **rút gọn** (reduction), và tránh chữ "sụp đổ" (collapse) vì chữ này hay gắn với một cách diễn giải cơ
+học lượng tử cụ thể.
+
+<p align="center"><img src="images/02_03_08_nondest_meas.png" width="400" alt="Đo không phá huỷ: electron bay qua lỗ trên hoặc lỗ dưới và còn lại ở trạng thái spin lên hoặc xuống"></p>
+
+*Hình: Đo không phá huỷ: electron bay qua lỗ trên hoặc lỗ dưới (mỗi bên 50%) và tiếp tục tồn tại ở trạng thái spin lên hoặc xuống tương ứng.*
+
+Vậy một phép đo cho ra ba thứ: kết quả cổ điển $j$, xác suất $\mathbb{P}_j$ của nó, và trạng thái lượng tử $|j\rangle$ sau đo.
+
+<p align="center"><img src="images/02_03_09_meas_cir.png" width="500" alt="Mạch H rồi đo: thanh ghi cổ điển nhận 0 hoặc 1, qubit sau đo là |0⟩ hoặc |1⟩, mỗi khả năng 1/2"></p>
+
+*Hình: Đo $|+\rangle$: kết quả cổ điển (0 hoặc 1) ghi vào thanh ghi cổ điển $c$ (dây đôi), mỗi kết quả có xác suất 1/2, và qubit sau đo là $|0\rangle$ hoặc $|1\rangle$ tương ứng.*
 
 **Phép đo chiếu (projective measurement, PVM).** Với tập phép chiếu $\{\Pi_j\}$:
 1. Mỗi $\Pi_j$ ứng với kết quả cổ điển $j$.
@@ -283,6 +414,10 @@ khả nghịch), và unitary giữ nguyên chuẩn của vector.
 3. Trạng thái sau đo: $|q'\rangle = \Pi_j|q\rangle / \sqrt{\mathbb{P}_j}$.
 
 Cách viết này nghe thừa với 1 qubit, nhưng rất cần khi chỉ đo một phần của hệ nhiều qubit (bài 02_04).
+
+> Lưu ý (lỗi đánh máy nhỏ trong notebook): mục 3.1 viết $\langle 1|(\alpha_1|0\rangle + \alpha_1|1\rangle)$, đúng là
+> $\alpha_0|0\rangle + \alpha_1|1\rangle$; và hai lần viết $\sqrt{\mathbb{P}_i}$, đúng là $\sqrt{\mathbb{P}_j}$. Mục 2.3 liệt kê
+> "RX, RY, RX", đúng là $RX, RY, RZ$.
 
 **Post-selection và reset.** Post-selection là đo rồi chỉ giữ kết quả mong muốn. Reset là đo rồi áp $X$ nếu kết quả là 1,
 nên luôn ra $|0\rangle$.
@@ -294,9 +429,6 @@ Giá trị kỳ vọng là
 $$\langle \mathcal{O}\rangle_q = \langle q|\mathcal{O}|q\rangle$$
 
 Ví dụ $|q\rangle = \sqrt{1/3}\,|0\rangle + \sqrt{2/3}\,|1\rangle$ cho $\langle X\rangle = 2\sqrt{2/9} \approx 0.943$.
-
-> Lưu ý: ở ví dụ đổi sang cơ sở sign, notebook ghi cả hai hệ số là $\frac{2\sqrt3 - \sqrt6}{6}$. Hệ số của $|-\rangle$
-> đúng ra là $\frac{2\sqrt3 + \sqrt6}{6} \approx 0.986$; giá trị số trong notebook thì đúng.
 
 ### Code chính
 
@@ -391,6 +523,8 @@ $$|q\rangle = \sum_{j=0}^{N-1} \alpha_j |j\rangle, \qquad \sum_j |\alpha_j|^2 = 
 
 $|j\rangle$ là cách viết tắt của số nhị phân tương ứng, ví dụ $|5\rangle \sim |101\rangle$.
 
+> Lưu ý: notebook viết $j$ (và $i$) chạy "từ 0 đến $2^{N-1}$"; đúng là từ 0 đến $N - 1 = 2^n - 1$, như chỉ số của tổng.
+
 **Cổng một qubit trên nhiều qubit:** $U = U_{n-1} \otimes \dots \otimes U_0$, ví dụ X trên $q_0$, H trên $q_1$, Z trên $q_2$
 là $Z \otimes H \otimes X$. Các cổng dạng tích này **không tạo được vướng víu**; cần **cổng vướng víu** (entangling gate).
 
@@ -409,21 +543,47 @@ $$CU = \Pi_0 \otimes I + \Pi_1 \otimes U$$
 | SWAP | Đổi trạng thái hai qubit; bằng 3 cổng CX (giống mẹo XOR swap) |
 | CSWAP (Fredkin) | SWAP có điều khiển |
 
-**Định lý no-cloning.** CX sao chép được $|0\rangle$ và $|1\rangle$. Giả sử có cổng $\Theta$ sao chép trạng thái bất kỳ:
-$(\alpha_0|0\rangle + \alpha_1|1\rangle)|0\rangle \to (\alpha_0|0\rangle + \alpha_1|1\rangle)^{\otimes 2}$. Vì unitary tuyến tính, đầu ra phải là
+> Lưu ý: notebook gọi SWAP là một "entangling gate". SWAP đúng là không viết được thành tích tensor của các cổng một
+> qubit, nhưng nó biến mọi trạng thái tách được $|a\rangle|b\rangle$ thành $|b\rangle|a\rangle$, vẫn tách được. Vì vậy một
+> mình SWAP **không** tạo được vướng víu.
+
+**Định lý no-cloning.** CX sao chép được $|0\rangle$ và $|1\rangle$.
+
+<p align="center"><img src="images/02_04_01_copy_1.png" width="500" alt="Cổng CX chép trạng thái |ψ⟩ của qubit 1 sang qubit 0, chỉ khi |ψ⟩ là |0⟩ hoặc |1⟩"></p>
+
+*Hình: CX chép trạng thái $|\psi\rangle$ của qubit 1 sang qubit 0 (khởi tạo $|0\rangle$), nhưng chỉ khi $|\psi\rangle$ là $|0\rangle$ hoặc $|1\rangle$.*
+
+Giả sử có cổng $\Theta$ sao chép trạng thái bất kỳ:
+$(\alpha_0|0\rangle + \alpha_1|1\rangle)|0\rangle \to (\alpha_0|0\rangle + \alpha_1|1\rangle)^{\otimes 2}$.
+
+<p align="center"><img src="images/02_04_02_copy_2.png" width="500" alt="Cổng sao chép giả định Θ chép mọi trạng thái |ψ⟩ của qubit 1 sang qubit 0"></p>
+
+*Hình: Cổng sao chép giả định $\Theta$, áp dụng cho mọi $|\psi\rangle$. Định lý no-cloning nói cổng như vậy không tồn tại.*
+
+Vì unitary tuyến tính, đầu ra phải là
 $\alpha_0|00\rangle + \alpha_1|11\rangle$, trong khi bản sao thật là
 $\alpha_0^2|00\rangle + \alpha_0\alpha_1|01\rangle + \alpha_1\alpha_0|10\rangle + \alpha_1^2|11\rangle$.
 Hai biểu thức chỉ bằng nhau khi trạng thái là $|0\rangle$ hoặc $|1\rangle$. **Không thể sao chép một trạng thái lượng tử tuỳ ý.**
 
+> Lưu ý: notebook ghi trường hợp thứ hai là $(\alpha_1 = 0, \alpha_1 = 1)$; đúng là $(\alpha_0 = 0, \alpha_1 = 1)$.
+
 **Bộ cổng phổ quát** (universal gate set) xấp xỉ được mọi unitary với độ chính xác tuỳ ý.
 - Phần cứng hiện nay: bộ cổng gốc có tham số liên tục, ví dụ $\{CX, SX, RZ(\theta)\}$; `transpile` dịch mạch sang bộ này.
-- Margolus ($RCCX$) giống CCX nhưng thêm pha $-1, i, -i$ vào $|101\rangle, |110\rangle, |111\rangle$; tốn ít cổng hơn nhiều khi không quan tâm pha.
-- Máy chịu lỗi (fault-tolerant) dùng **Clifford+T**: Clifford $\{H, S, CX\}$ mô phỏng được trên máy cổ điển (Gottesman–Knill);
-  thêm $T$ mới đủ sức mạnh lượng tử. Cổng $T$ đắt nhất, nên phải tối thiểu hoá **T-depth** (số lớp cổng T/T†).
+- Margolus ($RCCX$) giống CCX, chỉ khác pha: $|101\rangle \to -|101\rangle$, $|110\rangle \to i|111\rangle$,
+  $|111\rangle \to -i|110\rangle$ (sách gọn lại là thêm pha $-1, i, -i$ cho ba đầu vào này). Khi các pha này không ảnh
+  hưởng tới kết quả, nó tốn ít cổng hơn nhiều.
+- Máy chịu lỗi (fault-tolerant) dùng **Clifford+T**: mạch chỉ gồm Clifford $\{H, S, CX\}$ mô phỏng hiệu quả được trên máy
+  cổ điển (Gottesman–Knill); thêm $T$ mới đủ sức mạnh lượng tử. Trong đa số kiến trúc sửa lỗi, cổng $T$ tốn kém nhất, nên
+  phải tối thiểu hoá **T-depth** (số lớp cổng T/T†).
+
+> Lưu ý: notebook viết rằng lý do thêm $T$ thì đủ sức mạnh lượng tử "được giải thích bởi định lý Solovay–Kitaev". Không
+> phải vậy: tính phổ quát của Clifford+T đến từ việc $H$ và $T$ sinh ra một tập trù mật các phép xoay một qubit;
+> Solovay–Kitaev chỉ cho biết việc xấp xỉ đó **hiệu quả** (số cổng cỡ lũy thừa của $\log(1/\varepsilon)$).
 
 **Đo toàn bộ:** $\mathbb{P}_j = |\alpha_j|^2$, sau đo về $|j\rangle$.
 
-**Đo một phần.** Tách hệ thành phần đo $A$ và phần không đo $B$. Với $m$ qubit đầu:
+**Đo một phần.** Tách hệ thành phần đo $A$ và phần không đo $B$. Với $m$ qubit đầu ($q_0, \dots, q_{m-1}$, nằm ở **bên
+phải** tích tensor):
 
 $$\Pi_k^A = I^{\otimes(n-m)} \otimes \Pi_k, \qquad \mathbb{P}_k^A = \langle q|\Pi_k^A|q\rangle, \qquad |q'\rangle = \frac{\Pi_k^A|q\rangle}{\sqrt{\mathbb{P}_k^A}}$$
 
@@ -446,7 +606,9 @@ Dựng CX từ phép chiếu; `Operator.from_label('0')` chính là $|0\rangle\l
 qc = QuantumCircuit(2)
 qc.cx(1,0,ctrl_state='0')
 ```
-`ctrl_state` đổi điều kiện kích hoạt. Với nhiều control: `qc.ccx(1,2,0,ctrl_state='10')` (chuỗi đọc theo thứ tự little-endian).
+`ctrl_state` đổi điều kiện kích hoạt. Với nhiều control: `qc.ccx(1,2,0,ctrl_state='10')`. Chuỗi đọc theo kiểu
+little-endian: ký tự **bên phải** ứng với control **đầu tiên** trong danh sách ($q_1$), nên `'10'` nghĩa là $q_2 = 1$,
+$q_1 = 0$ (output: chỉ $|100\rangle \leftrightarrow |101\rangle$ đổi chỗ).
 
 ```python
 qc_t = transpile(qc, basis_gates=['cx', 'sx', 'rz']) # Converts arbitrary circuit to a given basis gate-set
@@ -502,7 +664,7 @@ Mạch chuẩn bị $|w\rangle$ bằng `cry` (RY có điều khiển), rồi th�
 - Cổng điều khiển: $\Pi_0 \otimes I + \Pi_1 \otimes U$; muốn cách qubit thì chèn $I$.
 - CZ đối xứng; SWAP = 3 CX; Fredkin = CSWAP.
 - **No-cloning:** không sao chép được trạng thái tuỳ ý (CX chỉ copy được $|0\rangle$, $|1\rangle$).
-- Clifford+T phổ quát; T đắt nhất, nên tối thiểu T-depth.
+- Clifford+T phổ quát; trên máy chịu lỗi T thường đắt nhất, nên tối thiểu T-depth.
 - Đo một phần: $\Pi_k^A = I \otimes \dots \otimes \Pi_k$, rồi chuẩn hoá lại.
 
 ---
@@ -518,15 +680,18 @@ Mạch chuẩn bị $|w\rangle$ bằng `cry` (RY có điều khiển), rồi th�
 $$|\Phi^\pm\rangle = \tfrac{1}{\sqrt2}\big(|00\rangle \pm |11\rangle\big), \qquad |\Psi^\pm\rangle = \tfrac{1}{\sqrt2}\big(|01\rangle \pm |10\rangle\big)$$
 
 Mạch H($q_1$) + CX($q_1 \to q_0$) biến $|00\rangle, |01\rangle, |10\rangle, |11\rangle$ lần lượt thành
-$|\Phi^+\rangle, |\Psi^+\rangle, |\Phi^-\rangle, |\Psi^-\rangle$. Hoặc bắt đầu từ $|00\rangle$ rồi thêm: Z → $\Phi^-$, X → $\Psi^+$, X và Z → $\Psi^-$.
+$|\Phi^+\rangle, |\Psi^+\rangle, |\Phi^-\rangle, |\Psi^-\rangle$. Hoặc giữ đầu vào $|00\rangle$ và thêm cổng sau CX: Z → $\Phi^-$, X → $\Psi^+$, X và Z → $\Psi^-$.
 
 **GHZ** tổng quát hoá $|\Phi^+\rangle$: $|\Omega_n\rangle = \tfrac{1}{\sqrt2}(|0\rangle^{\otimes n} + |1\rangle^{\otimes n})$. Có ba cách dựng mạch:
 
-| Cách | Ý tưởng | Nhược điểm |
+| Cách | Ý tưởng | Ưu / nhược điểm |
 |---|---|---|
 | `ghz_cir_a` | H lên qubit cao nhất, CX từ nó tới mọi qubit khác | Cần kết nối tới mọi qubit; phần cứng chỉ nối láng giềng thì phải thêm SWAP |
-| `ghz_cir_b` | CX nối tiếp giữa các cặp kề nhau | Độ sâu $n+1$, qubit rảnh lâu dễ lỗi |
-| `ghz_cir_c` | H ở qubit giữa, lan ra hai phía song song | Độ sâu $n/2 + 2$ |
+| `ghz_cir_b` | CX nối tiếp giữa các cặp kề nhau | Chỉ cần nối láng giềng, nhưng các CX chạy nối tiếp: độ sâu $n$, qubit chờ lâu dễ lỗi |
+| `ghz_cir_c` | H ở qubit giữa, lan ra hai phía song song | Vẫn chỉ nối láng giềng, độ sâu giảm còn $\lceil n/2\rceil + 1$ |
+
+> Lưu ý: notebook ghi độ sâu của `ghz_cir_b` là $n+1$ và của `ghz_cir_c` là $n/2 + 2$. Đếm bằng `qc.depth()` ra $n$ và
+> $\lceil n/2\rceil + 1$ (ví dụ $n = 7$: 7 và 5). Kết luận "giảm khoảng một nửa" vẫn đúng.
 
 **W** tổng quát hoá $|\Psi^+\rangle$: mỗi thành phần chỉ có đúng một bit 1 (one-hot):
 $|W_n\rangle = \tfrac{1}{\sqrt n}\sum_{j=0}^{n-1}|2^j\rangle$. Mạch dùng RY/CRY để phân phối biên độ, rồi CX để sắp xếp lại.
@@ -546,11 +711,20 @@ $$\tfrac{1}{\sqrt2}\big(|0\rangle + |1\rangle\big)|u\rangle \xrightarrow{CU} \tf
 
 Ví dụ với CX và target $|-\rangle$: $|+\rangle|-\rangle \to |-\rangle|-\rangle$, và kẹp giữa hai lớp H thì $|01\rangle \to |11\rangle$,
 tức **target làm lật control**. Với nhiều control, chỉ trạng thái $|k\rangle$ kích hoạt $U$ mới nhận pha, như
-"đánh dấu" một trạng thái. Đây là cốt lõi của Grover.
+"đánh dấu" một trạng thái. Đây là một bước then chốt của thuật toán Grover (phần 04).
+
+> Lưu ý: notebook viết phase kickback giữ vai trò lớn trong các thuật toán "có tăng tốc đã được chứng minh" như Shor và
+> Grover. Với Grover, tăng tốc bậc hai được chứng minh trong mô hình truy vấn (oracle). Với Shor, tăng tốc hàm mũ chỉ là
+> so với thuật toán cổ điển **tốt nhất đã biết**; chưa ai chứng minh được không có thuật toán cổ điển nhanh cho bài toán
+> phân tích thừa số.
 
 **Tính hàm Boolean bằng mạch.** Mọi $f:\{0,1\}^n \to \{0,1\}$ thành unitary khả nghịch nhờ một qubit phụ $y$:
 
 $$U_f: |x\rangle|y\rangle \to |x\rangle|y \oplus f(x)\rangle$$
+
+<p align="center"><img src="images/02_05_01_q_eval.png" width="700" alt="Hàm cổ điển f(x) so với unitary U_f: giữ nguyên các qubit |x⟩ và ghi f(x) vào qubit phụ thành |y ⊕ f(x)⟩"></p>
+
+*Hình: Trái: hàm cổ điển $f(x)$, nhiều bit vào một bit ra, không khả nghịch. Phải: unitary $U_f$ giữ nguyên các qubit đầu vào và cộng XOR $f(x)$ vào qubit phụ $y$.*
 
 Với $y = 0$ ra $f(x)$; với $y = 1$ ra $\overline{f(x)}$ (ví dụ AND 3 bit bằng `mcx` cho AND/NAND).
 
@@ -564,6 +738,14 @@ $$|x\rangle|-\rangle \xrightarrow{U_f} (-1)^{f(x)}|x\rangle|-\rangle$$
 |---|---|
 | Bit oracle $U_f$ | $\vert x\rangle\vert y\rangle \to \vert x\rangle\vert y \oplus f(x)\rangle$ |
 | Phase oracle $Z_f$ | $\vert x\rangle \to (-1)^{f(x)}\vert x\rangle$; = bit oracle với $y = \vert -\rangle$ rồi bỏ qubit $y$, hoặc dựng trực tiếp bằng MCZ không cần qubit phụ |
+
+<p align="center"><img src="images/02_05_02_oracles.png" width="700" alt="Bit oracle U_f biến |x⟩|y⟩ thành |x⟩|y ⊕ f(x)⟩; phase oracle Z_f biến |x⟩ thành (−1)^f(x)|x⟩"></p>
+
+*Hình: Bit oracle $U_f$ (trái) ghi $f(x)$ vào qubit $y$; phase oracle $Z_f$ (phải) ghi $f(x)$ vào dấu $(-1)^{f(x)}$.*
+
+<p align="center"><img src="images/02_05_03_oracle_equiv.png" width="400" alt="Bit oracle có qubit phụ ở |−⟩ tương đương phase oracle"></p>
+
+*Hình: Bit oracle có qubit phụ ở $|-\rangle$ (qubit này ra vẫn là $|-\rangle$) tương đương một phase oracle.*
 
 ### Code chính
 
@@ -586,6 +768,9 @@ def ghz_cir_c(n):
     return qc_ghz
 ```
 GHZ độ sâu thấp, chỉ dùng CX giữa các qubit kề nhau.
+
+> Lưu ý: comment "place most significant qubit in equal superposition" được chép từ `ghz_cir_a`; ở đây H đặt lên qubit
+> giữa `qb_mid`, không phải qubit cao nhất.
 
 ```python
 def w_cir(n):
@@ -640,6 +825,12 @@ CC̄S = SGate().control(2, ctrl_state='01')
 
 > Lưu ý: trong cell này notebook gán `qψ_in = Statevector(qc)` (thừa chữ `q`) nhưng lại hiển thị `ψ_in` của cell trước,
 > nên output "input" ghi $|01\rangle$ là **sai**. Output "output" thì đúng.
+
+> Lưu ý: phần chữ mục 3.3 (và comment "activated by state |01⟩" ở trên) nói cổng kích hoạt khi control
+> $|q_2 q_1\rangle = |01\rangle$ và dự đoán $|01\rangle|1\rangle$ nhận pha $i$. Nhưng `ctrl_state` đọc theo little-endian:
+> với `qc.append(CC̄S, [2,1,0])`, ký tự bên phải `'1'` ứng với control
+> đầu tiên ($q_2$). Vậy cổng kích hoạt khi $q_2 = 1$, $q_1 = 0$, và output (đúng theo code) cho $|101\rangle$ nhận pha $i$.
+> Cũng ở mục này, $k$ chạy từ 0 đến $2^m - 1$, không phải tới $2^m$.
 
 ```python
 qc_f = QuantumCircuit(qr_y, qr_x)
@@ -702,8 +893,8 @@ Phase oracle dựng trực tiếp bằng CCZ, không cần qubit phụ: đánh d
 | `Statevector([...])`, `.from_label('0'/'+'/'-')`, `.from_int(k, dim)` | Tạo trạng thái | 02_01–02_05 |
 | `Statevector(qc)` | Trạng thái đầu ra của mạch, bắt đầu từ $\vert 0\dots0\rangle$ | 02_01–02_05 |
 | `sv.draw('latex' / 'bloch', convention='vector', reverse_bits=True)` | Hiển thị ket, vector, Bloch sphere | 02_01–02_05 |
-| `sv.evolve(qc hoặc Operator)` | Cho trạng thái đi qua mạch/ma trận | 02_01, 02_02, 02_05 |
-| `sv.tensor(other)` | Tích Kronecker của trạng thái | 02_02 |
+| `sv.evolve(qc hoặc Operator)` | Cho trạng thái đi qua mạch/ma trận | 02_01–02_03, 02_05 |
+| `sv.tensor(other)` | Tích Kronecker của trạng thái | 02_02, 02_05 |
 | `sv.probabilities([qubits])` | Xác suất chính xác (toàn bộ hoặc một phần) | 02_03, 02_04 |
 | `sv.sample_counts(n)`, `sv.sample_memory(n)` | Giả lập đo | 02_01, 02_03 |
 | `sv.measure([qubits])` | Đo một lần, trả về (kết quả, trạng thái sau đo) | 02_04 |
@@ -711,7 +902,7 @@ Phase oracle dựng trực tiếp bằng CCZ, không cần qubit phụ: đánh d
 | `Operator(qc)`, `Operator.from_label('X'/'0'/'HHH')`, `Operator([[...]])` | Ma trận của mạch/cổng | 02_01–02_05 |
 | `op.tensor(other)`, `op1 + op2` | Ghép ma trận | 02_02, 02_04 |
 | `QuantumCircuit(n, m)`, `QuantumRegister(n, name=)` | Tạo mạch, nhóm qubit | 02_01–02_05 |
-| `x, h, z, s, sdg, t, tdg, rx, ry, rz, id` | Cổng một qubit | 02_01–02_04 |
+| `x, h, z, s, sdg, t, tdg, rx, ry, rz, id` | Cổng một qubit | 02_01–02_05 |
 | `cx(c, t, ctrl_state=)`, `cz`, `cry`, `ccx`, `rccx`, `ccz`, `mcx`, `swap`, `cswap` | Cổng nhiều qubit | 02_02–02_05 |
 | `SGate().control(k, ctrl_state=)`, `qc.append(gate, qubits)` | Tạo và gắn cổng có điều khiển | 02_05 |
 | `reset`, `measure`, `measure_all`, `barrier` | Chuẩn bị, đo, phân tách mạch | 02_01–02_05 |
