@@ -1,7 +1,8 @@
 # Libraries needed to run the notebooks in chapters/.
 # Same packages as the upstream textbook, minus its Jupyter Book build tools.
-# Lower bounds are the versions every notebook was last run with; CI re-runs
-# them weekly against the newest releases.
+# Lower bounds are minimum release series, not exact pins. The exact versions
+# every notebook was last run with are listed in docs/setup.md; CI re-runs the
+# notebooks weekly against the newest releases.
 #     pip install -r requirements.txt
 qiskit[visualization]>=2.5,<3
 qiskit-aer>=0.17
