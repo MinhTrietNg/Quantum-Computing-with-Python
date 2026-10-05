@@ -1,5 +1,7 @@
 # Lỗi đã biết trong bản gốc
 
+**Tiếng Việt** · [English](ERRATA.en.md) · [简体中文](ERRATA.zh-CN.md)
+
 Notebook trong [chapters/](chapters/) được giữ **nguyên văn** so với
 [bản gốc](https://github.com/learn-quantum/lqc-textbook) (commit `7abf73c`), kể cả lỗi. Các lỗi dưới đây
 được phát hiện khi đọc đối chiếu. Mỗi lỗi cũng được ghi chú tại chỗ (dạng `> Lưu ý:`) trong README của

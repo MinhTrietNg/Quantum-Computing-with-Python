@@ -1,5 +1,7 @@
 # 01 · Classical computing (Tính toán cổ điển)
 
+**Tiếng Việt** · [English](README.en.md) · [简体中文](README.zh-CN.md)
+
 Ôn lại bit, logic Boolean và mạch số, rồi "nâng cấp" dần chúng theo đúng hướng mà máy tính lượng tử cần:
 cổng **khả nghịch** (reversible), bit là **vector** và cổng là **ma trận**, và cuối cùng là bit **xác suất**
 (p-bit). Các công cụ toán mà phần 02 dùng liên tục (ket, tích Kronecker, ma trận của mạch) đều được xây ở đây.

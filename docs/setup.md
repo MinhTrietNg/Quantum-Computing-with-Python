@@ -1,5 +1,7 @@
 # Cài đặt và chạy notebook
 
+**Tiếng Việt** · [English](setup.en.md) · [简体中文](setup.zh-CN.md)
+
 Có ba cách dùng repo này, từ dễ nhất đến đầy đủ nhất. Bạn không cần tài khoản IBM Quantum hay máy lượng tử thật;
 mọi notebook chạy trên simulator ngay trên máy bạn.
 

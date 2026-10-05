@@ -1,5 +1,7 @@
 # 03 · Quantum protocols (Giao thức lượng tử)
 
+**Tiếng Việt** · [English](README.en.md) · [简体中文](README.zh-CN.md)
+
 Phần này dùng các khái niệm đã học (chồng chập (superposition), phép đo (measurement), vướng víu (entanglement), trạng thái Bell (Bell state)) để xây dựng ba giao thức lượng tử kinh điển: tiền lượng tử (quantum money) chống làm giả, teleportation (dịch chuyển trạng thái lượng tử) và superdense coding (mã hóa siêu đặc). Mỗi bài vừa giải thích bằng toán, vừa kiểm chứng bằng mạch Qiskit chạy trên simulator.
 
 > Nguồn: [03_01](https://learnquantum.io/chapters/03_quantum_protocols/03_01_quantum_money.html), [03_02](https://learnquantum.io/chapters/03_quantum_protocols/03_02_teleportation.html), [03_03](https://learnquantum.io/chapters/03_quantum_protocols/03_03_superdense_coding.html) — Diego Emilio Serrano, learnquantum.io, MIT License.

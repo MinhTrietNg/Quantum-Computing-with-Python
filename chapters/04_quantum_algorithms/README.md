@@ -1,5 +1,7 @@
 # 04 · Foundational quantum algorithms (Các thuật toán lượng tử nền tảng)
 
+**Tiếng Việt** · [English](README.en.md) · [简体中文](README.zh-CN.md)
+
 Bốn thuật toán kinh điển cho thấy, trong mô hình hộp đen, máy lượng tử cần ít lần gọi hơn máy cổ điển ra sao:
 **Deutsch–Jozsa**, **Bernstein–Vazirani**, **Simon** và **Grover**. Cả bốn dùng chung một khuôn: đưa đầu vào về chồng chập
 bằng Hadamard, gọi **oracle** $U_f$ (hộp đen chứa bài toán), rồi dùng **giao thoa** (interference) để kết quả cần tìm nổi

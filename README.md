@@ -1,5 +1,7 @@
 # Quantum Computing with Python
 
+**Tiếng Việt** · [English](README.en.md) · [简体中文](README.zh-CN.md)
+
 [![Notebooks](https://github.com/MinhTrietNg/Quantum-Computing-with-Python/actions/workflows/notebooks.yml/badge.svg)](https://github.com/MinhTrietNg/Quantum-Computing-with-Python/actions/workflows/notebooks.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
@@ -84,7 +86,7 @@ và CI kiểm tra lại hằng tuần.
 ngày). [Lộ trình học](docs/learning-path.md) có sơ đồ, thời gian từng phần, bài tự kiểm tra kèm đáp án gợi ý,
 và cách đi tắt nếu bạn đã có nền tảng.
 
-Mỗi phần có hướng dẫn tiếng Việt riêng gồm kiến thức chính, code chính, kết quả và **ghi nhớ nhanh** để ôn lại.
+Mỗi phần có hướng dẫn tiếng Việt riêng (kèm bản English và 简体中文) gồm kiến thức chính, code chính, kết quả và **ghi nhớ nhanh** để ôn lại.
 
 ## Mục lục
 
@@ -137,7 +139,7 @@ Khi tác giả viết xong, repo sẽ được cập nhật; trong lúc chờ, x
 
 Notebook và hình trong [chapters/](chapters/) là **bản sao nguyên văn** của sách mở
 **[Learn Quantum Computing using Python](https://learnquantum.io)** (Diego Emilio Serrano), kể cả output tác giả đã chạy
-và vài lỗi nhỏ của sách gốc (đã ghi trong [ERRATA](ERRATA.md) và ở các mục `> Lưu ý` trong README từng phần, nên bạn không cần tự phát hiện). Phần do repo này viết là README tiếng Việt của từng phần,
+và vài lỗi nhỏ của sách gốc (đã ghi trong [ERRATA](ERRATA.md) và ở các mục `> Lưu ý` trong README từng phần, nên bạn không cần tự phát hiện). Phần do repo này viết là README tiếng Việt của từng phần (cùng bản dịch English và 简体中文),
 thư mục [docs/](docs/), kiểm thử tự động và các công cụ đi kèm.
 
 | | |
@@ -152,22 +154,28 @@ thư mục [docs/](docs/), kiểm thử tự động và các công cụ đi kè
 
 ```text
 .
-├── chapters/             # sách: mỗi phần một folder (README tiếng Việt + notebook + images/)
+├── chapters/             # sách: mỗi phần một folder (README tiếng Việt và 2 bản dịch + notebook + images/)
 ├── docs/                 # tài liệu nhập môn: giới thiệu, lộ trình, cài đặt, thuật ngữ, FAQ, tài nguyên
-├── scripts/              # check_upstream.py (so sánh với repo gốc), check_links.py, check_doc_snippets.py
+├── scripts/              # check_upstream.py (so sánh với repo gốc), check_links.py, check_doc_snippets.py, check_translations.py
 ├── .github/              # CI chạy notebook, mẫu issue và pull request
-├── ERRATA.md, CONTRIBUTING.md, CITATION.cff, LICENSE
+├── ERRATA.md, CONTRIBUTING.md, CITATION.cff, LICENSE   # mỗi file .md có bản .en.md và .zh-CN.md
 ├── qiskit_settings.conf  # cấu hình hiển thị giống sách
 └── requirements.txt, requirements-dev.txt, pyproject.toml
 ```
 
-## English summary
+## Các ngôn ngữ
 
-A beginner-friendly Vietnamese guide to quantum computing: 19 runnable Qiskit notebooks from the open textbook
-[learnquantum.io](https://learnquantum.io) by Diego Emilio Serrano (MIT License), kept verbatim, plus a Vietnamese
-walkthrough of every chapter, introductory docs (what quantum computing is, learning path, setup, glossary, FAQ,
-resources), an [errata list](ERRATA.md), and CI that re-runs every notebook weekly. The notebooks and figures are
-copied unmodified; the Vietnamese material is original to this repo.
+Hướng dẫn có ba ngôn ngữ với nội dung tương đương. Notebook và hình trong [chapters/](chapters/) là bản gốc tiếng Anh
+của sách và dùng chung cho cả ba.
+
+| Ngôn ngữ | Bắt đầu từ |
+|---|---|
+| Tiếng Việt (bản gốc của repo) | [README.md](README.md) |
+| English | [README.en.md](README.en.md) |
+| 简体中文 (Chinese, Simplified) | [README.zh-CN.md](README.zh-CN.md) |
+
+Mỗi file `.md` có hai bản dịch cạnh nó, đặt tên `<tên>.en.md` và `<tên>.zh-CN.md`
+(xem [quy ước dịch](CONTRIBUTING.md#bản-dịch-english-và-简体中文)).
 
 ## Đóng góp
 
@@ -178,7 +186,7 @@ tại [Issues của repo gốc](https://github.com/learn-quantum/lqc-textbook/is
 ## Giấy phép và trích dẫn
 
 Notebook và hình minh hoạ © 2024 Diego Emilio Serrano, phát hành theo [MIT License](LICENSE).
-Phần hướng dẫn tiếng Việt và tài liệu bổ trợ được chia sẻ theo cùng giấy phép.
+Phần hướng dẫn (tiếng Việt và các bản dịch) và tài liệu bổ trợ được chia sẻ theo cùng giấy phép.
 Khi dùng nội dung, hãy trích dẫn sách gốc (GitHub hiện nút *Cite this repository* từ [CITATION.cff](CITATION.cff)):
 
 ```bibtex

@@ -1,5 +1,7 @@
 # Tài nguyên học tiếp
 
+**Tiếng Việt** · [English](resources.en.md) · [简体中文](resources.zh-CN.md)
+
 Danh sách chọn lọc, chỉ gồm tài liệu miễn phí hoặc kinh điển, kèm điều kiện đầu vào thật.
 Hầu hết bằng tiếng Anh; tài liệu tiếng Việt chất lượng cho người mới còn rất ít, và đó là lý do repo này tồn tại.
 Các liên kết được rà soát tháng 10/2026.

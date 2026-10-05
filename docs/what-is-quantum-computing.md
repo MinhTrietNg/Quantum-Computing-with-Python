@@ -1,5 +1,7 @@
 # Máy tính lượng tử là gì?
 
+**Tiếng Việt** · [English](what-is-quantum-computing.en.md) · [简体中文](what-is-quantum-computing.zh-CN.md)
+
 *Đọc mất khoảng 15 phút. Không cần biết vật lý lượng tử; chỉ cần Python cơ bản nếu muốn chạy thử code.
 Cách chạy: [Google Colab hoặc trên máy bạn](setup.md).*
 

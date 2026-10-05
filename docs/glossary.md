@@ -1,5 +1,7 @@
 # Bảng thuật ngữ
 
+**Tiếng Việt** · [English](glossary.en.md) · [简体中文](glossary.zh-CN.md)
+
 Thuật ngữ tiếng Việt (tiếng Anh), định nghĩa ngắn, và nơi học kỹ. Ký hiệu $|\cdot\rangle$ đọc là "ket".
 Dùng `Ctrl+F` để tìm nhanh. Mục có dấu *(đọc sau)* là khái niệm nâng cao, chưa cần hiểu khi mới bắt đầu.
 Gặp từ chưa có ở đây? Hãy [mở issue](https://github.com/MinhTrietNg/Quantum-Computing-with-Python/issues/new/choose) để chúng tôi bổ sung.

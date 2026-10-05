@@ -1,5 +1,7 @@
 # 00 · Getting started (Chuẩn bị môi trường)
 
+**Tiếng Việt** · [English](README.en.md) · [简体中文](README.zh-CN.md)
+
 Cài môi trường Python để chạy các notebook của sách, cấu hình Qiskit cho giống hình trong sách,
 và (tuỳ chọn) liên kết tài khoản IBM Quantum để chạy trên máy lượng tử thật.
 

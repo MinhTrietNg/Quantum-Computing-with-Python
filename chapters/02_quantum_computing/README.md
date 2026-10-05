@@ -1,5 +1,7 @@
 # 02 · Quantum computing (Tính toán lượng tử)
 
+**Tiếng Việt** · [English](README.en.md) · [简体中文](README.zh-CN.md)
+
 Từ thí nghiệm Stern–Gerlach với spin electron, phần này dựng lên khái niệm **qubit**, rồi đi qua chồng chập
 (superposition), vướng víu (entanglement), Bloch sphere, các cổng lượng tử, phép đo, và cuối cùng là các
 **khối dựng** (building blocks) như trạng thái Bell/GHZ/W, biến đổi Hadamard, phase kickback và oracle.

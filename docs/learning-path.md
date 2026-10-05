@@ -1,5 +1,7 @@
 # Lộ trình học
 
+**Tiếng Việt** · [English](learning-path.en.md) · [简体中文](learning-path.zh-CN.md)
+
 Trang này giúp bạn chọn điểm xuất phát, biết cần chuẩn bị gì, và tự kiểm tra sau mỗi phần.
 Chưa biết máy tính lượng tử là gì? Đọc [Máy tính lượng tử là gì?](what-is-quantum-computing.md) trước (15 phút).
 
@@ -63,6 +65,7 @@ Sai câu 4–5 thì **không sao**, vì sách dạy lại; nhưng nếu cả hai
 
 ## Lộ trình đầy đủ
 
+<!-- translate-block -->
 ```text
 00 Cài đặt ─> 01 Cổ điển ─> 02 Lượng tử ─> 03 Giao thức ─> 04 Thuật toán ─> Học tiếp
                (vector,       (qubit, Bloch,    (teleportation,   (Deutsch–Jozsa → BV     (QFT, Shor,

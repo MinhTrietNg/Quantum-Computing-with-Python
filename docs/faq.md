@@ -1,5 +1,7 @@
 # Câu hỏi thường gặp
 
+**Tiếng Việt** · [English](faq.en.md) · [简体中文](faq.zh-CN.md)
+
 ## Về máy tính lượng tử
 
 ### Máy tính lượng tử có thay thế máy tính thường không?
@@ -97,7 +99,7 @@ thường đòi hỏi nền tảng vật lý, toán hoặc khoa học máy tính
 
 ### Tôi có phải đọc nhiều tiếng Anh không?
 
-Hướng dẫn trong repo này bằng tiếng Việt, nhưng notebook gốc, tài liệu của Qiskit và phần lớn tài nguyên học tiếp bằng
+Hướng dẫn trong repo này viết bằng tiếng Việt (có bản dịch English và 简体中文), nhưng notebook gốc, tài liệu của Qiskit và phần lớn tài nguyên học tiếp bằng
 tiếng Anh. Không cần giỏi: các notebook dùng câu đơn giản, và [bảng thuật ngữ](glossary.md) có cả tên tiếng Anh
 để bạn dần quen.
 
@@ -138,7 +140,7 @@ Nếu kết luận khác hẳn (hoặc có lỗi), xem [gỡ lỗi](setup.md#g�
 ### Repo này khác gì sách gốc trên learnquantum.io?
 
 Notebook và hình là **bản sao nguyên văn** của sách gốc (giấy phép MIT). Phần do repo này thêm vào là
-hướng dẫn tiếng Việt cho từng phần, [danh sách lỗi](../ERRATA.md), tài liệu nhập môn trong thư mục `docs/`,
+hướng dẫn tiếng Việt cho từng phần (kèm bản dịch English và 简体中文), [danh sách lỗi](../ERRATA.md), tài liệu nhập môn trong thư mục `docs/`,
 và kiểm thử tự động. Mọi công lao về nội dung sách thuộc về tác giả Diego Emilio Serrano.
 
 ### Vì sao Phần 05 và 06 (QFT, Shor, ...) không có?
@@ -152,7 +154,7 @@ Xem [CONTRIBUTING](../CONTRIBUTING.md). Mọi góp ý đều được hoan nghê
 
 ### Tôi hỏi về kiến thức trong sách ở đâu?
 
-- **Bằng tiếng Việt:** mở một issue theo mẫu *Câu hỏi khi học* trong [Issues của repo này](https://github.com/MinhTrietNg/Quantum-Computing-with-Python/issues/new/choose).
+- **Tại repo này (tiếng Việt, English hoặc 中文):** mở một issue theo mẫu *Câu hỏi khi học* trong [Issues của repo này](https://github.com/MinhTrietNg/Quantum-Computing-with-Python/issues/new/choose).
   Hãy ghi rõ bạn đang học bài nào và đã thử gì.
 - **Bằng tiếng Anh:** [Discussions của repo gốc](https://github.com/learn-quantum/lqc-textbook/discussions), nơi tác giả
   và cộng đồng trả lời.
