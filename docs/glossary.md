@@ -31,10 +31,10 @@ Viết tắt nơi học: **P01** = [Phần 01](../chapters/01_classical_computin
 | Biên độ (amplitude) | Hệ số phức đứng trước mỗi trạng thái cơ sở. Bình phương môđun của nó là xác suất đo được trạng thái đó | P02 |
 | Chồng chập (superposition) | Trạng thái là tổ hợp của nhiều trạng thái cơ sở, ví dụ $\tfrac{1}{\sqrt2}(\vert 0\rangle + \vert 1\rangle)$ | P02 |
 | Trạng thái $\vert +\rangle$, $\vert -\rangle$ | Hai trạng thái chồng chập đều: $\vert +\rangle = \tfrac{1}{\sqrt2}(\vert 0\rangle + \vert 1\rangle)$ và $\vert -\rangle = \tfrac{1}{\sqrt2}(\vert 0\rangle - \vert 1\rangle)$; chỉ khác nhau ở dấu tương đối | P02 |
-| Đo (measurement) | Lấy ra một bit cổ điển từ qubit, theo xác suất bình phương biên độ; qubit bị đổi thành trạng thái vừa đo | P02 |
+| Đo (measurement) | Lấy ra một bit cổ điển từ qubit, theo xác suất bằng bình phương môđun của biên độ; qubit bị đổi thành trạng thái vừa đo | P02 |
 | Cơ sở (basis) | Tập trạng thái dùng làm "hệ trục" để đo hoặc viết trạng thái, ví dụ cơ sở $\{\vert 0\rangle,\vert 1\rangle\}$ hay $\{\vert +\rangle,\vert -\rangle\}$ | P02 |
 | Pha (phase) | Góc của biên độ phức. Pha toàn cục không đo được; pha *tương đối* giữa các biên độ thì quyết định giao thoa | P02 |
-| Giao thoa (interference) | Các biên độ cộng hoặc triệt tiêu nhau. Nguồn sức mạnh của thuật toán lượng tử | P02, P04 |
+| Giao thoa (interference) | Các biên độ cộng hoặc triệt tiêu nhau. Cùng với vướng víu, là chìa khoá sức mạnh của thuật toán lượng tử | P02, P04 |
 | Bloch sphere | Hình cầu biểu diễn mọi trạng thái thuần của một qubit; $\vert 0\rangle$ ở cực bắc, $\vert 1\rangle$ ở cực nam | P02 |
 | Tích tensor / Kronecker | Cách ghép trạng thái và cổng của nhiều hệ: $\vert 0\rangle \otimes \vert 1\rangle = \vert 01\rangle$ | P01, P02 |
 | Statevector | Vector chứa toàn bộ biên độ của hệ $n$ qubit ($2^n$ số phức) | P02 |
@@ -53,7 +53,8 @@ Viết tắt nơi học: **P01** = [Phần 01](../chapters/01_classical_computin
 | Cổng pha (P, S, T) | Chỉ đổi pha của $\vert 1\rangle$; S là $\tfrac{\pi}{2}$, T là $\tfrac{\pi}{4}$ | P02 |
 | CX (CNOT) | Cổng điều khiển hai qubit: đảo qubit đích nếu qubit điều khiển là 1. Cổng chính để tạo vướng víu | P01, P02 |
 | CCX (Toffoli) | Đảo qubit đích nếu **cả hai** qubit điều khiển là 1 | P01 |
-| SWAP | Hoán đổi trạng thái của hai qubit | P02 |
+| SWAP | Hoán đổi trạng thái của hai qubit. Biến trạng thái tích thành trạng thái tích nên tự nó không tạo vướng víu | P02 |
+| Barrier (vạch ngăn) | Dấu trên sơ đồ mạch (vẽ là `░`) để tách các nhóm cổng cho dễ đọc, không đổi trạng thái; `measure_all()` tự chèn một vạch trước phép đo | P02, [Giới thiệu](what-is-quantum-computing.md) |
 | Mạch lượng tử (quantum circuit) | Chuỗi cổng và phép đo áp lên các qubit, vẽ từ trái sang phải | P02 |
 | Cổng Clifford *(đọc sau)* | Nhóm cổng sinh bởi H, S, CX. Mạch chỉ gồm các cổng này mô phỏng hiệu quả được trên máy tính thường (định lý Gottesman–Knill) | P02 |
 | Bộ cổng phổ quát (universal gate set) | Tập cổng đủ để xấp xỉ mọi phép biến đổi lượng tử, ví dụ Clifford + T | P02 |
@@ -92,15 +93,15 @@ Cùng một khái niệm có thể được dịch khác nhau giữa các tài l
 | Qubit | bit lượng tử |
 | Mặt cầu Bloch (Bloch sphere; repo thường giữ nguyên tên tiếng Anh) | quả cầu Bloch |
 | Môđun | mô-đun |
-| Tích tensor | tích Kronecker (khi nói về ma trận) |
+| Tích tensor | tích Kronecker (tên sách gốc dùng, nên Phần 01 và 02 cũng dùng; nhất là khi nói về ma trận) |
 | Biên độ | biên độ xác suất |
 
 ## Giao thức và thuật toán
 
 | Thuật ngữ | Ý nghĩa | Học ở |
 |---|---|---|
-| Teleportation | Gửi trạng thái chưa biết của một qubit bằng một cặp vướng víu cộng **hai bit cổ điển**. Không gửi nhanh hơn ánh sáng | P03 |
-| Superdense coding | Gửi **hai bit cổ điển** bằng cách gửi **một qubit**, nhờ cặp vướng víu dùng chung từ trước | P03 |
+| Teleportation (dịch chuyển trạng thái lượng tử) | Gửi trạng thái chưa biết của một qubit bằng một cặp vướng víu cộng **hai bit cổ điển**. Không gửi nhanh hơn ánh sáng | P03 |
+| Superdense coding (mã hóa siêu đặc) | Gửi **hai bit cổ điển** bằng cách gửi **một qubit**, nhờ cặp vướng víu dùng chung từ trước | P03 |
 | Oracle ($U_f$) | "Hộp đen" lượng tử tính hàm $f$: $U_f\vert x\rangle\vert y\rangle = \vert x\rangle\vert y \oplus f(x)\rangle$ | P02, P04 |
 | Phase kickback | Với qubit đích ở $\vert -\rangle$, oracle biến giá trị $f(x)$ thành dấu $(-1)^{f(x)}$ trên qubit điều khiển | P02 |
 | Độ phức tạp truy vấn (query complexity) | Số lần gọi oracle mà thuật toán cần; thước đo so sánh ở Phần 04 | P04 |
@@ -109,11 +110,26 @@ Cùng một khái niệm có thể được dịch khác nhau giữa các tài l
 | Shor | Phân tích số nguyên ra thừa số trong thời gian đa thức. *Chưa có trong sách này* | — |
 | QFT, QPE | Biến đổi Fourier lượng tử và ước lượng pha, hai khối dựng của Shor. *Chưa có trong sách này* | — |
 
+## Độ phức tạp và mật mã
+
+Dùng trong [Giới thiệu](what-is-quantum-computing.md) và [FAQ](faq.md); sách gốc chưa dạy các khái niệm này.
+
+| Thuật ngữ | Ý nghĩa |
+|---|---|
+| Thời gian đa thức / siêu đa thức | Số bước tính tăng như một lũy thừa cố định của kích thước đầu vào (đa thức, thường coi là "nhanh"), hay tăng nhanh hơn mọi lũy thừa như vậy (siêu đa thức, ví dụ hàm mũ) |
+| NP-đầy-đủ | Lớp bài toán "khó nhất" trong NP: nếu giải được một bài NP-đầy-đủ trong thời gian đa thức thì giải được mọi bài trong NP. Chưa ai biết có thuật toán nhanh hay không (bài toán P với NP) |
+| Mật mã khoá công khai (RSA, ECC) | Mật mã dùng để trao đổi khoá và ký số, dựa trên độ khó của phân tích thừa số (RSA) hoặc *logarithm rời rạc* (ECC, Diffie–Hellman) |
+| Logarithm rời rạc | Bài toán tìm $x$ từ $g^x \bmod p$ (hoặc phép tương tự trên đường cong elliptic); máy tính thường chưa có cách giải nhanh, thuật toán Shor giải được trong thời gian đa thức |
+| Mật mã hậu lượng tử (post-quantum) | Thuật toán mật mã chạy trên máy tính thường nhưng được thiết kế để chống cả máy lượng tử, ví dụ ML-KEM (FIPS 203) và ML-DSA (FIPS 204) |
+| QKD (phân phối khoá lượng tử) | Dùng vật lý lượng tử để hai bên chia sẻ khoá bí mật; khác với mật mã hậu lượng tử, nó cần thiết bị chuyên dụng |
+| "Harvest now, decrypt later" | Kẻ tấn công thu thập dữ liệu mã hoá hôm nay để giải mã sau này, khi có máy lượng tử đủ mạnh |
+
 ## Phần cứng và chạy thực tế
 
 | Thuật ngữ | Ý nghĩa | Học ở |
 |---|---|---|
 | NISQ | Noisy Intermediate-Scale Quantum: máy hiện nay, nhiều qubit nhưng nhiễu và chưa sửa lỗi ở quy mô đủ lớn | — |
+| Qubit vật lý / qubit logic | Qubit vật lý là phần tử phần cứng thật, có nhiễu; qubit logic là một qubit "ảo" ít lỗi hơn, được mã hoá trên nhiều qubit vật lý nhờ sửa lỗi | — |
 | Sửa lỗi lượng tử (error correction) | Dùng nhiều qubit vật lý để tạo ra một qubit logic ít lỗi | — |
 | QPU | Quantum Processing Unit: chip lượng tử thật | Phần 00 |
 | Simulator | Chương trình mô phỏng máy lượng tử trên máy tính thường (như `AerSimulator`) | Phần 00 |
