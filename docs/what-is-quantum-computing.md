@@ -7,7 +7,8 @@ Cách chạy: [Google Colab hoặc trên máy bạn](setup.md).*
 
 Máy tính lượng tử là máy tính lưu và xử lý thông tin bằng các hiện tượng của cơ học lượng tử.
 Nó **không** phải là laptop nhanh hơn, và **không** "thử mọi đáp án cùng lúc". Nó là một công cụ khác,
-giỏi một số loại bài toán rất cụ thể và không giúp gì cho phần lớn việc bạn làm với máy tính hằng ngày.
+về lý thuyết giỏi một số loại bài toán rất cụ thể (nhiều bài cần máy lớn hơn và ít lỗi hơn hẳn máy hiện nay),
+và không giúp gì cho phần lớn việc bạn làm với máy tính hằng ngày.
 
 Phần còn lại của trang này giải thích câu trên nghĩa là gì.
 
@@ -34,20 +35,20 @@ Sau khi đo, qubit "chốt" vào kết quả đó. Phép đo không cho bạn th
 Hai điểm khiến qubit khác một bit "xác suất" bình thường (như đồng xu chưa lật):
 
 1. Biên độ có thể **âm hoặc phức**, không chỉ là số dương như xác suất.
-2. Biên độ có thể **triệt tiêu hoặc cộng gộp** với nhau. Đây gọi là *giao thoa*, và là nguồn sức mạnh thật sự
-   của máy tính lượng tử (xem bên dưới).
+2. Biên độ có thể **triệt tiêu hoặc cộng gộp** với nhau. Đây gọi là *giao thoa*, và cùng với vướng víu là chìa khoá
+   cho sức mạnh của máy tính lượng tử (xem bên dưới).
 
 ## Ba ý tưởng cần nhớ
 
 | Ý tưởng | Nói đơn giản | Học kỹ ở |
 |---|---|---|
-| **Chồng chập** (superposition) | Qubit đang ở **một trạng thái xác định**, mô tả bằng hai biên độ $\alpha, \beta$ như trên. Chồng chập là khi **cả hai biên độ đều khác 0**, ví dụ $\alpha = \beta = 1/\sqrt2$; còn $\vert 0\rangle$ có $\alpha = 1, \beta = 0$ nên không phải chồng chập. Nó **không** phải "vừa 0 vừa 1"; đó chỉ là cách nói gọn dễ gây hiểu lầm | [02_01](../chapters/02_quantum_computing/README.md#02_01--qubits-and-quantum-circuits-qubit-và-mạch-lượng-tử) |
-| **Vướng víu** (entanglement) | Hai qubit gắn với nhau đến mức không thể mô tả riêng từng qubit; kết quả đo của chúng tương quan theo cách mà không "đồng xu ghép sẵn" nào làm được | [02_02](../chapters/02_quantum_computing/README.md#02_02--quantum-entanglement-vướng-víu-lượng-tử) |
+| **Chồng chập** (superposition) | Qubit đang ở **một trạng thái xác định**, mô tả bằng hai biên độ $\alpha, \beta$ như trên. Chồng chập (so với $\vert 0\rangle, \vert 1\rangle$) là khi **cả hai biên độ đều khác 0**, ví dụ $\alpha = \beta = 1/\sqrt2$; còn $\vert 0\rangle$ có $\alpha = 1, \beta = 0$ nên không phải chồng chập. Nó **không** phải "vừa 0 vừa 1"; đó chỉ là cách nói gọn dễ gây hiểu lầm | [02_01](../chapters/02_quantum_computing/README.md#02_01--qubits-and-quantum-circuits-qubit-và-mạch-lượng-tử) |
+| **Vướng víu** (entanglement) | Hai qubit gắn với nhau đến mức không thể mô tả riêng từng qubit; khi đo theo nhiều hướng khác nhau, kết quả của chúng tương quan theo cách mà không "đồng xu ghép sẵn" nào làm được | [02_02](../chapters/02_quantum_computing/README.md#02_02--quantum-entanglement-vướng-víu-lượng-tử) |
 | **Giao thoa** (interference) | Các biên độ cộng gộp hoặc triệt tiêu nhau. Thuật toán lượng tử được thiết kế để các đáp án sai triệt tiêu còn đáp án đúng được khuếch đại | [Phần 04](../chapters/04_quantum_algorithms/README.md) |
 
 ## Chương trình lượng tử đầu tiên
 
-Dùng Qiskit, một thư viện Python mã nguồn mở, mô phỏng máy tính lượng tử ngay trên máy bạn.
+Ta dùng Qiskit, một thư viện Python mã nguồn mở, để mô phỏng máy tính lượng tử ngay trên máy bạn.
 `shots=1000` nghĩa là chạy mạch và đo 1000 lần; kết quả là bảng đếm xem mỗi đáp án xuất hiện bao nhiêu lần.
 Vì đo là ngẫu nhiên, **số của bạn sẽ hơi khác số trong tài liệu**.
 
@@ -71,7 +72,7 @@ print(AerSimulator().run(qc, shots=1000).result().get_counts())
 ```
 
 ```text
-{'1': 500, '0': 500}      # ví dụ; mỗi lần chạy ra số khác nhưng luôn gần 50/50
+{'1': 497, '0': 503}      # ví dụ; mỗi lần chạy ra số khác nhưng luôn gần 50/50
 ```
 
 ### Giao thoa: tung hai lần thì kết quả chắc chắn
@@ -129,7 +130,7 @@ print(AerSimulator().run(qc, shots=1000).result().get_counts())
 ```
 
 Mạch trông như sau (đọc từ trái sang phải): ô `H` là cổng Hadamard; chấm `■` nối với ô `X` là cổng CX (chấm ở qubit
-điều khiển, ô `X` ở qubit đích); `M` là phép đo; `░` chỉ là đường kẻ phân cách do `measure_all()` vẽ.
+điều khiển, ô `X` ở qubit đích); `M` là phép đo; `░` là *barrier* (vạch ngăn) mà `measure_all()` tự chèn vào, không làm thay đổi trạng thái.
 
 ```text
         ┌───┐      ░ ┌─┐   
@@ -146,7 +147,7 @@ quả `01`/`10`; simulator lý tưởng thì không). Từng qubit riêng lẻ l
 
 **Chỉ riêng điều này chưa đủ để gọi là lượng tử.** Hai đồng xu bỏ trong hai phong bì, được ghép trùng nhau từ trước,
 cũng cho kết quả giống hệt. Chỗ khác biệt thật sự chỉ lộ ra khi đo theo **nhiều hướng khác nhau**: khi đó các tương
-quan mạnh hơn mọi cách "ghép sẵn" có thể tạo ra (đó là *bất đẳng thức Bell*, còn gọi là trò chơi CHSH). Bạn sẽ thấy
+quan mạnh hơn mọi cách "ghép sẵn" có thể tạo ra (đó là nội dung của *bất đẳng thức Bell*, ví dụ trò chơi CHSH). Bạn sẽ thấy
 trạng thái này không thể viết thành "hai qubit độc lập" ở [02_02](../chapters/02_quantum_computing/README.md#02_02--quantum-entanglement-vướng-víu-lượng-tử).
 Chương Bell inequalities của sách gốc chưa có nội dung; khoá của IBM trong [Tài nguyên](resources.md) có phần này.
 
@@ -162,7 +163,7 @@ Mạch lượng tử đọc từ **trái sang phải** theo thời gian. Mỗi �
 Ví dụ, đây là mạch teleportation: Alice gửi trạng thái của một qubit cho Bob, bằng cách dùng một cặp qubit
 vướng víu và **hai bit cổ điển**.
 
-![Mạch teleportation](../chapters/03_quantum_protocols/images/03_02_03_teleportation_circuit.png)
+![Mạch teleportation: Alice tạo cặp vướng víu bằng cổng H và CX rồi gửi một qubit cho Bob qua kênh lượng tử; Alice chuẩn bị trạng thái cần gửi, áp CX và H, đo hai qubit; hai bit kết quả đi qua kênh cổ điển để Bob áp cổng X và Z](../chapters/03_quantum_protocols/images/03_02_03_teleportation_circuit.png)
 
 *Hình: Diego Emilio Serrano, [learnquantum.io](https://learnquantum.io), MIT License.*
 
@@ -177,8 +178,8 @@ Không cần hiểu hết ngay. Sau [Phần 03](../chapters/03_quantum_protocols
 
 | Bài toán | Tăng tốc | Ghi chú trung thực |
 |---|---|---|
-| **Phân tích số nguyên ra thừa số** (thuật toán Shor) | Từ *siêu đa thức* (tăng nhanh hơn mọi hàm đa thức của số chữ số) xuống đa thức | Chưa ai biết thuật toán cổ điển đa thức, nhưng cũng chưa chứng minh là không tồn tại. Cần máy lớn có sửa lỗi, chưa tồn tại (đến tháng 10/2026). **Lưu ý:** bài toán này không được biết là NP-đầy-đủ, và người ta không tin máy lượng tử giải được các bài NP-đầy-đủ trong thời gian đa thức |
-| **Tìm kiếm không cấu trúc** ([Grover](../chapters/04_quantum_algorithms/README.md#04_04--grovers-algorithm-thuật-toán-grover)) | Căn bậc hai: $N \to \sqrt N$ | Đã chứng minh là tối ưu **trong mô hình hộp đen** (chỉ được hỏi oracle); với bài toán có cấu trúc thì điều đó không loại trừ cách nhanh hơn. Với $N = 2^{20} \approx 10^6$ mục và 1 phần tử cần tìm: cổ điển cần trung bình khoảng 500 nghìn lần truy vấn, Grover cần khoảng 800 vòng, mỗi vòng một lần gọi oracle. Tăng tốc bậc hai là khiêm tốn: chi phí oracle và sửa lỗi có thể xoá lợi thế ở quy mô thực tế |
+| **Phân tích số nguyên ra thừa số** (thuật toán Shor) | Từ *siêu đa thức* (tăng nhanh hơn mọi hàm đa thức của số chữ số) xuống đa thức | Chưa ai biết thuật toán cổ điển đa thức, nhưng cũng chưa chứng minh là không tồn tại. Cần máy lớn có sửa lỗi, chưa tồn tại (đến tháng 10/2026). **Lưu ý:** chưa ai chứng minh bài toán này là *NP-đầy-đủ* (NP-complete, nhóm bài "khó nhất" trong lớp NP, như bài toán thoả mãn biểu thức logic SAT) và nhiều khả năng nó không phải; giới nghiên cứu cũng không tin máy lượng tử giải được các bài NP-đầy-đủ trong thời gian đa thức |
+| **Tìm kiếm không cấu trúc** ([Grover](../chapters/04_quantum_algorithms/README.md#04_04--grovers-algorithm-thuật-toán-grover)) | Căn bậc hai: $N \to \sqrt N$ | Đã chứng minh là tối ưu **trong mô hình hộp đen** (chỉ được hỏi oracle); với bài toán có cấu trúc thì điều đó không loại trừ cách nhanh hơn. Với $N = 2^{20} \approx 10^6$ mục và 1 phần tử cần tìm: cổ điển cần trung bình khoảng $N/2 \approx 524$ nghìn lần truy vấn, Grover cần khoảng 800 vòng, mỗi vòng một lần gọi oracle. Tăng tốc bậc hai là khiêm tốn: chi phí oracle và sửa lỗi có thể xoá lợi thế ở quy mô thực tế |
 | **Mô phỏng hệ lượng tử** (hoá học, vật liệu) | Có triển vọng lớn | Ý tưởng gốc của nhà vật lý Richard Feynman. Vẫn là hướng nghiên cứu, đang được thử nghiệm trên máy thật |
 | Machine learning, tối ưu hoá | **Chưa rõ** | Có nhiều tuyên bố, ít bằng chứng chắc chắn. Hãy dè dặt với quảng cáo |
 
@@ -205,9 +206,10 @@ Chúng dạy các kỹ thuật (oracle, phase kickback, giao thoa) mà những t
 
 ## Vì sao khó chế tạo
 
-Qubit rất dễ bị phá hỏng bởi môi trường (nhiệt, rung, nhiễu điện từ). Các sai lệch ngẫu nhiên này gọi chung là
-*nhiễu* (noise): gồm *mất kết hợp* (decoherence), lỗi của từng cổng và lỗi khi đọc kết quả. Các máy hiện nay thuộc thời kỳ **NISQ** (noisy intermediate-scale quantum, thuật ngữ do
-nhà vật lý John Preskill đặt năm 2018): có nhiều qubit nhưng nhiễu, chưa đủ tốt để chạy các thuật toán lớn như Shor.
+Qubit rất dễ bị phá hỏng bởi môi trường (nhiệt, rung, nhiễu điện từ) và bởi sự thiếu chính xác của thiết bị điều khiển.
+Các sai lệch này gọi chung là *nhiễu* (noise): gồm *mất kết hợp* (decoherence), lỗi của từng cổng và lỗi khi đọc kết quả.
+Các máy hiện nay vẫn thuộc thời kỳ **NISQ** (noisy intermediate-scale quantum, thuật ngữ do nhà vật lý John Preskill
+đưa ra cuối năm 2017, phổ biến qua bài báo năm 2018): có nhiều qubit nhưng nhiễu, chưa đủ tốt để chạy các thuật toán lớn như Shor.
 
 Hướng giải quyết là **sửa lỗi lượng tử**: dùng nhiều qubit vật lý để tạo ra một qubit "logic" đáng tin cậy.
 Số qubit vật lý cần cho mỗi qubit logic được ước tính từ hàng chục đến hàng nghìn, tuỳ mã sửa lỗi và độ nhiễu.
@@ -218,7 +220,7 @@ Các công nghệ đang được theo đuổi gồm mạch siêu dẫn, bẫy io
 
 ## Vì sao không thể chỉ "mô phỏng bằng máy tính thường"?
 
-Mô tả đầy đủ trạng thái $n$ qubit cần $2^n$ biên độ. Mỗi thêm một qubit, bộ nhớ nhân đôi:
+Mô tả đầy đủ trạng thái $n$ qubit cần $2^n$ biên độ. Mỗi khi thêm một qubit, bộ nhớ nhân đôi:
 
 | Số qubit | Số biên độ | Bộ nhớ (số phức 16 byte) |
 |---|---|---|
@@ -228,10 +230,10 @@ Mô tả đầy đủ trạng thái $n$ qubit cần $2^n$ biên độ. Mỗi th�
 
 Ba mươi qubit đã vừa với một máy tính mạnh (con số 16 GiB là cho riêng vector; thực tế cần nhiều hơn một chút để tính toán), năm mươi thì vượt xa mọi máy đơn lẻ. Đây là lý do mô phỏng
 đầy đủ không mở rộng được, và cũng là lý do bạn có thể **học mọi thứ trong repo này trên laptop**:
-các ví dụ chỉ dùng vài qubit.
+các ví dụ dùng nhiều nhất 14 qubit (bài Simon), tức chỉ khoảng 256 KiB cho vector trạng thái.
 
-(Có những kỹ thuật mô phỏng thông minh cho các mạch có cấu trúc đặc biệt, nên con số trên là chặn
-trên của cách mô phỏng "vét cạn", không phải giới hạn tuyệt đối.)
+(Có những kỹ thuật mô phỏng thông minh cho các mạch có cấu trúc đặc biệt, nên bảng trên là chi phí
+của cách mô phỏng "vét cạn", không phải giới hạn tuyệt đối.)
 
 ## Tiếp theo
 
