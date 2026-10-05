@@ -12,6 +12,7 @@ on:
       - "*.md"
       - "scripts/**"
       - "requirements*.txt"
+      - "pyproject.toml"
       - "qiskit_settings.conf"
       - ".github/workflows/notebooks.yml"
   pull_request:
@@ -21,6 +22,7 @@ on:
       - "*.md"
       - "scripts/**"
       - "requirements*.txt"
+      - "pyproject.toml"
       - "qiskit_settings.conf"
       - ".github/workflows/notebooks.yml"
   schedule:
@@ -60,7 +62,7 @@ jobs:
         run: pip install -r requirements-dev.txt
 
       - name: Show versions
-        run: pip list | grep -iE "^(qiskit|numpy|sympy|matplotlib) "
+        run: pip list | grep -iE "^(qiskit|qiskit-aer|qiskit-ibm-runtime|numpy|sympy|matplotlib) "
 
       - name: Lint scripts
         run: |
