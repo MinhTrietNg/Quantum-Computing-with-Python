@@ -3,8 +3,8 @@
 The upstream repo (learn-quantum/lqc-textbook) keeps every chapter under
 ``chapters/<part>/``, the same layout as this repo. The script lists files
 that are new, changed or removed upstream, and chapters that are still empty
-stubs there. Local ``README.md`` files are this repo's own study guides and
-are ignored.
+stubs there. Local ``README*.md`` files (the study guides in Vietnamese,
+English and Chinese) are this repo's own and are ignored.
 
 Usage
 -----
@@ -32,8 +32,9 @@ CHAPTERS = "chapters"
 # Upstream files kept outside chapters/, mapped to their local names.
 EXTRA_FILES = {"LICENSE": "LICENSE", "settings.conf": "qiskit_settings.conf"}
 
-# Files in chapters/ that exist only in this repo.
-LOCAL_ONLY = {"README.md"}
+# Files in chapters/ that exist only in this repo: the study guides, in every
+# language (README.md, README.en.md, README.zh-CN.md, ...).
+LOCAL_ONLY = "README*.md"
 
 # Upstream stubs hold only a title, about 30 characters of source in total.
 STUB_MAX_CHARS = 200
@@ -126,7 +127,7 @@ def compare(upstream: Path, local: Path) -> Report:
     report = Report()
     up_files = list_files(upstream / CHAPTERS)
     local_files = {
-        f for f in list_files(local / CHAPTERS) if Path(f).name not in LOCAL_ONLY
+        f for f in list_files(local / CHAPTERS) if not Path(f).match(LOCAL_ONLY)
     }
 
     pairs = [(f"{CHAPTERS}/{f}", f"{CHAPTERS}/{f}") for f in sorted(up_files)]
