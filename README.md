@@ -9,9 +9,9 @@
 Miễn phí. Không cần biết vật lý lượng tử, không cần máy lượng tử, chạy được trên laptop thường.
 Chỉ cần **Python cơ bản**; phần toán được dạy dần.
 
-Sau khoảng 4–6 tuần học đều, bạn sẽ hiểu qubit, chồng chập, vướng víu và giao thoa là gì, tự viết và chạy được
-mạch lượng tử bằng Qiskit, và giải thích được teleportation cùng các thuật toán Deutsch–Jozsa, Bernstein–Vazirani,
-Simon và Grover.
+Mục tiêu sau khoảng 4–6 tuần học đều (ước tính, mỗi ngày một giờ): hiểu qubit, chồng chập, vướng víu và giao thoa
+là gì, tự viết và chạy được mạch lượng tử bằng Qiskit, và giải thích được teleportation cùng các thuật toán
+Deutsch–Jozsa, Bernstein–Vazirani, Simon và Grover.
 
 ## Thử ngay
 
@@ -48,7 +48,7 @@ trong một ô, rồi dán đoạn code trên vào ô mới. Cài trên máy b�
 
 | Bạn là | Bắt đầu từ |
 |---|---|
-| **Tò mò, chưa lập trình** | [Máy tính lượng tử là gì?](docs/what-is-quantum-computing.md), 15 phút, ít toán (chỉ cộng và nhân phân số); rồi xem [Lộ trình học](docs/learning-path.md) |
+| **Tò mò, chưa lập trình** | [Máy tính lượng tử là gì?](docs/what-is-quantum-computing.md), 15 phút, ít toán (phân số và căn bậc hai); rồi xem [Lộ trình học](docs/learning-path.md) |
 | **Biết Python cơ bản** | [Lộ trình học](docs/learning-path.md), rồi bắt đầu từ [Phần 00](chapters/00_getting_started/) |
 | **Biết Python và đại số tuyến tính** | [Lộ trình học](docs/learning-path.md) chỉ cách lướt Phần 01 và vào thẳng Phần 02 |
 | **Đã học cơ học lượng tử** | Đọc phần *Code chính* của [02_01](chapters/02_quantum_computing/) (mạch Qiskit đầu tiên), rồi 02_04, 02_05 và [Phần 04](chapters/04_quantum_algorithms/) (nếu cú pháp cổng một qubit còn lạ, lướt thêm 02_03) |
@@ -90,22 +90,22 @@ Mỗi phần có hướng dẫn tiếng Việt riêng gồm kiến thức chính
 
 | Phần | Bài | Notebook | Nội dung |
 |---|---|---|---|
-| **[00 · Getting started](chapters/00_getting_started/)** | 00_00 | [About](chapters/00_getting_started/00_00_welcome.ipynb) | Cách dùng sách, trích dẫn |
-| | 00_01 | [Setting your environment](chapters/00_getting_started/00_01_setting_env.ipynb) | Cài Qiskit, code kiểm tra môi trường |
+| **[00 · Getting started](chapters/00_getting_started/)** | 00_00 | [About the textbook](chapters/00_getting_started/00_00_welcome.ipynb) | Cách dùng sách, trích dẫn |
+| | 00_01 | [Setting up your environment](chapters/00_getting_started/00_01_setting_env.ipynb) | Cài Qiskit, code kiểm tra môi trường |
 | | 00_02 | [Configuring Qiskit](chapters/00_getting_started/00_02_qiskit_config.ipynb) | Token IBM Quantum, `settings.conf` |
-| **[01 · Classical computing](chapters/01_classical_computing/)** | 01_01 | [Bits and circuits](chapters/01_classical_computing/01_01_bits_and_circuits.ipynb) | Bit, cổng logic, mạch cộng |
+| **[01 · Classical computing](chapters/01_classical_computing/)** | 01_01 | [Bits and digital circuits](chapters/01_classical_computing/01_01_bits_and_circuits.ipynb) | Bit, cổng logic, mạch cộng |
 | | 01_02 | [Reversible computing](chapters/01_classical_computing/01_02_reversible_computing.ipynb) | Cổng khả nghịch X, CX, CCX |
-| | 01_03 | [Bits to vectors](chapters/01_classical_computing/01_03_bits_to_vectors.ipynb) | Bit là vector, cổng là ma trận, tích tensor |
-| | 01_04 | [Probabilistic circuits](chapters/01_classical_computing/01_04_probabilistic_circuits.ipynb) | Bit xác suất, mạch có nhiễu |
-| **[02 · Quantum computing](chapters/02_quantum_computing/)** | 02_01 | [Bits to qubits](chapters/02_quantum_computing/02_01_bits_to_qubits.ipynb) | Thí nghiệm Stern–Gerlach, từ bit đến qubit |
-| | 02_02 | [Entanglement](chapters/02_quantum_computing/02_02_entanglement.ipynb) | Trạng thái tách được và vướng víu; tạo vướng víu bằng H + CX |
+| | 01_03 | [Linear algebra for reversible circuits](chapters/01_classical_computing/01_03_bits_to_vectors.ipynb) | Bit là vector, cổng là ma trận, tích tensor |
+| | 01_04 | [Probabilistic computing](chapters/01_classical_computing/01_04_probabilistic_circuits.ipynb) | Bit xác suất, mạch có nhiễu |
+| **[02 · Quantum computing](chapters/02_quantum_computing/)** | 02_01 | [Qubits and quantum circuits](chapters/02_quantum_computing/02_01_bits_to_qubits.ipynb) | Thí nghiệm Stern–Gerlach, từ bit đến qubit |
+| | 02_02 | [Quantum entanglement](chapters/02_quantum_computing/02_02_entanglement.ipynb) | Trạng thái tách được và vướng víu; tạo vướng víu bằng H + CX |
 | | 02_03 | [Single-qubit systems](chapters/02_quantum_computing/02_03_single_qb_sys.ipynb) | Biên độ phức, Bloch sphere, cổng một qubit, phép đo, observable |
 | | 02_04 | [Multi-qubit systems](chapters/02_quantum_computing/02_04_multi_qb_sys.ipynb) | Cổng điều khiển, SWAP, no-cloning, bộ cổng phổ quát, đo một phần |
 | | 02_05 | [Quantum building blocks](chapters/02_quantum_computing/02_05_quantum_blocks.ipynb) | Bell/GHZ/W, biến đổi Hadamard, phase kickback, oracle |
-| **[03 · Quantum protocols](chapters/03_quantum_protocols/)** | 03_01 | [Quantum money](chapters/03_quantum_protocols/03_01_quantum_money.ipynb) | Nguyên lý bất định; tiền lượng tử Wiesner: càng nhiều qubit càng khó làm giả |
-| | 03_02 | [Teleportation](chapters/03_quantum_protocols/03_02_teleportation.ipynb) | Dịch chuyển trạng thái lượng tử |
+| **[03 · Quantum protocols](chapters/03_quantum_protocols/)** | 03_01 | [Uncertainty & quantum money](chapters/03_quantum_protocols/03_01_quantum_money.ipynb) | Nguyên lý bất định; tiền lượng tử Wiesner: càng nhiều qubit càng khó làm giả |
+| | 03_02 | [Quantum teleportation](chapters/03_quantum_protocols/03_02_teleportation.ipynb) | Dịch chuyển trạng thái lượng tử |
 | | 03_03 | [Superdense coding](chapters/03_quantum_protocols/03_03_superdense_coding.ipynb) | Gửi 2 bit cổ điển bằng 1 qubit |
-| **[04 · Quantum algorithms](chapters/04_quantum_algorithms/)** | 04_01 | [Deutsch–Jozsa](chapters/04_quantum_algorithms/04_01_deutsch-jozsa.ipynb) | Hàm hằng hay cân bằng, 1 lần truy vấn |
+| **[04 · Foundational quantum algorithms](chapters/04_quantum_algorithms/)** | 04_01 | [Deutsch–Jozsa](chapters/04_quantum_algorithms/04_01_deutsch-jozsa.ipynb) | Hàm hằng hay cân bằng, 1 lần truy vấn |
 | | 04_02 | [Bernstein–Vazirani](chapters/04_quantum_algorithms/04_02_bernstein-vazirani.ipynb) | Tìm chuỗi bí mật, 1 lần truy vấn |
 | | 04_03 | [Simon's algorithm](chapters/04_quantum_algorithms/04_03_simons.ipynb) | Tìm chu kỳ XOR, tăng tốc hàm mũ (trong mô hình oracle) |
 | | 04_04 | [Grover's algorithm](chapters/04_quantum_algorithms/04_04_grover.ipynb) | Tìm kiếm không cấu trúc, tăng tốc căn bậc hai |
