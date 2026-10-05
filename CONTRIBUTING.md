@@ -11,7 +11,7 @@ từ sửa một lỗi chính tả đến viết hướng dẫn cho chương m�
 | Báo lỗi trong nội dung sách (công thức, code, giải thích) | Mở issue **Báo lỗi trong sách** |
 | Báo notebook không chạy được | Mở issue **Notebook không chạy**, kèm phiên bản Qiskit và traceback |
 | Góp ý hoặc sửa hướng dẫn tiếng Việt | Mở issue **Góp ý hướng dẫn**, hoặc gửi pull request luôn |
-| Hỏi về kiến thức trong sách | Dùng [Discussions của repo gốc](https://github.com/learn-quantum/lqc-textbook/discussions) |
+| Hỏi về kiến thức trong sách | Mở issue **Câu hỏi khi học** (hỏi bằng tiếng Việt), hoặc hỏi tác giả tại [Discussions của repo gốc](https://github.com/learn-quantum/lqc-textbook/discussions) (tiếng Anh) |
 
 ## Nguyên tắc quan trọng nhất: notebook giữ nguyên văn
 
@@ -60,7 +60,8 @@ Văn phong:
 
 - Viết tiếng Việt; lần đầu gặp thuật ngữ thì giữ từ gốc trong ngoặc, ví dụ "vướng víu (entanglement)".
 - Công thức dùng LaTeX của GitHub: `$...$` trong dòng, `$$...$$` cho công thức riêng. Trong bảng,
-  viết `\vert` thay cho `|` (ví dụ `$\vert 0\rangle$`); chỉ dùng `\|` cho độ dài (chuẩn) của vector, ví dụ `$\|q\|$`.
+  viết `\vert` thay cho `|` (ví dụ `$\vert 0\rangle$`). Độ dài (chuẩn) của vector viết `$\|q\|$` ngoài bảng,
+  nhưng trong bảng phải viết `$\Vert q\Vert$`, vì bảng của GitHub đọc `\|` thành một dấu `|`.
 - Code trích từ notebook giữ nguyên, chỉ được thêm comment giải thích.
 - **Kết quả** lấy từ output đã lưu trong notebook, không phải từ lần chạy của bạn.
 - Câu ngắn, mỗi ý một câu; ưu tiên bảng khi so sánh nhiều thứ.
@@ -74,7 +75,7 @@ Khi `scripts/check_upstream.py` (hoặc workflow **Upstream**) báo có thay đ�
    xoá các file được báo **đã xoá**.
 3. Chạy lại `python scripts/check_upstream.py --upstream <tmp>` cho đến khi báo *in sync*.
 4. Cập nhật README của phần tương ứng (với chương mới thì viết README theo khuôn ở trên), mục lục trong
-   [README.md](README.md), và commit cùng ngày lấy về trong mục *Cập nhật từ bản gốc* của README.
+   [README.md](README.md), và commit cùng ngày lấy về trong mục *Nguồn gốc và cập nhật* của README.
 5. Đọc lại [ERRATA.md](ERRATA.md): xoá những lỗi tác giả đã sửa.
 
 Chương được báo *empty stub* là chương mới có tiêu đề, chưa có nội dung, nên chưa cần copy.
@@ -103,7 +104,7 @@ Chương được báo *empty stub* là chương mới có tiêu đề, chưa c�
 pip install -r requirements-dev.txt
 pytest --nbmake chapters/                # chạy mọi notebook (không ghi đè output)
 python scripts/check_upstream.py         # notebook vẫn khớp với bản gốc
-python scripts/check_links.py            # link và anchor trong mọi file .md còn đúng
+python scripts/check_links.py            # link, hình và anchor trong mọi file .md còn đúng (kể cả chữ hoa/thường)
 python scripts/check_doc_snippets.py     # mọi đoạn code Python trong README và docs/ chạy được
 black --check scripts/ && ruff check scripts/
 ```
@@ -127,8 +128,9 @@ chore: sync chapters with upstream 1a2b3c4
   trong repo công khai nếu repo không có hoạt động trong 60 ngày; nếu thấy CI ngừng chạy, vào tab *Actions* bật lại.
 - `upstream.yml` chỉ báo (workflow thất bại) khi bản gốc có thay đổi; nó không tự cập nhật gì. Người bảo trì copy chương
   mới theo mục *Cập nhật từ bản gốc* ở trên.
-- Công thức trong Markdown: dùng `\vert` (không dùng `\|`) cho dấu gạch đứng như $\vert 0\rangle$, và dùng `\|` chỉ
-  khi muốn ký hiệu chuẩn (độ dài vector). Cách này hiển thị đúng cả trong bảng lẫn ngoài bảng.
+- Công thức trong Markdown: dùng `\vert` (không dùng `|` hay `\|`) cho dấu gạch đứng như $\vert 0\rangle$, và dùng
+  `\Vert` cho ký hiệu chuẩn (độ dài vector). Hai lệnh này hiển thị đúng cả trong bảng lẫn ngoài bảng; `\|` chỉ đúng
+  ngoài bảng.
 
 ## Giấy phép
 
